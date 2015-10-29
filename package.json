@@ -1,0 +1,20 @@
+{
+  "name": "react-pixi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PixelsCommander <denis.radin@gmail.com> (http://pixelscommander.com)",
+  "license": "ISC",
+  "dependencies": {
+    "babel-runtime": "^5.8.29",
+    "css-layout": "^1.0.0",
+    "react": "^0.14.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^5.3.2",
+    "webpack": "^1.12.2"
+  }
+}
