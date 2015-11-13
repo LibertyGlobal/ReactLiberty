@@ -13,4 +13,4 @@ Performance hints
 
 Classes tree
 ------------
-![ReactLiberty classes tree](https://raw.github.com/LibertyGlobal/ReactLiberty/blob/master/figures/inhertitance-scheme.png)
+![ReactLiberty classes tree](https://raw.githubusercontent.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png?token=AAxer4RGVCjtZHBtM6Xl2ni4Rq5jE1sRks5WTzRJwA%3D%3D)
