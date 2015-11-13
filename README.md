@@ -1,8 +1,8 @@
 React Liberty
 =============
 
-Connect, discover, be free to choose between PIXI / DOM and any other renderer when put your components on the screen
----------------------------------------------------------------------------------------------------------------------
+Connect, discover, be free to choose between PIXI / DOM and any other renderer
+------------------------------------------------------------------------------
 
 This is a React binding for Pixi which does not have React hacked and backed-in. Also supports https://github.com/facebook/css-layout for layouting.
 
