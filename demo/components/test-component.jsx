@@ -4,11 +4,11 @@ class TestComponent extends React.Component {
             displacement: 0
         });
 
-        /* setInterval(() => {
-            this.setState({
+         setInterval(() => {
+            /* this.setState({
                 displacement: this.state.displacement + 10
-            });
-        }, 100); */
+            }); */
+        }, 100);
     }
 
     render() {

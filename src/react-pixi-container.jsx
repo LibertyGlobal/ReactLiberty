@@ -14,6 +14,7 @@ class ReactPixiContainer extends ReactPixiElement {
         if (ReactElement.isValidElement(childClass)) {
             var component = instantiateReactComponent(childClass);
             component.mountComponent(this, ReactPixi.transaction, {'parent': this});
+            component._instance.parent = this;
             this.children.push(component._instance);
         }
     }
@@ -42,11 +43,15 @@ class ReactPixiContainer extends ReactPixiElement {
     }
 
     componentWillMount() {
-        console.log('Layouting...');
         super.componentWillMount();
         this.mountChildren();
-        computeLayout(this);
+        this.layout();
         this.updatePixiRepresentation(true);
+    }
+
+    doLayout() {
+        console.log('Layouting...');
+        computeLayout(this);
     }
 }
 
