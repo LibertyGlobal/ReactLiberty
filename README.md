@@ -7,8 +7,10 @@ Inherit your root component component from React.Component and use ReactPixi.Con
 
 Render root node via `ReactPixi.render(React.createElement(MyRootComponent));`
 
-Look into `figures/inheritance scheme.png` to understand how components inherit from each other.
-
 Performance hints
 -----------------
 - Set images dimensions via properties
+
+Classes tree
+------------
+![ReactLiberty classes tree](https://raw.github.com/LibertyGlobal/ReactLiberty/master/figures/inheritance scheme.png)
