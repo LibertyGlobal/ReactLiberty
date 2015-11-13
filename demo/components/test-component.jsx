@@ -19,17 +19,10 @@ class TestComponent extends React.Component {
                 flexDirection: 'column'
             },
             image: {
-                width: 100,
-                height: 100,
-                alignSelf: 'stretch'
             },
             text1: {
-                marginTop: 120,
-                flexWrap: 'wrap',
-            },
-            text2: {
-                width: 100,
-                height: 100
+                marginTop: 10,
+                height: 30
             }
         }
 
@@ -38,8 +31,8 @@ class TestComponent extends React.Component {
         return <ReactPixi.Container style={styles.main}>
             <ReactPixi.Image style={styles.image} src="./assets/game_of_thrones.jpg"
                              key="3"/>
-            <ReactPixi.Text style={styles.header} text="Some text" key="1"/>
-            <ReactPixi.Text style={styles.header} text="ABC" key="2"/>
+            <ReactPixi.Text style={styles.text1} text="Some text" key="1"/>
+            <ReactPixi.Text style={styles.text2} text="ABC" key="2"/>
         </ReactPixi.Container>;
     }
 }

@@ -14,8 +14,8 @@ class ReactPixiImage extends ReactPixiElement {
 
     updatePixiRepresentation() {
         super.updatePixiRepresentation();
-        //this.pixiRepresentation.width = this.layout && this.layout.width || this.pixiRepresentation.width;
-        //this.pixiRepresentation.height = this.layout && this.layout.height || this.pixiRepresentation.height;
+        this.pixiRepresentation.width = this.layout && this.layout.width || this.pixiRepresentation.width;
+        this.pixiRepresentation.height = this.layout && this.layout.height || this.pixiRepresentation.height;
     }
 }
 

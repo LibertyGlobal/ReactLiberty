@@ -31,11 +31,22 @@ class ReactPixiContainer extends ReactPixiElement {
         }
     }
 
+    updatePixiRepresentation(updateChildren) {
+        super.updatePixiRepresentation();
+
+        if (updateChildren) {
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].updatePixiRepresentation();
+            }
+        }
+    }
+
     componentWillMount() {
-        computeLayout(this);
+        console.log('Layouting...');
         super.componentWillMount();
         this.mountChildren();
-        this.updatePixiRepresentation();
+        computeLayout(this);
+        this.updatePixiRepresentation(true);
     }
 }
 

@@ -23,7 +23,7 @@ class ReactPixiElement extends React.Component {
         parentPixiContainer.addChild(this.pixiRepresentation);
     }
 
-    updatePixiRepresentation() {
+    updatePixiRepresentation(updateChildren) {
         console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
 
         this.pixiRepresentation.x = this.layout && this.layout.left || (this.props && this.props.x) || 0;
