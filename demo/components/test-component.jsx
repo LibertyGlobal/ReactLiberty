@@ -1,14 +1,14 @@
-class TestComponent extends ReactPixi.Container {
+class TestComponent extends React.Component {
     componentDidMount() {
         this.setState({
             displacement: 0
         });
 
-        setInterval(() => {
+        /* setInterval(() => {
             this.setState({
                 displacement: this.state.displacement + 10
             });
-        }, 100);
+        }, 100); */
     }
 
     render() {
@@ -24,6 +24,7 @@ class TestComponent extends ReactPixi.Container {
                 alignSelf: 'stretch'
             },
             text1: {
+                marginTop: 120,
                 flexWrap: 'wrap',
             },
             text2: {
@@ -32,7 +33,6 @@ class TestComponent extends ReactPixi.Container {
             }
         }
 
-        console.log('Rerender');
         var displacement = this.state && this.state.displacement || 0;
 
         return <ReactPixi.Container style={styles.main}>

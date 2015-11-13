@@ -7,8 +7,6 @@ var StyleMapper = require('./style-mapper.js');
 class ReactPixiElement extends React.Component {
     constructor() {
         super();
-
-        //this.layout = {};
         this.children = [];
     }
 
@@ -26,7 +24,7 @@ class ReactPixiElement extends React.Component {
     }
 
     updatePixiRepresentation() {
-        console.log('Layout: ' + JSON.stringify(this.layout));
+        console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
 
         this.pixiRepresentation.x = this.layout && this.layout.left || (this.props && this.props.x) || 0;
         this.pixiRepresentation.y = this.layout && this.layout.top || (this.props && this.props.y) || 0;

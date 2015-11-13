@@ -44,13 +44,14 @@ module.exports.rootID = ReactInstanceHandles.createReactRootID();
 module.exports.transaction = ReactUpdates.ReactReconcileTransaction.getPooled();
 
 module.exports.render = function (pixiElement) {
-    var component = instantiateReactComponent(pixiElement);
+    var component = instantiateReactComponent(pixiElement),
+        instance;
 
     if (ReactElement.isValidElement(pixiElement)) {
         module.exports.transaction.perform(function () {
-            var instance = component.mountComponent(module.exports.rootID, module.exports.transaction, {});
+            instance = component.mountComponent(module.exports.rootID, module.exports.transaction, {});
         });
-        return component.pixiContainer;
+        return instance;
     } else {
         console.log('ReactPixi.render: Passed element is not a valid ReactElement');
     }

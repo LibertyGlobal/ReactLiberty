@@ -26,14 +26,13 @@ class ReactPixiContainer extends ReactPixiElement {
                     self.mountChild(child);
                 });
             } else {
-                self._mountChild(self.props.children);
+                self.mountChild(self.props.children);
             }
         }
-
-        computeLayout(this);
     }
 
     componentWillMount() {
+        computeLayout(this);
         super.componentWillMount();
         this.mountChildren();
         this.updatePixiRepresentation();
