@@ -1,5 +1,5 @@
-ReactPixi made right
-====================
+ReactPixi made right allowing to switch between renderers (PIXI / DOM / Proprietary WebGL renderer)
+===========================================================================================
 
 This is a React binding for Pixi which does not have React hacked and backed-in. Also supports https://github.com/facebook/css-layout for layouting.
 
@@ -9,7 +9,7 @@ Render root node via `ReactPixi.render(React.createElement(MyRootComponent));`
 
 Performance hints
 -----------------
-- Set images dimensions via properties
+- Set images dimensions via component properties initially to prevent relayouting when they complete loading
 
 Classes tree
 ------------
