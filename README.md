@@ -1,7 +1,7 @@
 React Liberty
 =============
 
-Connect, discover, be free to choose between WebGL / Canvas / PIXI / DOM and any other UI renderer
+Connect, discover, be free to choose between WebGL / Canvas (PIXI) / DOM or any other UI renderer
 ---------------------------------------------------------------------------------
 
 This is a React binding for Pixi which does not have React hacked and backed-in. Also supports https://github.com/facebook/css-layout for layouting.
