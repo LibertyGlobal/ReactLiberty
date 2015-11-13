@@ -16,4 +16,7 @@ Performance hints
 
 Classes tree
 ------------
+
+This is a set of base components every ReactLiberty renderer should support:
+
 ![ReactLiberty classes tree](https://raw.githubusercontent.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png?token=AAxer4RGVCjtZHBtM6Xl2ni4Rq5jE1sRks5WTzRJwA%3D%3D)
