@@ -8,9 +8,9 @@ var HIGHLIGHT = require('../assets/images/genre-highlight.png');
 
 var categories = appService.getCategories();
 var CATEGORY_ICONS = {
-    sport: require('../assets/images/genres-icons/sport.png'),
+    sport: require('../assets/images/genres-icons/sports.png'),
     games: require('../assets/images/genres-icons/games.png'),
-    lifestyle: require('../assets/images/genres-icons/lifestyle.png'),
+    lifestyle: require('../assets/images/genres-icons/life-style.png'),
     music: require('../assets/images/genres-icons/music.png'),
     news: require('../assets/images/genres-icons/news.png'),
     social: require('../assets/images/genres-icons/social.png'),
