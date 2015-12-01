@@ -1,4 +1,4 @@
-var BUNDLE_NAME = "react-pixi";
+var BUNDLE_NAME = "react-liberty";
 
 module.exports = {
     entry: "./src/index.js",

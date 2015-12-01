@@ -1,5 +1,8 @@
-window.ReactPixi = require('./react-pixi-core.js');
-window.ReactPixi.Element = require('./react-pixi-element.jsx');
-window.ReactPixi.Container = require('./react-pixi-container.jsx');
-window.ReactPixi.Text = require('./react-pixi-text.jsx');
-window.ReactPixi.Image = require('./react-pixi-image.jsx');
+window.ReactLiberty = require('./init.js');
+window.ReactLiberty.gl = require('./renderers/gl/core.js');
+window.ReactLiberty.gl.Element = require('./renderers/gl/element.jsx');
+window.ReactLiberty.gl.Container = require('./renderers/gl/container.jsx');
+window.ReactLiberty.gl.Text = require('./renderers/gl/text.jsx');
+window.ReactLiberty.gl.Image = require('./renderers/gl/image.jsx');
+
+module.exports = window.ReactLiberty;
