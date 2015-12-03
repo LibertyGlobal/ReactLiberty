@@ -4,6 +4,8 @@ var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service.js');
 
+var FocusManager = require('improved-navigation-concept').FocusManager;
+
 var HIGHLIGHT = require('../assets/images/genre-highlight.png');
 
 var categories = appService.getCategories();
@@ -37,6 +39,19 @@ class MovieAsset extends React.Component {
         }
     }
 
+    constructor(props) {
+        super(props);
+        this.id = String(Date.now());
+    }
+
+    shouldComponentUpdate(a, b) {
+        if (a.selected !== this.props.selected) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render() {
         var opacitySpring = null;
         var styles = MovieAsset.styles;
@@ -56,6 +71,21 @@ class MovieAsset extends React.Component {
             <GLimg style={styles.image} src={CATEGORY_ICONS[this.props.data.id] || CATEGORY_ICONS['video']} key="3"/>
         </GLdiv>;
     }
+
+    componentWillMount() {
+        this.parentId = this.context.navigationContainerId;
+        FocusManager.registerFocusableComponent(this);
+    }
 }
+
+MovieAsset.defaultProps = {
+    onBlur: function() {},
+    onFocus: function() {},
+    onSelect: function() {}
+};
+
+MovieAsset.contextTypes = {
+    navigationContainerId: React.PropTypes.string
+};
 
 module.exports = MovieAsset;

@@ -49,16 +49,14 @@ class DataScroller {
     }
 
     getVisibleItems() {
-        //if (!this.cachedItems) {
-            this.cachedItems = [];
-            var itemClass = this.carusel.props.itemClass;
+        this.cachedItems = [];
+        var itemClass = this.carusel.props.itemClass;
 
-            for (var i = 0; i < this.carusel.props.data.length; i++) {
-                var selected = (i === this.carusel.state.currentIndex)
-                var dataItem = this.carusel.props.data[i];
-                this.cachedItems.push(React.createElement(itemClass, {selected, index: i, key: dataItem.id + i, data: dataItem}));
-            }
-        //}
+        for (var i = 0; i < this.carusel.props.data.length; i++) {
+            var selected = (i === this.carusel.state.currentIndex)
+            var dataItem = this.carusel.props.data[i];
+            this.cachedItems.push(React.createElement(itemClass, {selected, index: i, key: dataItem.id + i, data: dataItem}));
+        }
 
         return this.cachedItems;
     }

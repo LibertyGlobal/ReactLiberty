@@ -10,7 +10,31 @@ var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service');
 
+var FocusManager = require('improved-navigation-concept').FocusManager;
+
 class ForYou extends React.Component {
+    componentDidMount() {
+        FocusManager.initializeFocus();
+        document.addEventListener('keydown', this.onKeyDown.bind(this));
+    }
+
+    onKeyDown(e) {
+        switch(e.keyCode) {
+            case 37:
+                FocusManager.doLeft();
+                break;
+            case 39:
+                FocusManager.doRight();
+                break;
+            case 40:
+                FocusManager.doDown();
+                break;
+            case 38:
+                FocusManager.doUp();
+                break;
+        }
+    }
+
     render() {
         var styles = {
             container: {

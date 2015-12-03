@@ -6,6 +6,8 @@ var spring = require('react-motion').spring;
 var PLACEHOLDER = require('../assets/images/placeholder.png');
 var HIGHLIGHT = require('../assets/images/app-highlight.png');
 
+var FocusManager = require('improved-navigation-concept').FocusManager;
+
 class MovieAsset extends React.Component {
     static styles = {
         width: 164,
@@ -33,9 +35,23 @@ class MovieAsset extends React.Component {
         }
     }
 
+    constructor(props) {
+        super(props);
+        this.id = String(Date.now());
+    }
+
+    shouldComponentUpdate(a, b) {
+      if (a.selected !== this.props.selected) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     render() {
         var opacitySpring = null;
         var styles = MovieAsset.styles;
+        var self = this;
 
         if (this.props.selected) {
             opacitySpring = spring(0.99, [120, 17]);
@@ -43,16 +59,31 @@ class MovieAsset extends React.Component {
             opacitySpring = spring(0.001, [120, 17])
         }
 
-        return <GLdiv>
+        return <Div>
             <Motion key="focus-motion" defaultStyle={styles.focus} style={{opacity: opacitySpring}}>
-                {interpolatedStyle => {
-                    return <GLimg style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
+                {function(interpolatedStyle) {
+                    return <Img style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
                 }}
             </Motion>;
-            <GLimg style={styles.image} src={this.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
-            <GLp style={styles.title} key="1">{this.props.data.name}</GLp>
-        </GLdiv>;
+            <Img style={styles.image} src={self.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
+            <P style={styles.title} key="1">{self.props.data.name}</P>
+        </Div>;
+    }
+
+    componentWillMount() {
+        this.parentId = this.context.navigationContainerId;
+        FocusManager.registerFocusableComponent(this);
     }
 }
+
+MovieAsset.defaultProps = {
+    onBlur: function() {},
+    onFocus: function() {},
+    onSelect: function() {}
+};
+
+MovieAsset.contextTypes = {
+    navigationContainerId: React.PropTypes.string
+};
 
 module.exports = MovieAsset;
