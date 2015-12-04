@@ -78,7 +78,7 @@ class ForYou extends React.Component {
                 <P style={styles.headerStyle}>Featured</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getFeatured()}/>
+                      data={appService.getFeatured().slice(0,10)}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>Recently used</P>

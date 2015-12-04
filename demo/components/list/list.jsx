@@ -25,6 +25,13 @@ class List extends FocusableComponent {
     currentIndex: 0
   }
 
+  //Experiment
+  constructor(props) {
+    super(props);
+    this.moveTo = 0;
+    this.motionSpring = spring(this.moveTo, [120, 17]);
+  }
+
   getPreferredFocusedComponentNode(containerNode, prevFocusedComponentNode) {
     return containerNode.children[this.state.currentIndex];
   }
@@ -61,10 +68,6 @@ class List extends FocusableComponent {
     }
   }
 
-  componentReceivedFocus() {
-
-  }
-
   componentWillMount() {
     super.componentWillMount();
     this.positionProperty = this.props.orientation === List.orientation.VERTICAL ? 'top' : 'left';
@@ -92,14 +95,20 @@ class List extends FocusableComponent {
     var currentIndex = (this.state.currentIndex + direction) % itemsLength;
     currentIndex = currentIndex < 0 ? currentIndex = itemsLength + currentIndex : currentIndex;
 
+    //Experiment
+    this.state.currentIndex = currentIndex;
+
+    //Calculating translate
+    this.moveTo = this.itemsManager.getScrollForItem(this.state.currentIndex);
+    this.motionSpring.val = -this.moveTo;
+    this.refs.motion.startAnimating();
+
     this.setState({
       currentIndex
     });
 
     var currentItem = this.itemsManager.getVisibleItems()[currentIndex];
-    if (typeof(currentItem.onFocus) === 'function') {
-      currentItem.onFocus.apply(currentItem);
-    }
+
     return currentIndex;
   }
 
@@ -109,16 +118,6 @@ class List extends FocusableComponent {
 
   selectPrev() {
     return this.moveSelection(-1);
-  }
-
-  updateCurrentFocusedItem(itemIndex) {
-    this.setState({
-      currentIndex: itemIndex
-    });
-  }
-
-  onFocus() {
-    this.hideTitles();
   }
 
   shouldComponentUpdate(a, b) {
@@ -134,15 +133,11 @@ class List extends FocusableComponent {
     var items = this.itemsManager.getVisibleItems();
     var self = this;
 
-    //Calculating translate
-    var moveTo = this.itemsManager.getScrollForItem(this.state.currentIndex);
-
     //Creating motion spring
-    var motionSpring = spring(-moveTo, [120, 17]);
     var styleObject = {};
-    styleObject[this.translateProperty] = motionSpring;
+    styleObject[this.translateProperty] = this.motionSpring;
 
-    return (<Motion defaultStyle={this.styles} style={styleObject}>
+    return (<Motion ref='motion' defaultStyle={this.styles} style={styleObject}>
       {function (interpolatedStyle) {
         self.movedTo = interpolatedStyle[self.translateProperty];
         return (<GLdiv style={interpolatedStyle}>{items}</GLdiv>);

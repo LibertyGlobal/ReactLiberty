@@ -1,6 +1,6 @@
 module.exports = {};
 
-var PIXI = require('pixijs');
+var PIXI = require('pixi.js');
 window.PIXI = PIXI;
 
 // Initialize PIXI renderer

@@ -38,43 +38,34 @@ class AppAsset extends React.Component {
   constructor(props) {
     super(props);
     this.id = String(Date.now());
-  }
-
-  shouldComponentUpdate(a, b) {
-    if (a.selected !== this.props.selected) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  componentReceivedFocus() {
-    this.opacitySpring = spring(0.99, [120, 17]);
-  }
-
-  componentLostFocus() {
     this.opacitySpring = spring(0.001, [120, 17]);
   }
 
-  render() {
-    var opacitySpring = null;
-    var styles = AppAsset.styles;
-    var self = this;
+  shouldComponentUpdate(a, b) {
+    return false;
+  }
 
-    /*if (this.props.selected) {
-      opacitySpring = spring(0.99, [120, 17]);
-    } else {
-      opacitySpring = spring(0.001, [120, 17]);
-    }*/
+  componentReceivedFocus() {
+    this.opacitySpring.val = 0.99;
+    this.refs.motion.startAnimating();
+  }
+
+  componentLostFocus() {
+    this.opacitySpring.val = 0.01;
+    this.refs.motion.startAnimating();
+  }
+
+  render() {
+    var styles = AppAsset.styles;
 
     return <Div>
-      <Motion key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
+      <Motion ref='motion' key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
         {function (interpolatedStyle) {
           return <Img style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
         }}
       </Motion>;
-      <Img style={styles.image} src={self.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
-      <P style={styles.title} key="1">{self.props.data.name}</P>
+      <Img style={styles.image} src={this.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
+      <P style={styles.title} key="1">{this.props.data.name}</P>
     </Div>;
   }
 

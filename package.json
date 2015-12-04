@@ -17,6 +17,7 @@
     "es6-react-mixins": "^0.2.1",
     "horizon4-fonts": "git+ssh://git@github.com/LibertyGlobal/horizon4-fonts#v2.3.0",
     "improved-navigation-concept": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+    "json-loader": "^0.5.4",
     "pixi.js": "git+ssh://git@github.com/LibertyGlobal/pixi.js.git#v3.0.8-patched",
     "react": "^0.14.0",
     "react-dom": "^0.14.2",

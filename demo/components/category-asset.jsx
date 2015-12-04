@@ -19,7 +19,7 @@ var CATEGORY_ICONS = {
   video: require('../assets/images/genres-icons/video.png'),
 };
 
-class MovieAsset extends React.Component {
+class CategoryAsset extends React.Component {
   static styles = {
     width: 201,
     marginRight: 24,
@@ -42,29 +42,29 @@ class MovieAsset extends React.Component {
   constructor(props) {
     super(props);
     this.id = String(Date.now());
+    this.opacitySpring = spring(0.001, [120, 17]);
   }
 
   shouldComponentUpdate(a, b) {
-    if (a.selected !== this.props.selected) {
-      return true;
-    } else {
-      return false;
-    }
+    return false;
+  }
+
+  componentReceivedFocus() {
+    this.opacitySpring.val = 0.99;
+    this.refs.motion.startAnimating();
+  }
+
+  componentLostFocus() {
+    this.opacitySpring.val = 0.01;
+    this.refs.motion.startAnimating();
   }
 
   render() {
-    var opacitySpring = null;
-    var styles = MovieAsset.styles;
-
-    if (this.props.selected) {
-      opacitySpring = spring(0.99, [120, 17]);
-    } else {
-      opacitySpring = spring(0.001, [120, 17])
-    }
+    var styles = CategoryAsset.styles;
 
     return <GLdiv>
-      <Motion key="focus-motion" defaultStyle={styles.focus} style={{opacity: opacitySpring}}>
-        {interpolatedStyle => {
+      <Motion ref='motion' key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
+        {function (interpolatedStyle) {
           return <GLimg style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
         }}
       </Motion>;
@@ -78,17 +78,8 @@ class MovieAsset extends React.Component {
   }
 }
 
-MovieAsset.defaultProps = {
-  onBlur: function () {
-  },
-  onFocus: function () {
-  },
-  onSelect: function () {
-  }
-};
-
-MovieAsset.contextTypes = {
+CategoryAsset.contextTypes = {
   navigationContainerId: React.PropTypes.string
 };
 
-module.exports = MovieAsset;
+module.exports = CategoryAsset;
