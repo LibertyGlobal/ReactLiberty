@@ -1,6 +1,6 @@
 module.exports = {};
 
-var PIXI = require('../../../bower_components/pixi.js/bin/pixi');
+var PIXI = require('pixijs');
 window.PIXI = PIXI;
 
 // Initialize PIXI renderer

@@ -48,19 +48,27 @@ class AppAsset extends React.Component {
     }
   }
 
+  componentReceivedFocus() {
+    this.opacitySpring = spring(0.99, [120, 17]);
+  }
+
+  componentLostFocus() {
+    this.opacitySpring = spring(0.001, [120, 17]);
+  }
+
   render() {
     var opacitySpring = null;
     var styles = AppAsset.styles;
     var self = this;
 
-    if (this.props.selected) {
+    /*if (this.props.selected) {
       opacitySpring = spring(0.99, [120, 17]);
     } else {
-      opacitySpring = spring(0.001, [120, 17])
-    }
+      opacitySpring = spring(0.001, [120, 17]);
+    }*/
 
     return <Div>
-      <Motion key="focus-motion" defaultStyle={styles.focus} style={{opacity: opacitySpring}}>
+      <Motion key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
         {function (interpolatedStyle) {
           return <Img style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
         }}

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "appdev":"webpack -w --config=webpack.demo.config.js",
-    "appprod":"NODE_ENV=production webpack -p -w --config=webpack.production.config.js "
+    "appdev": "webpack -w --config=webpack.demo.config.js",
+    "appprod": "NODE_ENV=production webpack -p -w --config=webpack.production.config.js "
   },
   "author": "PixelsCommander <denis.radin@gmail.com> (http://pixelscommander.com)",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "es6-react-mixins": "^0.2.1",
     "horizon4-fonts": "git+ssh://git@github.com/LibertyGlobal/horizon4-fonts#v2.3.0",
     "improved-navigation-concept": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+    "pixi.js": "git+ssh://git@github.com/LibertyGlobal/pixi.js.git#v3.0.8-patched",
     "react": "^0.14.0",
     "react-dom": "^0.14.2",
     "react-hot-loader": "^1.3.0",
