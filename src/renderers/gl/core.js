@@ -14,19 +14,19 @@ renderer.view.style['pointerEvents'] = 'none';
 module.exports.document = new PIXI.Container();
 
 var resizeViewer = function () {
-    var self = this,
-        width = window.innerWidth,
-        height = window.innerHeight;
+  var self = this,
+    width = window.innerWidth,
+    height = window.innerHeight;
 
-    renderer.resize(width, height);
-    renderer.render(module.exports.document);
+  renderer.resize(width, height);
+  renderer.render(module.exports.document);
 }
 
 var redrawStage = function () {
-    if (true) {
-        renderer.render(module.exports.document);
-    }
-    window.requestAnimationFrame(redrawStage);
+  if (true) {
+    renderer.render(module.exports.document);
+  }
+  window.requestAnimationFrame(redrawStage);
 }
 
 resizeViewer();
@@ -44,16 +44,16 @@ module.exports.rootID = ReactInstanceHandles.createReactRootID();
 module.exports.transaction = ReactUpdates.ReactReconcileTransaction.getPooled();
 
 module.exports.render = function (pixiElement) {
-    var component = instantiateReactComponent(pixiElement),
-        instance;
+  var component = instantiateReactComponent(pixiElement),
+    instance;
 
-    if (ReactElement.isValidElement(pixiElement)) {
-        module.exports.transaction.perform(function () {
-            instance = component.mountComponent(module.exports.rootID, module.exports.transaction, {});
-            instance.isRootLibertyNode = true;
-        });
-        return instance;
-    } else {
-        console.log('ReactLiberty.render: Passed element is not a valid ReactElement');
-    }
+  if (ReactElement.isValidElement(pixiElement)) {
+    module.exports.transaction.perform(function () {
+      instance = component.mountComponent(module.exports.rootID, module.exports.transaction, {});
+      instance.isRootLibertyNode = true;
+    });
+    return instance;
+  } else {
+    console.log('ReactLiberty.render: Passed element is not a valid ReactElement');
+  }
 };

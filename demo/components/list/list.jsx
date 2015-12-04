@@ -61,6 +61,10 @@ class List extends FocusableComponent {
     }
   }
 
+  componentReceivedFocus() {
+
+  }
+
   componentWillMount() {
     super.componentWillMount();
     this.positionProperty = this.props.orientation === List.orientation.VERTICAL ? 'top' : 'left';
@@ -146,6 +150,10 @@ class List extends FocusableComponent {
     </Motion>);
   }
 }
+
+List.defaultProps = {
+  orientation: List.orientation.HORIZONTAL
+};
 
 var extendStyle = function (objA, objB) {
   for (var i in objB) {

@@ -43,8 +43,8 @@ main {
 
 @font-face {
     font-family: 'icomoon';
-    src:url('../fonts/icomoon.eot?j0nsc3');
-    src:url('fonts/icomoon.eot?j0nsc3#iefix') format('embedded-opentype'),
+    src: url('../fonts/icomoon.eot?j0nsc3');
+    src: url('fonts/icomoon.eot?j0nsc3#iefix') format('embedded-opentype'),
     url('../fonts/icomoon.ttf?j0nsc3') format('truetype'),
     url('../fonts/icomoon.woff?j0nsc3') format('woff'),
     url('../fonts/icomoon.svg?j0nsc3#icomoon') format('svg');

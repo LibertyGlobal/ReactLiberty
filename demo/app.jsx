@@ -4,50 +4,50 @@ var ForYouPage = require('./pages/for-you.jsx');
 var fonts = require('horizon4-fonts');
 
 class AppStore {
-    constructor() {
-        this.container = document.getElementById('app-container');
-        this.initLifecycleListeners();
-        this.init();
-    }
+  constructor() {
+    this.container = document.getElementById('app-container');
+    this.initLifecycleListeners();
+    this.init();
+  }
 
-    initLifecycleListeners() {
-        document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
-    }
+  initLifecycleListeners() {
+    document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
+  }
 
-    init() {
-        ReactDOM.render(React.createElement(ForYouPage), this.container);
-    }
+  init() {
+    ReactDOM.render(React.createElement(ForYouPage), this.container);
+  }
 
-    processVisibilityChange({target}) {
-        if (document.hidden) {
-            this.suspend();
-        } else {
-            this.awake();
-        }
+  processVisibilityChange({target}) {
+    if (document.hidden) {
+      this.suspend();
+    } else {
+      this.awake();
     }
+  }
 
-    suspend() {
-        console.log('Suspending...');
-        return;
-        if (!this.suspended) {
-            window.routerHistory.pushState(null, '/suspend/');
-            this.suspended = true;
-        }
+  suspend() {
+    console.log('Suspending...');
+    return;
+    if (!this.suspended) {
+      window.routerHistory.pushState(null, '/suspend/');
+      this.suspended = true;
     }
+  }
 
-    awake() {
-        console.log('Awaking...');
-        return;
-        if (this.suspended) {
-            window.routerHistory.go(-1);
-            this.suspended = false;
-        }
+  awake() {
+    console.log('Awaking...');
+    return;
+    if (this.suspended) {
+      window.routerHistory.go(-1);
+      this.suspended = false;
     }
+  }
 
-    runApp(appId) {
-        var appURL = appId;
-        window.open(appURL, '_blank');
-    }
+  runApp(appId) {
+    var appURL = appId;
+    window.open(appURL, '_blank');
+  }
 }
 
 window.appStore = new AppStore();

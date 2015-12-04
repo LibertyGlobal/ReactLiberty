@@ -31,9 +31,10 @@ module.exports = {
         new Webpack.NoErrorsPlugin(),
         new Webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: 'production'
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
         })
-    ]
+    ],
+    devtool: 'source-map'
 };
 
