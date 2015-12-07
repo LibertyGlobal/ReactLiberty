@@ -2,11 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Horizon application store</title>
-    <link rel="stylesheet" href="./assets/css/styles.css"/>
+    <title></title>
+    <style>
+        #app-store {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-<div id="app-container"></div>
+<iframe id="app-store" src="main.html?bar" frameborder="0"></iframe>
+
+<script>
+    var middlewareEvents = {
+        STATUS: 'MWStatus',
+        KEY: 'MWKeyEvent'
+    };
+    var middlewareEventSourceURL = 'http://127.0.0.1:8081/server-sent-events';
+    var eventSource;
+    function start() {
+        console.log('start');
+        eventSource = new EventSource(middlewareEventSourceURL);
+        eventSource.addEventListener('message', handleMiddlewareEvent);
+        eventSource.addEventListener('error', handleEventSourceError);
+    }
+    function end() {
+        eventSource.removeEventListener('message', handleMiddlewareEvent);
+        eventSource.removeEventListener('error', handleEventSourceError);
+        eventSource.close();
+    }
+    function handleMiddlewareEvent(event) {
+        console.log('handleMiddlewareEvent');
+        var data = JSON.parse(event.data);
+        var type = data.method;
+        var params = data.params;
+        switch (type) {
+            case middlewareEvents.STATUS:
+                handleStatusEvent(params);
+                break;
+            case middlewareEvents.KEY:
+                handleKeyEvent(params);
+                break;
+            default:
+                // ignore unknown events
+                break;
+        }
+    }
+    function handleEventSourceError(error) {
+        console.error(error);
+        end();
+    }
+    function handleStatusEvent(statusParams) {
+    }
+    function handleKeyEvent(keyEventParams) {
+        var keyEvent = parseKeyEvent(keyEventParams);
+        sendKeyEventToIframe(keyEvent);
+    }
+    function parseKeyEvent(keyEventParams) {
+        var eventType;
+        var keyState = String(keyEventParams['KeyState']).toUpperCase();
+        var keyCode = parseInt(keyEventParams['KeyCode'], 10) || 0;
+        switch (keyState) {
+            case 'UP':
+                eventType = 'keyup';
+                break;
+            // use "keydown" for both cases
+            case 'DOWN':
+            case 'REPEAT':
+                eventType = 'keydown';
+                break;
+        }
+        return {
+            type: eventType,
+            keyCode: keyCode
+        };
+    }
+    function sendKeyEventToIframe(keyEvent) {
+        var iframe = document.querySelector('#app-store');
+        var iframeWindow = iframe.contentWindow;
+        var message = JSON.stringify({
+            type: 'key',
+            message: {
+                type: keyEvent.type,
+                keyCode: keyEvent.keyCode
+            }
+        });
+        iframeWindow.postMessage(message, '*');
+    }
+    window.onload = start;
+    window.onunload = stop;
+</script>
 </body>
-<script src="./build/app.js"></script>
 </html>

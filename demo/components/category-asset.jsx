@@ -50,17 +50,27 @@ class CategoryAsset extends React.Component {
   }
 
   componentReceivedFocus() {
+    this.state = this.state || {};
+    this.state.selected = true;
     this.opacitySpring.val = 0.99;
     this.refs.motion.startAnimating();
   }
 
   componentLostFocus() {
+    this.state = this.state || {};
+    this.state.selected = false;
     this.opacitySpring.val = 0.01;
     this.refs.motion.startAnimating();
   }
 
   render() {
     var styles = CategoryAsset.styles;
+
+    if (this.state && this.state.selected) {
+      this.opacitySpring = spring(0.99, [120, 17]);
+    } else {
+      this.opacitySpring = spring(0.001, [120, 17]);
+    }
 
     return <GLdiv>
       <Motion ref='motion' key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
