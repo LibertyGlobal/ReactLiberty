@@ -15,6 +15,7 @@
     "css-layout": "^1.0.0",
     "css-loader": "^0.23.0",
     "es6-react-mixins": "^0.2.1",
+    "history": "^1.14.0",
     "horizon4-fonts": "git+ssh://git@github.com/LibertyGlobal/horizon4-fonts#v2.3.0",
     "improved-navigation-concept": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
     "json-loader": "^0.5.4",

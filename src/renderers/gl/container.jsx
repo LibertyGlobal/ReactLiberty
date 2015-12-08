@@ -40,6 +40,11 @@ class ReactLibertyContainer extends ReactLibertyElement {
     }
   }
 
+  unmountComponent() {
+    this.unmountChildren();
+    super.unmountComponent();
+  }
+
   receiveComponent(nextElement, transaction, context) {
     super.receiveComponent(nextElement, transaction, context);
     this.updateDisplayObject(true);

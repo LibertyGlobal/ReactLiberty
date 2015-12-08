@@ -72,19 +72,23 @@ class CategoryAsset extends React.Component {
       this.opacitySpring = spring(0.001, [120, 17]);
     }
 
-    return <GLdiv>
+    return <Div>
       <Motion ref='motion' key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
         {function (interpolatedStyle) {
-          return <GLimg style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
+          return <Img style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
         }}
       </Motion>;
-      <GLimg style={styles.image} src={CATEGORY_ICONS[this.props.data.id] || CATEGORY_ICONS['video']} key="3"/>
-    </GLdiv>;
+      <Img style={styles.image} src={CATEGORY_ICONS[this.props.data.id] || CATEGORY_ICONS['video']} key="3"/>
+    </Div>;
   }
 
   componentWillMount() {
     this.parentId = this.context.navigationContainerId;
     FocusManager.registerFocusableComponent(this);
+  }
+
+  componentWillUnmount() {
+    FocusManager.unregisterFocusableComponent(this);
   }
 }
 

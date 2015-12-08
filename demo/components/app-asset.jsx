@@ -83,6 +83,10 @@ class AppAsset extends React.Component {
     this.parentId = this.context.navigationContainerId;
     FocusManager.registerFocusableComponent(this);
   }
+
+  componentWillUnmount() {
+    FocusManager.unregisterFocusableComponent(this);
+  }
 }
 
 AppAsset.contextTypes = {

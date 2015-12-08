@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactMount = require('react/lib/ReactMount');
 var ReactLiberty = require('./core.js');
+var ReactReconciler = require('react/lib/ReactReconciler');
+var ReactInstanceMap = require('react/lib/ReactInstanceMap');
 var ReactElement = require('react/lib/ReactElement');
 var ReactCompositeComponent = require('react/lib/ReactCompositeComponent');
 
@@ -13,7 +15,7 @@ class ReactLibertyElement extends React.Component {
     this._context = null;
     this._rootNodeID = null;
     this._instance = null;
-    this._renderedComponent = null;
+    this._renderedComponent = this;
 
     //Liberty specific
     this._style = {};
@@ -44,17 +46,11 @@ class ReactLibertyElement extends React.Component {
     this._displayObject = this._displayObject || this.getDisplayObject();
   }
 
-  unmountComponent() {
-    alert('unmountComponent');
-  }
-
   receiveComponent(nextElement, transaction, context) {
     var newProps = nextElement.props;
     var oldProps = this._currentElement.props;
 
     this.props = newProps;
-
-    //TODO reuse DisplayObject ?
 
     this.updateDisplayObject();
     return this;
@@ -87,9 +83,6 @@ class ReactLibertyElement extends React.Component {
   mountComponentToDOM() {
     try {
       //If is being added to ReactDOM node then consider X,Y of it`s bounding rect as a location
-      //var DOMOwnerProperty = Object.keys(this._context)[0];
-      //var DOMOwner = this._context[DOMOwnerProperty].parentTag.instance;
-
       this.DOMParent = ReactMount.findReactNodeByID(this._instance._rootNodeID.substr(0, this._instance._rootNodeID.lastIndexOf('.')));
       var boundingRect = this.DOMParent.getBoundingClientRect();
 
@@ -106,12 +99,48 @@ class ReactLibertyElement extends React.Component {
     }
   }
 
+  unmountComponent() {
+    var inst = this._instance;
+
+    if (inst.componentWillUnmount) {
+      inst.componentWillUnmount();
+    }
+
+    //ReactReconciler.unmountComponent(this._renderedComponent);
+    this._renderedComponent = null;
+    this._instance = null;
+
+    // These fields do not really need to be reset since this object is no
+    // longer accessible.
+    this._context = null;
+    this._rootNodeID = null;
+    this._topLevelWrapper = null;
+
+    // Delete the reference from the instance to this internal representation
+    // which allow the internals to be properly cleaned up even if the user
+    // leaks a reference to the public instance.
+
+    //ReactInstanceMap.remove(inst);
+
+    // Some existing components rely on inst.props even after they've been
+    // destroyed (in event handlers).
+    // TODO: inst.props = null;
+    // TODO: inst.state = null;
+    // TODO: inst.context = null;
+
+    if (this._displayObject) {
+      this._displayObject.parent.removeChild(this._displayObject);
+      this._displayObject.destroy(false);
+    }
+  }
+
   updateDisplayObject(updateChildren) {
     //console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
 
     var halfWidth = 0;
     var halfHeight = 0;
 
+    //Needed if we scale from center but adds additional calculation
     /*var halfWidth = (((this.layout && this.layout.width) || this.style.width) / 2) || 0;
      var halfHeight = (((this.layout && this.layout.height) || this.style.height) / 2) || 0;
      this._displayObject.pivot.x = halfWidth;
@@ -147,12 +176,6 @@ class ReactLibertyElement extends React.Component {
 
   componentWillUpdate(nextProps, prevProps) {
     this.updateDisplayObject();
-  }
-
-  componentWillUnmount() {
-    if (this._displayObject) {
-      this._displayObject.destroy(true);
-    }
   }
 
   render() {

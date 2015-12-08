@@ -13,7 +13,6 @@ var appService = require('../services/applications-service');
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
 class ForYou extends React.Component {
-
   render() {
     var styles = {
       container: {
