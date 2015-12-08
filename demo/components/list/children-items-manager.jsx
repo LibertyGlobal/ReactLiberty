@@ -4,7 +4,7 @@ class ChildrenScroller {
   }
 
   getNumberOfItemsVisible() {
-    return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.getSizeForItem(0)) - 2;
+    return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.getSizeForItem(0)) - 1;
   }
 
   getScrollForItem(itemIndex) {

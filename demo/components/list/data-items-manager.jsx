@@ -7,7 +7,7 @@ class DataScroller {
   }
 
   getNumberOfItemsVisible() {
-    return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.itemSize) - 2;
+    return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.itemSize) - 1;
   }
 
   getScrollForItem(itemIndex) {

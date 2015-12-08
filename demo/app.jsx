@@ -11,30 +11,35 @@ var Redirect = require('react-router').Redirect;
 var createHashHistory = require('history/lib/createHashHistory');
 var {useQueries} = require('history');
 var history = useQueries(createHashHistory)();
+window.routerHistory = history;
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
+var Menu = require('./components/menu.jsx');
 var pages = {};
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
 class AppStoreRouter extends React.Component {
+  componentDidMount() {
+    window.router = this.refs['router'];
+    window.router.history.listen(FocusManager.initializeFocus);
+  }
+
   render() {
     return (
-      <Router history={history}>
-        <Redirect from='/' to='/for-you'/>
+      <div>
+        <Menu/>
+        <Router ref='router' history={history}>
+          <Redirect from='/' to='/for-you'/>
           <Route path='/for-you' component={pages['for-you']}></Route>
-          <Route path='/app-store-you' component={pages['app-store']}></Route>
-        <Route path='/suspend/' component={null} onEnter={function(){
-          console.log('Entered suspended route');
-        }}/>
-      </Router>
+          <Route path='/app-store' component={pages['app-store']}></Route>
+          <Route path='/suspend/' component={null}/>
+        </Router>
+      </div>
     );
   }
 }
-
-window.router = React.createElement(AppStoreRouter);
-window.routerHistory = history;
 
 class AppStore {
   constructor() {

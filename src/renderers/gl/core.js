@@ -4,7 +4,7 @@ var PIXI = require('pixi.js');
 window.PIXI = PIXI;
 
 // Initialize PIXI renderer
-var renderer = PIXI.autoDetectRenderer(0, 0, {transparent: true});
+var renderer = PIXI.autoDetectRenderer(0, 0, {transparent: true, antialias: false, forceFXAA: true});
 renderer.view.style.position = 'fixed';
 renderer.view.style.top = '0px';
 renderer.view.style.left = '0px';
