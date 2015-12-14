@@ -33,7 +33,7 @@ class AppAsset extends React.Component {
       height: 222,
       opacity: 0.001
     }
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -59,6 +59,14 @@ class AppAsset extends React.Component {
     this.refs.motion.startAnimating();
   }
 
+  showLabel() {
+    this.refs.label._displayObject.visible = true;
+  }
+
+  hideLabel() {
+    this.refs.label._displayObject.visible = false;
+  }
+
   render() {
     var styles = AppAsset.styles;
 
@@ -75,7 +83,7 @@ class AppAsset extends React.Component {
         }}
       </Motion>;
       <Img style={styles.image} src={this.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
-      <P style={styles.title} key="1">{this.props.data.name}</P>
+      <P ref="label" style={styles.title} key="1">{this.props.data.name}</P>
     </Div>;
   }
 
