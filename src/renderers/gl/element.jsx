@@ -181,6 +181,10 @@ class ReactLibertyElement extends React.Component {
   render() {
     return this;
   }
+
+  getPublicInstance() {
+    return this;
+  }
 }
 
 module.exports = ReactLibertyElement;
