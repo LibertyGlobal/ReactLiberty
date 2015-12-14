@@ -133,11 +133,7 @@ class List extends FocusableComponent {
     var items = this.itemsManager.getVisibleItems();
     var self = this;
 
-    setTimeout(function(){
-      self._displayObject.cacheAsBitmap = true;
-    });
-
-    //Creating motion spring
+    //Creating style object to pass motion spring
     var styleObject = {};
     styleObject[this.translateProperty] = this.motionSpring;
 

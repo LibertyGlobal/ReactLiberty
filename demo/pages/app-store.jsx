@@ -4,7 +4,6 @@ var React = require('react');
 var ReactLiberty = require('../../src/index');
 var AppAsset = require('../components/app-asset.jsx');
 var CategoryAsset = require('../components/category-asset.jsx');
-var Menu = require('../components/menu.jsx');
 var List = require('../components/list/list.jsx');
 var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
@@ -12,7 +11,7 @@ var appService = require('../services/applications-service');
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
-class ForYou extends React.Component {
+class AppStore extends React.Component {
   render() {
     var styles = {
       container: {
@@ -74,4 +73,4 @@ class ForYou extends React.Component {
   }
 }
 
-module.exports = ForYou;
+module.exports = AppStore;

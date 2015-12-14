@@ -107,8 +107,8 @@ class ReactLibertyElement extends React.Component {
     }
 
     //ReactReconciler.unmountComponent(this._renderedComponent);
-    this._renderedComponent = null;
-    this._instance = null;
+    this._renderedComponent = this._displayObject;
+    this._instance = this;
 
     // These fields do not really need to be reset since this object is no
     // longer accessible.
@@ -116,17 +116,11 @@ class ReactLibertyElement extends React.Component {
     this._rootNodeID = null;
     this._topLevelWrapper = null;
 
-    // Delete the reference from the instance to this internal representation
-    // which allow the internals to be properly cleaned up even if the user
-    // leaks a reference to the public instance.
-
-    //ReactInstanceMap.remove(inst);
-
     // Some existing components rely on inst.props even after they've been
     // destroyed (in event handlers).
-    // TODO: inst.props = null;
-    // TODO: inst.state = null;
-    // TODO: inst.context = null;
+    inst.props = null;
+    inst.state = null;
+    inst.context = null;
 
     if (this._displayObject) {
       this._displayObject.parent.removeChild(this._displayObject);
@@ -180,6 +174,14 @@ class ReactLibertyElement extends React.Component {
 
   render() {
     return this;
+  }
+
+  getPublicInstance() {
+    return this;
+  }
+
+  getDisplayObject() {
+    return this._displayObject;
   }
 }
 

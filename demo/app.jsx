@@ -15,10 +15,14 @@ window.routerHistory = history;
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
-var Menu = require('./components/menu.jsx');
+var Menu = require('./components/menu/menu.jsx');
+var MenuItem = require('./components/menu/menu-item.jsx');
 var pages = {};
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
+
+var FocusManager = require('improved-navigation-concept').FocusManager;
+var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;
 
 class AppStoreRouter extends React.Component {
   componentDidMount() {
@@ -29,7 +33,10 @@ class AppStoreRouter extends React.Component {
   render() {
     return (
       <div>
-        <Menu/>
+        <Menu>
+          <MenuItem>FOR YOU</MenuItem>
+          <MenuItem>APP STORE</MenuItem>
+        </Menu>
         <Router ref='router' history={history}>
           <Redirect from='/' to='/for-you'/>
           <Route path='/for-you' component={pages['for-you']}></Route>
