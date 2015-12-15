@@ -10,26 +10,33 @@ var DataItemsManager = require('./data-items-manager.jsx');
 var FocusManager = require('improved-navigation-concept').FocusManager;
 var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;
 
+function invoke(fn) {
+  if (typeof this[fn] === 'function') {
+    this[fn]();
+  }
+}
+
 class List extends FocusableComponent {
   static orientation = {
     VERTICAL: 'vertical',
     HORIZONTAL: 'horizontal'
-  }
+  };
 
   styles = {
     translateX: 0,
     translateY: 0
-  }
+  };
 
   state = {
     currentIndex: 0
-  }
+  };
 
   //Experiment
   constructor(props) {
     super(props);
     this.moveTo = 0;
     this.motionSpring = spring(this.moveTo, [120, 17]);
+    this.registeredChildren = new Set();
   }
 
   getPreferredFocusedComponentNode(containerNode, prevFocusedComponentNode) {
@@ -90,12 +97,24 @@ class List extends FocusableComponent {
     this.itemsManager = new ItemsManagerClass(this);
   }
 
+  componentWillUnmount() {
+    this.registeredChildren.clear();
+  }
+
+  componentReceivedFocus() {
+    Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'showLabel'));
+  }
+
+  componentLostFocus() {
+    Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'hideLabel'));
+  }
+
   moveSelection(direction) {
     var itemsLength = this.itemsManager.getVisibleItems().length;
     var currentIndex = (this.state.currentIndex + direction) % itemsLength;
     currentIndex = currentIndex < 0 ? currentIndex = itemsLength + currentIndex : currentIndex;
 
-    //Experiment
+    //Should be in sync if rerendered
     this.state.currentIndex = currentIndex;
 
     //Calculating translate
@@ -129,8 +148,10 @@ class List extends FocusableComponent {
   }
 
   render() {
+    const refFn = child => this.registeredChildren.add(child);
+
     //Receiving items from items manager
-    var items = this.itemsManager.getVisibleItems();
+    var items = this.itemsManager.getVisibleItems(refFn);
     var self = this;
 
     //Creating style object to pass motion spring

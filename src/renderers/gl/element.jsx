@@ -107,8 +107,8 @@ class ReactLibertyElement extends React.Component {
     }
 
     //ReactReconciler.unmountComponent(this._renderedComponent);
-    this._renderedComponent = this._displayObject;
-    this._instance = this;
+    this._renderedComponent = null;
+    this._instance = null;
 
     // These fields do not really need to be reset since this object is no
     // longer accessible.
@@ -118,9 +118,9 @@ class ReactLibertyElement extends React.Component {
 
     // Some existing components rely on inst.props even after they've been
     // destroyed (in event handlers).
-    inst.props = null;
-    inst.state = null;
-    inst.context = null;
+    // TODO: inst.props = null;
+    // TODO: inst.state = null;
+    // TODO: inst.context = null;
 
     if (this._displayObject) {
       this._displayObject.parent.removeChild(this._displayObject);
@@ -140,8 +140,8 @@ class ReactLibertyElement extends React.Component {
      this._displayObject.pivot.x = halfWidth;
      this._displayObject.pivot.y = halfHeight;*/
 
-    //this._displayObject.scale.x = this.style.scale || 1;
-    //this._displayObject.scale.y = this.style.scale || 1;
+    this._displayObject.scale.x = this.style.scale || 1;
+    this._displayObject.scale.y = this.style.scale || 1;
 
     this._displayObject.x = this.style.translateX || 0 + (this.layout && this.layout.left || (this.props && this.props.x) || 0) + halfWidth;
     this._displayObject.y = this.style.translateY || 0 + (this.layout && this.layout.top || (this.props && this.props.y) || 0) + halfHeight;
