@@ -134,7 +134,7 @@ class ReactLibertyElement extends React.Component {
 
   updateDisplayObject(updateChildren) {
     //console.trace('@S+update child coordinates');
-    console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
+    //console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
 
     var halfWidth = 0;
     var halfHeight = 0;
@@ -145,8 +145,8 @@ class ReactLibertyElement extends React.Component {
      this._displayObject.pivot.x = halfWidth;
      this._displayObject.pivot.y = halfHeight;*/
 
-    this._displayObject.scale.x = this.style.scale || 1;
-    this._displayObject.scale.y = this.style.scale || 1;
+    //this._displayObject.scale.x = this.style.scale || 1;
+    //this._displayObject.scale.y = this.style.scale || 1;
 
     this._displayObject.x = this.style.translateX || 0 + (this.layout && this.layout.left || (this.props && this.props.x) || 0) + halfWidth;
     this._displayObject.y = this.style.translateY || 0 + (this.layout && this.layout.top || (this.props && this.props.y) || 0) + halfHeight;
@@ -170,10 +170,6 @@ class ReactLibertyElement extends React.Component {
     if (this._isRootLibertyNode) {
       this.mountComponentToDOM();
     }
-    this.updateDisplayObject();
-  }
-
-  componentWillUpdate(nextProps, prevProps) {
     this.updateDisplayObject();
   }
 
