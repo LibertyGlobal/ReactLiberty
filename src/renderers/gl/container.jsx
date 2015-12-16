@@ -47,8 +47,8 @@ class ReactLibertyContainer extends ReactLibertyElement {
 
   receiveComponent(nextElement, transaction, context) {
     super.receiveComponent(nextElement, transaction, context);
-    this.updateDisplayObject(true);
-    this.updateChildren(this.props.children, transaction, context);
+    this.updateDisplayObject(false);
+    //this.updateChildren(this.props.children, transaction, context);
   }
 
   updateDisplayObject(updateChildren) {

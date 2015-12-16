@@ -41,7 +41,7 @@ class AppStoreRouter extends React.Component {
           <Redirect from='/' to='/for-you'/>
           <Route path='/for-you' component={pages['for-you']}></Route>
           <Route path='/app-store' component={pages['app-store']}></Route>
-          <Route path='/suspend/' component={null}/>
+          <Route path='/suspend' component={null}/>
         </Router>
       </div>
     );
@@ -63,6 +63,7 @@ class AppStore {
   }
 
   onKeyDown(e) {
+    //console.trace('@S+key down');
     switch (e.keyCode) {
       case 37:
         FocusManager.doLeft();
@@ -80,7 +81,7 @@ class AppStore {
   }
 
   initLifecycleListeners() {
-    document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
+    //document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
     //window.addEventListener('blur', this.suspend.bind(this), false);
     //window.addEventListener('focus', this.awake.bind(this), false);
   }
@@ -101,7 +102,7 @@ class AppStore {
     console.log('Suspending...');
     if (!this.suspended) {
       this.suspended = true;
-      window.routerHistory.push('/suspend/');
+      window.routerHistory.push('/suspend');
     }
   }
 

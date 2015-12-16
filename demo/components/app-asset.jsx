@@ -60,11 +60,11 @@ class AppAsset extends React.Component {
   }
 
   showLabel() {
-    this.refs.label._displayObject.visible = true;
+    //this.refs.label._displayObject.visible = true;
   }
 
   hideLabel() {
-    this.refs.label._displayObject.visible = false;
+    //this.refs.label._displayObject.visible = false;
   }
 
   render() {

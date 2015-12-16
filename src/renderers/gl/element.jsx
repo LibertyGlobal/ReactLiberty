@@ -38,6 +38,10 @@ class ReactLibertyElement extends React.Component {
     this.timesLayouted = 0;
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   getDisplayObject() {
     return new PIXI.Container();
   }
@@ -129,7 +133,8 @@ class ReactLibertyElement extends React.Component {
   }
 
   updateDisplayObject(updateChildren) {
-    //console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
+    //console.trace('@S+update child coordinates');
+    console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
 
     var halfWidth = 0;
     var halfHeight = 0;

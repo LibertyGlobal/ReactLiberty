@@ -140,11 +140,11 @@ class List extends FocusableComponent {
   }
 
   shouldComponentUpdate(a, b) {
-    if (b.currentIndex !== this.state.currentIndex) {
-      return true;
-    } else {
+    //if (b.currentIndex !== this.state.currentIndex) {
+    //  return true;
+    //} else {
       return false;
-    }
+    //}
   }
 
   render() {

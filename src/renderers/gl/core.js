@@ -24,9 +24,11 @@ var resizeViewer = function () {
 
 var redrawStage = function () {
   if (true) {
+    //console.trace('@I+RAF');
     renderer.render(module.exports.document);
   }
   window.requestAnimationFrame(redrawStage);
+  //console.trace('@I-RAF');
 }
 
 resizeViewer();
