@@ -159,6 +159,8 @@ class ReactLibertyElement extends React.Component {
     }
 
     this._displayObject.rotation = this.props && parseInt(this.props.rotation, 10) || 0;
+
+    ReactLiberty.markStageAsChanged();
   }
 
   get style() {

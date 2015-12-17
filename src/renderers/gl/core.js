@@ -22,18 +22,8 @@ var resizeViewer = function () {
   renderer.render(module.exports.document);
 }
 
-var redrawStage = function () {
-  if (true) {
-    //console.trace('@I+RAF');
-    renderer.render(module.exports.document);
-  }
-  window.requestAnimationFrame(redrawStage);
-  //console.trace('@I-RAF');
-}
-
 resizeViewer();
 document.body.appendChild(renderer.view);
-window.requestAnimationFrame(redrawStage);
 
 //Initialize React stage
 var React = require('react');
@@ -57,5 +47,19 @@ module.exports.render = function (pixiElement) {
     return instance;
   } else {
     console.log('ReactLiberty.render: Passed element is not a valid ReactElement');
+  }
+};
+
+module.exports.redrawStage = function () {
+  if (module.exports.shouldRedraw) {
+    renderer.render(module.exports.document);
+    module.exports.shouldRedraw = false;
+  }
+};
+
+module.exports.markStageAsChanged = function () {
+  if (!module.exports.shouldRedraw) {
+    module.exports.shouldRedraw = true;
+    module.exports.redrawStage();
   }
 };
