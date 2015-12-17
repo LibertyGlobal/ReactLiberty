@@ -60,6 +60,6 @@ module.exports.redrawStage = function () {
 module.exports.markStageAsChanged = function () {
   if (!module.exports.shouldRedraw) {
     module.exports.shouldRedraw = true;
-    module.exports.redrawStage();
+    requestAnimationFrame(module.exports.redrawStage);
   }
 };

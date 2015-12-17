@@ -140,11 +140,7 @@ class List extends FocusableComponent {
   }
 
   shouldComponentUpdate(a, b) {
-    //if (b.currentIndex !== this.state.currentIndex) {
-    //  return true;
-    //} else {
-      return false;
-    //}
+    return false;
   }
 
   render() {
@@ -161,7 +157,7 @@ class List extends FocusableComponent {
     return (<Motion ref='motion' defaultStyle={this.styles} style={styleObject}>
       {function (interpolatedStyle) {
         self.movedTo = interpolatedStyle[self.translateProperty];
-        return (<GLdiv style={interpolatedStyle}>{items}</GLdiv>);
+        return (<Div style={interpolatedStyle}>{items}</Div>);
       }}
     </Motion>);
   }

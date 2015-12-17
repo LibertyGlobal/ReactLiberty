@@ -24,4 +24,4 @@ class ReactLibertyText extends ReactLibertyElement {
   }
 }
 
-window['P'] = window['GLp'] = module.exports = ReactLibertyText;
+window['GLp'] = module.exports = ReactLibertyText;

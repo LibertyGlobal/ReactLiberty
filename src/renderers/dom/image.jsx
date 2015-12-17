@@ -10,12 +10,15 @@ class ReactLibertyImage extends ReactLibertyElement {
   getDisplayObject() {
     var result;
     if (this.props && this.props.src) {
-      result = new PIXI.Sprite.fromImage(this.props.src);
+      result = document.createElement('img');
+      result.src = this.props.src;
+      result.width = this.style.width + 'px';
+      result.height = this.style.height + 'px';
 
       //If sizes are not set use images sizes when it is loaded
-      if (!this.style.width || !this.style.height) {
-        result.texture.baseTexture.on('loaded', this.onImageLoaded);
-      }
+      //if (!this.style.width || !this.style.height) {
+      //  result.texture.baseTexture.on('loaded', this.onImageLoaded);
+      //}
     } else {
       throw(new Error('ReactLiberty.Image: src is not set'));
     }
@@ -49,4 +52,4 @@ class ReactLibertyImage extends ReactLibertyElement {
   }
 }
 
-window['GLimg'] = module.exports = ReactLibertyImage;
+window['DOMimg'] = module.exports = ReactLibertyImage;

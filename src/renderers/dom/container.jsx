@@ -12,7 +12,7 @@ const { assign } = Object;
 
 class ReactLibertyContainer extends ReactLibertyElement {
   getDisplayObject() {
-    return new PIXI.Container();
+    return document.createElement('div');
   }
 
   mountComponent(rootID, transaction, context) {
@@ -36,7 +36,7 @@ class ReactLibertyContainer extends ReactLibertyElement {
     if (typeof child !== 'string') {
       child.parent = this;
       this.children.push(child);
-      this._displayObject.addChild(child._displayObject);
+      this._displayObject.appendChild(child._displayObject);
     }
   }
 
@@ -85,4 +85,4 @@ assign(
   ReactMultiChild.Mixin
 );
 
-window['Div'] = window['GLdiv'] = module.exports = ReactLibertyContainer;
+window['DOMdiv'] = module.exports = ReactLibertyContainer;
