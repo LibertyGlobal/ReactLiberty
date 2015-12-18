@@ -13,7 +13,7 @@ class ReactLibertyImage extends ReactLibertyElement {
       result = new PIXI.Sprite.fromImage(this.props.src);
 
       //If sizes are not set use images sizes when it is loaded
-      if (!this.style.width || !this.style.height) {
+      if ((!this.style.width || !this.style.height) && (!this.props.width || !this.props.height)) {
         result.texture.baseTexture.on('loaded', this.onImageLoaded);
       }
     } else {
@@ -44,8 +44,8 @@ class ReactLibertyImage extends ReactLibertyElement {
 
   updateDisplayObject() {
     super.updateDisplayObject();
-    this._displayObject.width = this.layout && this.layout.width || this._displayObject.width;
-    this._displayObject.height = this.layout && this.layout.height || this._displayObject.height;
+    this._displayObject.width = this.layout && this.layout.width || this.props.width || this._displayObject.width;
+    this._displayObject.height = this.layout && this.layout.height || this.props.height || this._displayObject.height;
   }
 }
 

@@ -20,7 +20,7 @@ var CATEGORY_ICONS = {
 };
 
 class CatAssetHighlight extends React.Component {
-  render(){
+  render() {
     var style = {
       width: 216,
       height: 129,
@@ -28,7 +28,7 @@ class CatAssetHighlight extends React.Component {
       opacity: 0.001
     };
 
-    return <Img ref="highlight" style={style} src={HIGHLIGHT} key="focus"/>;
+    return <Img ref="highlight" style={style} src={HIGHLIGHT}/>;
   }
 }
 

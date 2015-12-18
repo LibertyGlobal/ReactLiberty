@@ -47,8 +47,8 @@ class ReactLibertyImage extends ReactLibertyElement {
 
   updateDisplayObject() {
     super.updateDisplayObject();
-    this._displayObject.width = this.layout && this.layout.width || this._displayObject.width;
-    this._displayObject.height = this.layout && this.layout.height || this._displayObject.height;
+    this._displayObject.width = this.layout && this.layout.width || this.props.width || this._displayObject.width;
+    this._displayObject.height = this.layout && this.layout.height || this.props.height || this._displayObject.height;
   }
 }
 

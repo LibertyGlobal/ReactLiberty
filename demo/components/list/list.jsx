@@ -119,13 +119,14 @@ class List extends FocusableComponent {
     Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'hideLabel'));
   }
 
-  moveSelection(direction) {
+  goTo(newIndex) {
     var itemsLength = this.itemsManager.getVisibleItems().length;
-    var currentIndex = (this.state.currentIndex + direction) % itemsLength;
-    currentIndex = currentIndex < 0 ? currentIndex = itemsLength + currentIndex : currentIndex;
+    newIndex = newIndex % itemsLength;
+
+    newIndex = newIndex < 0 ? newIndex = itemsLength + newIndex : newIndex;
 
     //Should be in sync if rerendered
-    this.state.currentIndex = currentIndex;
+    this.state.currentIndex = newIndex;
 
     //Calculating translate
     this.moveTo = this.itemsManager.getScrollForItem(this.state.currentIndex);
@@ -139,20 +140,20 @@ class List extends FocusableComponent {
     this.refs.motion.startAnimating();
 
     this.setState({
-      currentIndex
+      currentIndex: newIndex
     });
 
-    var currentItem = this.itemsManager.getVisibleItems()[currentIndex];
+    var currentItem = this.itemsManager.getVisibleItems()[newIndex];
 
-    return currentIndex;
+    return newIndex;
   }
 
   selectNext() {
-    return this.moveSelection(1);
+    return this.goTo(this.state.currentIndex + 1);
   }
 
   selectPrev() {
-    return this.moveSelection(-1);
+    return this.goTo(this.state.currentIndex - 1);
   }
 
   shouldComponentUpdate(a, b) {

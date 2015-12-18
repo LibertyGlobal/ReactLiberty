@@ -17,6 +17,7 @@ class ReactLibertyText extends ReactLibertyElement {
     pixiStyle.fill = CSS.color || '#000000';
     pixiStyle.wordWrapWidth = CSS.width || null;
     pixiStyle.align = CSS.textAlign;
+    pixiStyle.lineHeight = CSS.lineHeight;
     if (pixiStyle.wordWrapWidth) {
       pixiStyle.wordWrap = true;
     }

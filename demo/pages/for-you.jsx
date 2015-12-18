@@ -6,10 +6,15 @@ var AppAsset = require('../components/app-asset.jsx');
 var CategoryAsset = require('../components/category-asset.jsx');
 var List = require('../components/list/list.jsx');
 var appService = require('../services/applications-service');
+var BackToTopButton = require('../components/back-to-top.jsx');
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
 class ForYou extends React.Component {
+
+  goTop() {
+    this.refs.mainList.goTo(0);
+  }
 
   render() {
     var styles = {
@@ -47,7 +52,7 @@ class ForYou extends React.Component {
     return (
       <main style={styles.divStyle}>
         <Div style={styles.container}>
-          <List style={styles.verticalList} orientation="vertical">
+          <List ref="mainList" style={styles.verticalList} orientation="vertical">
             <Div style={styles.caruselRow}>
               <P style={styles.headerStyle}>Featured</P>
               <List style={styles.carusel}
@@ -77,6 +82,7 @@ class ForYou extends React.Component {
                     itemClass={AppAsset}
                     data={appService.getApplicationsByCategory('music')}/>
             </Div>
+            <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
           </List>
         </Div>
       </main>

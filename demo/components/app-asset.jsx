@@ -17,7 +17,7 @@ class AppAssetHighlight extends React.Component {
       opacity: 0.001
     };
 
-    return <Img ref="highlight" style={style} src={HIGHLIGHT} key="focus"/>;
+    return <Img ref="highlight" style={style} src={HIGHLIGHT}/>;
   }
 }
 

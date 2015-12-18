@@ -8,6 +8,7 @@ var List = require('../components/list/list.jsx');
 var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service');
+var BackToTopButton = require('../components/back-to-top.jsx');
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
@@ -66,6 +67,7 @@ class AppStore extends React.Component {
                       itemClass={AppAsset}
                       data={appService.getApplicationsByCategory('music')}/>
               </Div>
+              <BackToTopButton style={styles.caruselRow}/>
             </List>
           </Div>
         </main>

@@ -10,11 +10,16 @@ class ReactLibertyText extends ReactLibertyElement {
   }
 
   applyCSS(node) {
+    if (!this.props.style) {
+      return;
+    }
+
     var CSS = this.props.style;
 
     node.style.padding = '0';
     node.style.margin = '0';
-    node.style.lineHeight = node.style.fontSize = (CSS.fontSize || 18) + 'px';
+    node.style.fontSize = (CSS.fontSize || 18) + 'px';
+    node.style.lineHeight = CSS.lineHeight ? CSS.lineHeight + 'px' : node.style.fontSize;
     node.style.fontFamily = CSS.fontFamily || 'Arial';
     node.style.color = CSS.color || '#000000';
     node.style.width = CSS.width ? CSS.width + 'px' : '100%';

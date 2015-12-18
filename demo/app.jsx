@@ -66,6 +66,9 @@ class AppStore {
   onKeyDown(e) {
     //console.trace('@S+key down');
     switch (e.keyCode) {
+      case 13:
+        FocusManager.doSelect();
+        break;
       case 37:
         FocusManager.doLeft();
         break;
