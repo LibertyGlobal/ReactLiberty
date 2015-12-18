@@ -12,10 +12,10 @@
 </script>
 <script src="./build/app.js"></script>
 <script>
-    console.log('enter');
+    //console.log('enter');
     window.addEventListener('message', receiveMessage, false);
     function receiveMessage(event) {
-        console.log('receiveMessage');
+        //console.log('receiveMessage');
         var data = JSON.parse(event.data);
         var type = data.type;
         var message = data.message;

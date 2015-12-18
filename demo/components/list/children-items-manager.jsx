@@ -57,6 +57,10 @@ class ChildrenScroller {
   getVisibleItems() {
     return this.carusel.props.children;
   }
+
+  getHighlightClass() {
+    return null;
+  }
 }
 
 module.exports = ChildrenScroller;

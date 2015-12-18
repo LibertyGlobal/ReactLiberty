@@ -19,7 +19,22 @@ var CATEGORY_ICONS = {
   video: require('../assets/images/genres-icons/video.png'),
 };
 
+class CatAssetHighlight extends React.Component {
+  render(){
+    var style = {
+      width: 216,
+      height: 129,
+      position: 'absolute',
+      opacity: 0.001
+    };
+
+    return <Img ref="highlight" style={style} src={HIGHLIGHT} key="focus"/>;
+  }
+}
+
 class CategoryAsset extends React.Component {
+  static highlightClass = CatAssetHighlight;
+
   static styles = {
     width: 201,
     marginRight: 24,
@@ -53,14 +68,14 @@ class CategoryAsset extends React.Component {
     this.state = this.state || {};
     this.state.selected = true;
     this.opacitySpring.val = 0.99;
-    this.refs.motion.startAnimating();
+    //this.refs.motion.startAnimating();
   }
 
   componentLostFocus() {
     this.state = this.state || {};
     this.state.selected = false;
     this.opacitySpring.val = 0.01;
-    this.refs.motion.startAnimating();
+    //this.refs.motion.startAnimating();
   }
 
   render() {
@@ -73,11 +88,7 @@ class CategoryAsset extends React.Component {
     }
 
     return <Div>
-      <Motion ref='motion' key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
-        {function (interpolatedStyle) {
-          return <Img style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
-        }}
-      </Motion>;
+
       <Img style={styles.image} src={CATEGORY_ICONS[this.props.data.id] || CATEGORY_ICONS['video']} key="3"/>
     </Div>;
   }

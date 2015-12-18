@@ -8,7 +8,22 @@ var HIGHLIGHT = require('../assets/images/app-highlight.png');
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
+class AppAssetHighlight extends React.Component {
+  render(){
+    var style = {
+      width: 164,
+      height: 222,
+      position: 'absolute',
+      opacity: 0.001
+    };
+
+    return <Img ref="highlight" style={style} src={HIGHLIGHT} key="focus"/>;
+  }
+}
+
 class AppAsset extends React.Component {
+  static highlightClass = AppAssetHighlight;
+
   static styles = {
     width: 164,
     marginRight: 24,
@@ -49,14 +64,14 @@ class AppAsset extends React.Component {
     this.state = this.state || {};
     this.state.selected = true;
     this.opacitySpring.val = 0.99;
-    this.refs.motion.startAnimating();
+    //this.refs.motion.startAnimating();
   }
 
   componentLostFocus() {
     this.state = this.state || {};
     this.state.selected = false;
     this.opacitySpring.val = 0.01;
-    this.refs.motion.startAnimating();
+    //this.refs.motion.startAnimating();
   }
 
   showLabel() {
@@ -77,11 +92,6 @@ class AppAsset extends React.Component {
     }
 
     return <Div>
-      <Motion ref='motion' key="focus-motion" defaultStyle={styles.focus} style={{opacity: this.opacitySpring}}>
-        {function (interpolatedStyle) {
-          return <Img style={interpolatedStyle} src={HIGHLIGHT} key="focus"/>
-        }}
-      </Motion>;
       <Img style={styles.image} src={this.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
       <P ref="label" style={styles.title} key="1">{this.props.data.name}</P>
     </Div>;

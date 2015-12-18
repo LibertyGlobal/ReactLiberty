@@ -24,7 +24,7 @@
     var middlewareEventSourceURL = 'http://127.0.0.1:8081/server-sent-events';
     var eventSource;
     function start() {
-        console.log('start');
+        //console.log('start');
         eventSource = new EventSource(middlewareEventSourceURL);
         eventSource.addEventListener('message', handleMiddlewareEvent);
         eventSource.addEventListener('error', handleEventSourceError);
@@ -35,7 +35,7 @@
         eventSource.close();
     }
     function handleMiddlewareEvent(event) {
-        console.log('handleMiddlewareEvent');
+        //console.log('handleMiddlewareEvent');
         var data = JSON.parse(event.data);
         var type = data.method;
         var params = data.params;
@@ -52,7 +52,7 @@
         }
     }
     function handleEventSourceError(error) {
-        console.error(error);
+        //console.error(error);
         end();
     }
     function handleStatusEvent(statusParams) {

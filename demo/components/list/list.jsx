@@ -102,10 +102,20 @@ class List extends FocusableComponent {
   }
 
   componentReceivedFocus() {
+    if (this.itemsManager.getHighlightClass()) {
+      this.refs.motion.refs.container.children[0].style.opacity = 0.999;
+      this.refs.motion.refs.container.children[0].updateDisplayObject();
+    }
+
     Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'showLabel'));
   }
 
   componentLostFocus() {
+    if (this.itemsManager.getHighlightClass()) {
+      this.refs.motion.refs.container.children[0].style.opacity = 0.001;
+      this.refs.motion.refs.container.children[0].updateDisplayObject();
+    }
+
     Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'hideLabel'));
   }
 
@@ -119,6 +129,12 @@ class List extends FocusableComponent {
 
     //Calculating translate
     this.moveTo = this.itemsManager.getScrollForItem(this.state.currentIndex);
+
+    if (this.itemsManager.getHighlightClass()) {
+      this.refs.motion.refs.container.children[0].style[this.translateProperty] = this.itemsManager.getSizeForItem() * this.state.currentIndex;
+      this.refs.motion.refs.container.children[0].updateDisplayObject();
+    }
+
     this.motionSpring.val = -this.moveTo;
     this.refs.motion.startAnimating();
 
@@ -154,12 +170,20 @@ class List extends FocusableComponent {
     var styleObject = {};
     styleObject[this.translateProperty] = this.motionSpring;
 
+    var highlightClass = this.itemsManager.getHighlightClass() || undefined;
+
+    if (highlightClass) {
+      var highlight = React.createElement(highlightClass);
+    } else {
+      var highlight = undefined;
+    }
+
     return (<Motion ref='motion' defaultStyle={this.styles} style={styleObject}>
-      {function (interpolatedStyle) {
-        self.movedTo = interpolatedStyle[self.translateProperty];
-        return (<Div style={interpolatedStyle}>{items}</Div>);
-      }}
-    </Motion>);
+        {function (interpolatedStyle) {
+          self.movedTo = interpolatedStyle[self.translateProperty];
+          return (<Div ref='container' style={interpolatedStyle}>{highlight}{items}</Div>);
+        }}
+      </Motion>);
   }
 }
 

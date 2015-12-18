@@ -66,6 +66,10 @@ class DataScroller {
 
     return this.cachedItems;
   }
+
+  getHighlightClass() {
+    return this.carusel.props.itemClass.highlightClass || null;
+  }
 }
 
 module.exports = DataScroller;
