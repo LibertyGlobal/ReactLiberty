@@ -1,99 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title></title>
     <style>
-        #app-store {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+      #app-store {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
     </style>
-</head>
-<body>
-<iframe id="app-store" src="main.html?bar" frameborder="0"></iframe>
+  </head>
+  <body>
+    <iframe id="app-store" src="app.html" frameborder="0"></iframe>
 
-<script>
-    var middlewareEvents = {
+    <script>
+      var middlewareEvents = {
         STATUS: 'MWStatus',
         KEY: 'MWKeyEvent'
-    };
-    var middlewareEventSourceURL = 'http://127.0.0.1:8081/server-sent-events';
-    var eventSource;
-    function start() {
-        console.log('start');
+      };
+
+      var middlewareEventSourceURL = 'http://127.0.0.1:8081/server-sent-events';
+
+      var eventSource;
+
+      function start() {
         eventSource = new EventSource(middlewareEventSourceURL);
         eventSource.addEventListener('message', handleMiddlewareEvent);
         eventSource.addEventListener('error', handleEventSourceError);
-    }
-    function end() {
+      }
+
+      function end() {
         eventSource.removeEventListener('message', handleMiddlewareEvent);
         eventSource.removeEventListener('error', handleEventSourceError);
         eventSource.close();
-    }
-    function handleMiddlewareEvent(event) {
-        console.log('handleMiddlewareEvent');
+      }
+
+      function handleMiddlewareEvent(event) {
         var data = JSON.parse(event.data);
         var type = data.method;
         var params = data.params;
+
         switch (type) {
-            case middlewareEvents.STATUS:
-                handleStatusEvent(params);
-                break;
-            case middlewareEvents.KEY:
-                handleKeyEvent(params);
-                break;
-            default:
-                // ignore unknown events
-                break;
+          case middlewareEvents.STATUS:
+            handleStatusEvent(params);
+            break;
+
+          case middlewareEvents.KEY:
+            handleKeyEvent(params);
+            break;
+
+          default:
+            // ignore unknown events
+            break;
         }
-    }
-    function handleEventSourceError(error) {
+      }
+
+      function handleEventSourceError(error) {
         console.error(error);
         end();
-    }
-    function handleStatusEvent(statusParams) {
-    }
-    function handleKeyEvent(keyEventParams) {
+      }
+
+      function handleStatusEvent(statusParams) {
+      }
+
+      function handleKeyEvent(keyEventParams) {
         var keyEvent = parseKeyEvent(keyEventParams);
         sendKeyEventToIframe(keyEvent);
-    }
-    function parseKeyEvent(keyEventParams) {
+      }
+
+      function parseKeyEvent(keyEventParams) {
         var eventType;
         var keyState = String(keyEventParams['KeyState']).toUpperCase();
         var keyCode = parseInt(keyEventParams['KeyCode'], 10) || 0;
+
         switch (keyState) {
-            case 'UP':
-                eventType = 'keyup';
-                break;
-            // use "keydown" for both cases
-            case 'DOWN':
-            case 'REPEAT':
-                eventType = 'keydown';
-                break;
+          case 'UP':
+            eventType = 'keyup';
+            break;
+          // use "keydown" for both cases
+          case 'DOWN':
+          case 'REPEAT':
+            eventType = 'keydown';
+            break;
         }
+
         return {
-            type: eventType,
-            keyCode: keyCode
+          type: eventType,
+          keyCode: keyCode
         };
-    }
-    function sendKeyEventToIframe(keyEvent) {
+      }
+
+      function sendKeyEventToIframe(keyEvent) {
         var iframe = document.querySelector('#app-store');
         var iframeWindow = iframe.contentWindow;
         var message = JSON.stringify({
-            type: 'key',
-            message: {
-                type: keyEvent.type,
-                keyCode: keyEvent.keyCode
-            }
+          type: 'key',
+          message: {
+            type: keyEvent.type,
+            keyCode: keyEvent.keyCode
+          }
         });
+
         iframeWindow.postMessage(message, '*');
-    }
-    window.onload = start;
-    window.onunload = stop;
-</script>
-</body>
+      }
+
+      window.onload = start;
+      window.onunload = stop;
+    </script>
+  </body>
 </html>
