@@ -3,7 +3,6 @@ var fonts = require('horizon4-fonts');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var Router = require
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var Redirect = require('react-router').Redirect;
@@ -21,7 +20,6 @@ var pages = {};
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
 var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;
 
 class AppStoreRouter extends React.Component {
