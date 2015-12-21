@@ -35,8 +35,9 @@ class BackToTopButton extends React.Component {
       color: '#B8B8BB',
       textAlign: 'center',
       top: 15,
-      left: 28,
-      position: 'relative'
+      left: 27,
+      position: 'relative',
+      fontFamily: 'InterstatePro'
     }
   }
 

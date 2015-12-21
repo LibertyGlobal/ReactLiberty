@@ -41,12 +41,6 @@ class AppAsset extends React.Component {
       worldWarp: true,
       height: 30,
       color: '#ffffff'
-    },
-    focus: {
-      position: 'absolute',
-      width: 164,
-      height: 222,
-      opacity: 0.001
     }
   };
 
@@ -60,20 +54,6 @@ class AppAsset extends React.Component {
     return false;
   }
 
-  componentReceivedFocus() {
-    this.state = this.state || {};
-    this.state.selected = true;
-    this.opacitySpring.val = 0.99;
-    //this.refs.motion.startAnimating();
-  }
-
-  componentLostFocus() {
-    this.state = this.state || {};
-    this.state.selected = false;
-    this.opacitySpring.val = 0.01;
-    //this.refs.motion.startAnimating();
-  }
-
   showLabel() {
     //this.refs.label._displayObject.visible = true;
   }
@@ -84,12 +64,6 @@ class AppAsset extends React.Component {
 
   render() {
     var styles = AppAsset.styles;
-
-    if (this.state && this.state.selected) {
-      this.opacitySpring = spring(0.99, [120, 17]);
-    } else {
-      this.opacitySpring = spring(0.001, [120, 17]);
-    }
 
     return <Div>
       <Img style={styles.image} src={this.props.data.images.icon['192x192'] || PLACEHOLDER} key="3"/>
@@ -110,5 +84,11 @@ class AppAsset extends React.Component {
 AppAsset.contextTypes = {
   navigationContainerId: React.PropTypes.string
 };
+
+AppAsset.defaultProps = {
+  onSelect: function() {
+    window.appStore.runApp(this.props.data.id);
+  }
+}
 
 module.exports = AppAsset;

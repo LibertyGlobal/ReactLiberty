@@ -1,6 +1,7 @@
 window.ReactLiberty = require('./core.js');
 
 window.ReactLiberty.gl = {};
+require('./renderers/gl/init-renderer.js');
 window.ReactLiberty.gl.Element = require('./renderers/gl/element.jsx');
 window.ReactLiberty.gl.Container = require('./renderers/gl/container.jsx');
 window.ReactLiberty.gl.Image = require('./renderers/gl/image.jsx');

@@ -12,6 +12,9 @@ class ChildrenScroller {
     var movedTo = this.carusel.movedTo;
     var currentIndex = this.carusel.state.currentIndex;
     var itemsLength = this.getVisibleItems().length;
+
+    console.log(this.getVisibleRange());
+
     var itemsOnScreen = this.getNumberOfItemsVisible();
     var itemSize = this.getSizeForItem(0);
     var focusedItemPosition = currentIndex * itemSize;
@@ -34,8 +37,41 @@ class ChildrenScroller {
     return moveTo;
   }
 
+  getVisibleRange() {
+    var result = {};
+    var items = this.getVisibleItems();
+    var screenPosition = this.carusel.movedTo;
+    var screenEnds = this.carusel.movedTo + this.carusel.props.style[this.carusel.sizeProperty];
+
+    result.min = 0;
+    result.max = 0;
+
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var itemPosition = this.getPositionForItem(i);
+      var itemSize = this.getSizeForItem(i);
+      var itemEnds = itemPosition + itemSize;
+
+      if (screenPosition < itemEnds && !result.min) {
+        result.min = i;
+      }
+
+      if (screenEnds < itemPosition && !result.max) {
+        result.max = i;
+      }
+    }
+
+    return result;
+  }
+
   getPositionForItem(itemIndex) {
     //TODO for flexible items sizes
+    var items = this.getVisibleItems();
+    var result = 0;
+    for (var i = 0; i < itemIndex; i++) {
+      result += this.getSizeForItem(i);
+    }
+    return result;
   }
 
   getSizeForItem(itemIndex) {

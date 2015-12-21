@@ -11,11 +11,7 @@ class ReactLibertyImage extends ReactLibertyElement {
     var result;
     if (this.props && this.props.src) {
       result = new PIXI.Sprite.fromImage(this.props.src);
-
-      //If sizes are not set use images sizes when it is loaded
-      if ((!this.style.width || !this.style.height) && (!this.props.width || !this.props.height)) {
-        result.texture.baseTexture.on('loaded', this.onImageLoaded);
-      }
+      result.texture.baseTexture.on('loaded', this.onImageLoaded);
     } else {
       throw(new Error('ReactLiberty.Image: src is not set'));
     }
@@ -24,22 +20,28 @@ class ReactLibertyImage extends ReactLibertyElement {
 
   //Update scene and image sizes when loaded
   onImageLoaded() {
-    if (this.parent) {
-      this.parent.layout = null;
+    //If sizes are not set use images sizes when it is loaded
+    if ((!this.style.width || !this.style.height) && (!this.props.width || !this.props.height)) {
+      if (this.parent) {
+        this.parent.layout = null;
+      }
+
+      this.layout = null;
+
+      this.style.width = this.style.width || this._displayObject.texture.baseTexture.width;
+      this.style.height = this.style.height || this._displayObject.texture.baseTexture.height;
+
+      if (this.parent) {
+        this.parent.doLayout();
+        this.parent.updateDisplayObject(true);
+      } else {
+        this.layout.width = this.style.width || this._displayObject.texture.baseTexture.width;
+        this.layout.height = this.style.height || this._displayObject.texture.baseTexture.height;
+      }
     }
 
-    this.layout = null;
-
-    this.style.width = this.style.width || this._displayObject.texture.baseTexture.width;
-    this.style.height = this.style.height || this._displayObject.texture.baseTexture.height;
-
-    if (this.parent) {
-      this.parent.doLayout();
-      this.parent.updateDisplayObject(true);
-    } else {
-      this.layout.width = this.style.width || this._displayObject.texture.baseTexture.width;
-      this.layout.height = this.style.height || this._displayObject.texture.baseTexture.height;
-    }
+    //Redraw after image loaded
+    setTimeout(ReactLiberty.markStageAsChanged, 0);
   }
 
   updateDisplayObject() {

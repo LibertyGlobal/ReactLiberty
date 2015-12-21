@@ -61,6 +61,15 @@ class ReactLibertyContainer extends ReactLibertyElement {
     }
   }
 
+  updateVisibility() {
+    super.updateVisibility();
+    if (this._visible) {
+      for (var i = 0; i < this.children.length; i++) {
+        this.children[i].updateVisibility();
+      }
+    }
+  }
+
   componentDidMount() {
     super.componentDidMount();
     if (this._isRootLibertyNode) {

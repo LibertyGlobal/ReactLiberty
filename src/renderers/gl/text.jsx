@@ -23,6 +23,11 @@ class ReactLibertyText extends ReactLibertyElement {
     }
     return pixiStyle;
   }
+
+  updateDisplayObject() {
+    super.updateDisplayObject();
+    super.updateVisibility();
+  }
 }
 
 window['GLp'] = module.exports = ReactLibertyText;

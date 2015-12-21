@@ -4,8 +4,8 @@ var React = require('react');
 var ReactLiberty = require('../../../src/index');
 var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
-var ChildrenItemsManager = require('./children-items-manager.jsx');
-var DataItemsManager = require('./data-items-manager.jsx');
+var ChildrenItemsManager = require('./strategies/children-items-manager.jsx');
+var DataItemsManager = require('./strategies/data-items-manager.jsx');
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;

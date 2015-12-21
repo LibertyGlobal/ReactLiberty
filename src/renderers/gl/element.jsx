@@ -16,6 +16,7 @@ class ReactLibertyElement extends React.Component {
     this._rootNodeID = null;
     this._instance = null;
     this._renderedComponent = this;
+    this._visible = true;
 
     //Liberty specific
     this._style = {};
@@ -132,10 +133,8 @@ class ReactLibertyElement extends React.Component {
     }
   }
 
-  updateDisplayObject(updateChildren) {
-    //console.trace('@S+update child coordinates');
-    //console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
-
+  updateDisplayObject() {
+    console.time("Update " + this.constructor.name);
     var halfWidth = 0;
     var halfHeight = 0;
 
@@ -148,8 +147,8 @@ class ReactLibertyElement extends React.Component {
     //this._displayObject.scale.x = this.style.scale || 1;
     //this._displayObject.scale.y = this.style.scale || 1;
 
-    this._displayObject.x = this.style.translateX || 0 + (this.layout && this.layout.left || (this.props && this.props.x) || 0) + halfWidth;
-    this._displayObject.y = this.style.translateY || 0 + (this.layout && this.layout.top || (this.props && this.props.y) || 0) + halfHeight;
+    this._displayObject.x = this.style.translateX || 0 + (this.layout && this.layout.left || (this.props && this.props.x) || 0);// + halfWidth;
+    this._displayObject.y = this.style.translateY || 0 + (this.layout && this.layout.top || (this.props && this.props.y) || 0);// + halfHeight;
 
     this._displayObject.alpha = this.style.opacity || 1;
 
@@ -160,7 +159,37 @@ class ReactLibertyElement extends React.Component {
 
     this._displayObject.rotation = this.props && parseInt(this.props.rotation, 10) || 0;
 
-    ReactLiberty.markStageAsChanged();
+    this.updateVisibility();
+
+    if (this._visible && !ReactLiberty.shouldRedraw) {
+      ReactLiberty.markStageAsChanged();
+    }
+
+    console.timeEnd("Update element " + this.constructor.name);
+  }
+
+  //Viewport culling
+  updateVisibility() {
+    var isOnScreen = this.isOnScreen();
+
+    /* if (this._visible !== isOnScreen) {
+      console.log('Visibility for ' + this.constructor.name + ' changed to ' + isOnScreen)
+    } */
+
+    this._visible = isOnScreen;
+    this._displayObject.visible = isOnScreen;
+  }
+
+  isOnScreen() {
+    var bounds = this._displayObject.toGlobal({x:0, y:0});
+    var stageW = ReactLiberty.renderer.width;
+    var stageH = ReactLiberty.renderer.height;
+
+    if(bounds.x > stageW || bounds.y > stageH || bounds.x + bounds.width < 0 || bounds.y + bounds.height < 0) {
+      return false;
+    }
+
+    return true;
   }
 
   get style() {

@@ -10,6 +10,10 @@ class DataScroller {
     return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.itemSize) - 1;
   }
 
+  getPositionForItem(index) {
+
+  }
+
   getScrollForItem(itemIndex) {
     var moveTo = 0;
     var movedTo = this.carusel.movedTo;

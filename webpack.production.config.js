@@ -31,7 +31,7 @@ module.exports = {
         new Webpack.NoErrorsPlugin(),
         new Webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+                NODE_ENV: JSON.stringify('production')
             }
         })
     ],
