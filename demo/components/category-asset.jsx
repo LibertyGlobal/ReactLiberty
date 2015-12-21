@@ -4,7 +4,7 @@ var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service.js');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
+var FocusManager = require('../vendor/improved-navigation-concept').FocusManager;
 
 var HIGHLIGHT = require('../assets/images/genre-highlight.png');
 

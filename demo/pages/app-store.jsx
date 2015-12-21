@@ -10,8 +10,6 @@ var spring = require('react-motion').spring;
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
-
 class AppStore extends React.Component {
   render() {
     var styles = {

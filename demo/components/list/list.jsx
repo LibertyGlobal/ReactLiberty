@@ -7,8 +7,8 @@ var spring = require('react-motion').spring;
 var ChildrenItemsManager = require('./strategies/children-items-manager.jsx');
 var DataItemsManager = require('./strategies/data-items-manager.jsx');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
-var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;
+var FocusManager = require('../../vendor/improved-navigation-concept').FocusManager;
+var FocusableComponent = require('../../vendor/improved-navigation-concept').NavigationContainerClass.default;
 
 function invoke(fn) {
   if (typeof this[fn] === 'function') {

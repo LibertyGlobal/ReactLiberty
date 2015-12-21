@@ -8,8 +8,6 @@ var List = require('../components/list/list.jsx');
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
-
 class ForYou extends React.Component {
 
   goTop() {

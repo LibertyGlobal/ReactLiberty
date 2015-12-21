@@ -1,0 +1,70 @@
+{
+  "_args": [
+    [
+      "improved-navigation-concept@git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+      "/Users/denisradin/Desktop/Work/ReactLibertyTry"
+    ]
+  ],
+  "_from": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+  "_id": "improved-navigation-concept@0.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/improved-navigation-concept",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/LibertyGlobal/improved-navigation-concept/master/package.json",
+      "gitUrl": "git://github.com/LibertyGlobal/improved-navigation-concept.git#master",
+      "httpsUrl": "git+https://github.com/LibertyGlobal/improved-navigation-concept.git#master",
+      "shortcut": "github:LibertyGlobal/improved-navigation-concept#master",
+      "ssh": "git@github.com:LibertyGlobal/improved-navigation-concept.git#master",
+      "sshUrl": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+      "type": "github"
+    },
+    "name": "improved-navigation-concept",
+    "raw": "improved-navigation-concept@git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+    "rawSpec": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+    "scope": null,
+    "spec": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+    "type": "hosted"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#575b96f9431dad31251147b6950d02fb40718d71",
+  "_shasum": "0ef00f4568af806679424ebba67dc008a92b8b49",
+  "_shrinkwrap": null,
+  "_spec": "improved-navigation-concept@git+ssh://git@github.com/LibertyGlobal/improved-navigation-concept.git#master",
+  "_where": "/Users/denisradin/Desktop/Work/ReactLibertyTry",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "react": "^0.14.2"
+  },
+  "description": "Improved navigation concept ===",
+  "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-cli": "^6.2.0",
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "react-dom": "^0.14.2",
+    "webpack": "^1.12.3",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "gitHead": "575b96f9431dad31251147b6950d02fb40718d71",
+  "main": "index.js",
+  "name": "improved-navigation-concept",
+  "optionalDependencies": {},
+  "private": true,
+  "readme": "Improved navigation concept\n===\n\nGoal\n---\nReduce key handling complexity, but be flexible enough to handle changing demands from design.\n\nNote\n---\nWork In Progress - current version only handles Visual Navigation (not ideal yet).\n\nDemo\n---\n`npm start` and go to `http://localhost:9999`\n\nExample\n---\n\n```\nclass Button extends React.Component {\n   onFocus() {\n      // TODO: add button specific logic\n      this.props.onFocus();\n   }\n   onBlur() {}\n   render() {\n      return <Focusable onFocus={()=>this.onFocus()} onBlur={()=>this.onBlur()} onSelect={this.props.onSelect}>\n         <div>\n            {this.props.children}\n         </div>\n      </Focusable>;\n   }\n\n}\n```\n\n```\n\nimport {RestoreStateNavigation, SpatialNavigation} from 'horizon4-navigation';\n\nclass App extends React.Component {\n\n   onOkayButtonSelect() {\n      // handle select thingy\n   }\n\n   render() {\n      return <div>\n         <NavigationContainer strategy={SpatialNavigation}>\n            <NavigationContainer strategy={RestoreStateNavigation}>\n               <ActionMenu>\n                  <ActionMenuItem onSelect={()=>this.play()}>Play movie</ActionItemMenu>\n                  <ActionMenuItem>Watch trailer</ActionItemMenu>\n                  <ActionMenuItem>Add to watchlist</ActionItemMenu>\n               </ActionMenu>\n            </NavigationContainer>\n            <Button onSelect={()=>this.onOkayButtonSelect()}>Okay</Button>\n            <Button onSelect={()=>this.onCancelButtonSelect()}>Cancel</Button>\n         </NavigationContainer>\n      </div>\n   }\n\n}\n```\nFocus management algorithm\n---\n\n+ `FocusManager` finds the root `NavigationContainer` and asks its `NavigationStrategy` for the `preferredFocusedComponent`\n+ root `NavigationContainer`'s `NavigationStrategy` returns its `preferredFocusedComponent`\n+ if given `preferredFocusedComponent` is a `NavigationContainer` itself, `FocusManager` repeats the steps above with that Container\n+ if given `preferredFocusedComponent` is a `Focusable`, `FocusManager` stores it as a `currentFocusable` and calls its `onFocus` method\n\nSimilar ideas:\n- https://developer.apple.com/library/prerelease/tvos/documentation/General/Conceptual/AppleTV_PG/WorkingwiththeAppleTVRemote.html\n- http://nerds.airbnb.com/tvos-focus-engine/\n- http://www.slideshare.net/EvanMaloney/tvos-the-focus-engine-and-swift\n- https://developer.mozilla.org/en-US/docs/Mozilla/Firefox_OS/TVs_connected_devices/TV_remote_control_navigation\n",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "compile": "babel src --out-dir dist",
+    "start": "webpack-dev-server --content-base demo/ --port 9999 --inline",
+    "test": "mocha --compilers js:babel-core/register"
+  },
+  "version": "0.0.1"
+}
