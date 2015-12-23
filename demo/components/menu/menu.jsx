@@ -13,11 +13,9 @@ class Menu extends React.Component {
 
   render() {
     return (
-      <header>
-        <ul>
-          {this.props.children}
-        </ul>
-      </header>
+      <ul>
+        {this.props.children}
+      </ul>
     );
   }
 }

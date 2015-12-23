@@ -14,6 +14,7 @@ window.routerHistory = history;
 
 var FocusManager = require('improved-navigation-concept').FocusManager;
 
+var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
 var MenuItem = require('./components/menu/menu-item.jsx');
 var pages = {};
@@ -32,10 +33,13 @@ class AppStoreRouter extends React.Component {
 
     return (
       <div>
-        <Menu>
-          <MenuItem>FOR YOU</MenuItem>
-          <MenuItem>APP STORE</MenuItem>
-        </Menu>
+        <header>
+          <Header/>
+          <Menu>
+            <MenuItem>FOR YOU</MenuItem>
+            <MenuItem>APP STORE</MenuItem>
+          </Menu>
+        </header>
         <Router ref='router' history={history}>
           <Redirect from='/' to='/for-you'/>
           <Route path='/for-you' component={pages['for-you']}></Route>

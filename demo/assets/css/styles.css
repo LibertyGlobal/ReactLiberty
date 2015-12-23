@@ -25,12 +25,12 @@ canvas {
 
 header {
     background-color: #12121D;
-    padding: 70px 70px 0px 70px;
+    padding: 27px 70px 0px 70px;
     box-sizing: border-box;
 }
 
 ul {
-    padding: 0;
+    padding: 27px 0 0 0;
     margin: 0;
     padding-bottom: 10px;
     line-height: 26px;
