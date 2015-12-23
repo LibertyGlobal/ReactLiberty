@@ -4,7 +4,7 @@ var ReactLiberty = require('../../src/index');
 var backToTopImage = require('../assets/images/back-to-top.png');
 var backToTopHighlightImage = require('../assets/images/back-to-top-hl.png');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
+var FocusManager = require('../vendor/improved-navigation-concept').FocusManager;
 
 class BackToTopButton extends React.Component {
   styles = {

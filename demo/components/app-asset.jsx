@@ -6,7 +6,7 @@ var spring = require('react-motion').spring;
 var PLACEHOLDER = require('../assets/images/placeholder.png');
 var HIGHLIGHT = require('../assets/images/app-highlight.png');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
+var FocusManager = require('../vendor/improved-navigation-concept').FocusManager;
 
 class AppAssetHighlight extends React.Component {
   render(){

@@ -1,0 +1,1 @@
+require('../src/declarative-navigation/__tests__/Focusable-test');

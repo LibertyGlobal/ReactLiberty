@@ -15,7 +15,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-polyfill": "^6.3.14",
     "babel-runtime": "^5.8.29",
-    "css-layout": "^1.0.0",
+    "css-layout": "1.0.0",
     "css-loader": "^0.23.0",
     "es6-react-mixins": "^0.2.1",
     "history": "^1.14.0",

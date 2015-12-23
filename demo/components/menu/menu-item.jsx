@@ -1,8 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
-var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;
+var FocusManager = require('../../vendor/improved-navigation-concept').FocusManager;
+var FocusableComponent = require('../../vendor/improved-navigation-concept').NavigationContainerClass.default;
 
 class MenuItem extends FocusableComponent {
   constructor(props) {

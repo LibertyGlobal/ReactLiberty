@@ -12,7 +12,7 @@ var {useQueries} = require('history');
 var history = useQueries(createHashHistory)();
 window.routerHistory = history;
 
-var FocusManager = require('improved-navigation-concept').FocusManager;
+var FocusManager = require('./vendor/improved-navigation-concept').FocusManager;
 
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
@@ -21,7 +21,7 @@ var pages = {};
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
-var FocusableComponent = require('improved-navigation-concept').NavigationContainerClass.default;
+var FocusableComponent = require('./vendor/improved-navigation-concept').NavigationContainerClass.default;
 
 class AppStoreRouter extends React.Component {
   componentDidMount() {
