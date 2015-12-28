@@ -23,6 +23,4 @@ if (window.libertyRender === 'dom') {
   window.P = window.ReactLiberty.gl.Text;
 }
 
-
-
 module.exports = window.ReactLiberty;

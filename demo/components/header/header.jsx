@@ -8,7 +8,7 @@ class Header extends React.Component {
   render() {
     var date = new Date();
     var minutesString = date.getMinutes();
-    minutes.minutesString = minutesString.length === 1 ? '0' + minutesString : minutesString;
+    minutesString = minutesString.length === 1 ? '0' + minutesString : minutesString;
     var timeString = date.getHours() + ":" + minutesString;
 
     var styles = {
