@@ -12,7 +12,7 @@ var {useQueries} = require('history');
 var history = useQueries(createHashHistory)();
 window.routerHistory = history;
 
-var FocusManager = require('./vendor/sunbeam').FocusManager;
+var FocusManager = require('sunbeam').FocusManager;
 global.FM = FocusManager;
 
 var Header = require('./components/header/header.jsx');
