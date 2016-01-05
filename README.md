@@ -35,8 +35,8 @@ How it looks like at app developer level?
               <BackToTopButton onSelect={this.goTop}/>
             </List>
           </Div>
-        </main>```
-
+        </main>
+```
 
 Usage
 -----
@@ -53,5 +53,4 @@ Classes tree
 ------------
 
 This is a set of base components every ReactLiberty renderer should support:
-
-![ReactLiberty classes tree](https://raw.github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png)
+[[https://github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png|alt=ReactLiberty classes tree]]
