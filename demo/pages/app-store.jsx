@@ -9,8 +9,15 @@ var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
+var FocusManager = require('sunbeam').FocusManager;
 
 class AppStore extends React.Component {
+
+  goTop() {
+    this.refs.mainList.goTo(0);
+    FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
+  }
+
   render() {
     var styles = {
       container: {
@@ -47,7 +54,7 @@ class AppStore extends React.Component {
     return (
         <main style={styles.divStyle}>
           <Div style={styles.container}>
-            <List cyclic={false} style={styles.verticalList} orientation="vertical">
+            <List ref="mainList" cyclic={false} style={styles.verticalList} orientation="vertical">
               <Div style={styles.categoriesCaruselRow}>
                 <List style={styles.categoriesCarusel}
                       itemClass={CategoryAsset}
@@ -65,7 +72,7 @@ class AppStore extends React.Component {
                       itemClass={AppAsset}
                       data={appService.getApplicationsByCategory('music')}/>
               </Div>
-              <BackToTopButton style={styles.caruselRow}/>
+              <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
             </List>
           </Div>
         </main>

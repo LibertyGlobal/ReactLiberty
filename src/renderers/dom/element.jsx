@@ -93,7 +93,7 @@ class ReactLibertyElement extends React.Component {
     var parentPixiContainer = null;
 
     if (!this.parent) {
-      document.body.appendChild(this._displayObject);
+      //document.body.appendChild(this._displayObject);
       this._isRootLibertyNode = true;
     }
 
@@ -114,8 +114,14 @@ class ReactLibertyElement extends React.Component {
       var paddingLeft = parseInt(styles.paddingLeft);
       var paddingTop = parseInt(styles.paddingTop);
 
-      this.parentX = boundingRect.left + paddingLeft;
-      this.parentY = boundingRect.top + paddingTop;
+      //this.parentX = boundingRect.left + paddingLeft;
+      //this.parentY = boundingRect.top + paddingTop;
+
+      if (this.DOMParent.style.position !== 'absolute' || this.DOMParent.style.position !== 'fixed') {
+        this.DOMParent.style.position = 'relative';
+      }
+
+      this.DOMParent.appendChild(this._displayObject);
 
       this.updateDisplayObject();
     } catch (e) {

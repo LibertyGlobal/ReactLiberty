@@ -1,24 +1,57 @@
 React Liberty
 =============
 
-Connect, discover, be free to choose between WebGL / Canvas (PIXI) / DOM or any other UI renderer
+![LGI slogan](https://media.licdn.com/media/p/5/000/1c7/0ee/0b3c8ed.png)
+
+Be free to choose between WebGL / Canvas / DOM / Native or any other UI renderer
 ---------------------------------------------------------------------------------
 
-This is a React binding for Pixi which does not have React hacked and backed-in. Also supports https://github.com/facebook/css-layout for layouting.
+This is a family of React libraries which designed to abstract renderer by presenting three kinds of entities. They are Image, Text and Container. 
 
-Inherit your root component component from React.Component and use ReactPixi.Container, ReactPixi.Text and ReactPixi.Image in your components.
+React Liberty uses [CSS Layout](https://github.com/facebook/css-layout) for laying components out, [ReactMotion](https://github.com/chenglou/react-motion) for declarative animations and [Sunbeam](https://github.com/LibertyGlobal/sunbeam) for focus management.
 
-Render root node via `ReactPixi.render(React.createElement(MyRootComponent));`
+
+
+Motivation
+----------
+As a TV company LibertyGlobal support a few generations of TV devices. Horizon, Dawn, EOS exposing HTML UI... Every of them have some specifity and nobody knows which shift we may expect in next few years. Let`s be prepared to the future by providing UI abstraction which allows to switch between renderers. So for example if we switch to Android we do not need to remake all apps we have, but use the same markup introducing a new renderer.
+
+How it looks like at app developer level?
+-----------------------------------------
+```html
+		<main>
+          <Div>
+            <List cyclic={false} orientation="vertical">
+              <Div>
+                <P>News</P>
+                <List itemClass={AppAsset}
+                      data={appService.getApplicationsByCategory('news')}/>
+              </Div>
+              <Div>
+                <P>Music</P>
+                <List itemClass={AppAsset}
+                      data={appService.getApplicationsByCategory('music')}/>
+              </Div>
+              <BackToTopButton onSelect={this.goTop}/>
+            </List>
+          </Div>
+        </main>```
+
+
+Usage
+-----
+
+Inherit your root component component from React.Component and use Div, P and Img (capitalized) to declare UI. You may insert ReactLiberty components into regular ReactDOM components.
+
+Switch between DOM and WebGL by setting `window.libertyRender = 'gl'` or `'dom'`
 
 Performance hints
 -----------------
-- Set images dimensions via component properties initially to prevent relayouting when they complete loading
+- Set images dimensions via component properties initially to prevent relayouting when their loading is complete
 
 Classes tree
 ------------
 
 This is a set of base components every ReactLiberty renderer should support:
 
-![ReactLiberty classes tree](https://raw.githubusercontent.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png?token=AAxer4RGVCjtZHBtM6Xl2ni4Rq5jE1sRks5WTzRJwA%3D%3D)
-
-TODO Why MovieAsset do not mount children
+![ReactLiberty classes tree](https://raw.github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png)

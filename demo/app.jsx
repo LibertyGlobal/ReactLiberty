@@ -26,6 +26,13 @@ pages['app-store'] = require('./pages/app-store.jsx');
 var FocusableContainer = require('sunbeam').FocusableContainer;
 
 class AppStoreRouter extends FocusableContainer {
+  static styles = {
+    header: {
+      position: 'relative',
+      zIndex: 999
+    }
+  }
+
   componentDidMount() {
     window.router = this.refs['router'];
     FocusManager.initializeFocus();
@@ -33,10 +40,9 @@ class AppStoreRouter extends FocusableContainer {
   }
 
   render() {
-
     return (
       <div>
-        <header>
+        <header style={AppStoreRouter.styles.header}>
           <Header/>
           <Menu>
             <MenuItem onFocus={function(){
