@@ -48,6 +48,13 @@ Inherit your root component component from React.Component and use Div, P and Im
 
 Switch between DOM and WebGL by setting `window.libertyRender = 'gl'` or `'dom'`
 
+
+Build from sources
+------------------
+
+You will need npm v3.0 or higher.
+Then do: `npm install`, `npm run compile`.
+
 Performance hints
 -----------------
 - Set images dimensions via component properties initially to prevent relayouting when their loading is complete
@@ -56,4 +63,4 @@ Classes tree
 ------------
 
 This is a set of base components every ReactLiberty renderer should support:
-![[https://github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png|alt=ReactLiberty classes tree]]
+![ReactLiberty classes tree](https://github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png)
