@@ -7,10 +7,7 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var Redirect = require('react-router').Redirect;
 
-var createHashHistory = require('history/lib/createHashHistory');
-var {useQueries} = require('history');
-var history = useQueries(createHashHistory)();
-window.routerHistory = history;
+var history = require('./history');
 
 var FocusManager = require('sunbeam').FocusManager;
 global.FM = FocusManager;
@@ -46,10 +43,10 @@ class AppStoreRouter extends FocusableContainer {
           <Header/>
           <Menu>
             <MenuItem onFocus={function(){
-              if (window.location.hash.indexOf('for-you') === -1) window.routerHistory.push('/for-you');
+              if (window.location.hash.indexOf('for-you') === -1) history.push('/for-you');
             }}>FOR YOU</MenuItem>
             <MenuItem onFocus={function(){
-              if (window.location.hash.indexOf('app-store') === -1)window.routerHistory.push('/app-store');
+              if (window.location.hash.indexOf('app-store') === -1) history.push('/app-store');
             }}>APP STORE</MenuItem>
           </Menu>
         </header>
