@@ -23,7 +23,7 @@ var pages = {};
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
-var FocusableContainer = require('./vendor/sunbeam').FocusableContainer;
+var FocusableContainer = require('sunbeam').FocusableContainer;
 
 class AppStoreRouter extends FocusableContainer {
   componentDidMount() {

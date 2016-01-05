@@ -6,8 +6,8 @@ var spring = require('react-motion').spring;
 var PLACEHOLDER = require('../assets/images/placeholder.png');
 var HIGHLIGHT = require('../assets/images/app-highlight.png');
 
-var FocusManager = require('../vendor/sunbeam').FocusManager;
-var Focusable = require('../vendor/sunbeam').Focusable;
+var FocusManager = require('sunbeam').FocusManager;
+var Focusable = require('sunbeam').Focusable;
 
 class AppAssetHighlight extends React.Component {
   render(){

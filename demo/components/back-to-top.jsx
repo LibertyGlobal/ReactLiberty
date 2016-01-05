@@ -4,8 +4,8 @@ var ReactLiberty = require('../../src/index');
 var backToTopImage = require('../assets/images/back-to-top.png');
 var backToTopHighlightImage = require('../assets/images/back-to-top-hl.png');
 
-var FocusManager = require('../vendor/sunbeam').FocusManager;
-var Focusable = require('../vendor/sunbeam').Focusable;
+var FocusManager = require('sunbeam').FocusManager;
+var Focusable = require('sunbeam').Focusable;
 
 class BackToTopButton extends Focusable {
   styles = {

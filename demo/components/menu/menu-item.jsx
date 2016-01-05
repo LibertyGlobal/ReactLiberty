@@ -1,8 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var FocusManager = require('../../vendor/sunbeam').FocusManager;
-var Focusable = require('../../vendor/sunbeam').Focusable;
+var FocusManager = require('sunbeam').FocusManager;
+var Focusable = require('sunbeam').Focusable;
 
 class MenuItem extends Focusable {
   componentDidReceiveFocus() {
