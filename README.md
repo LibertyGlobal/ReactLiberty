@@ -63,4 +63,4 @@ Classes tree
 ------------
 
 This is a set of base components every ReactLiberty renderer should support:
-![ReactLiberty classes tree](https://github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png)
+![ReactLiberty classes tree](https://github.com/LibertyGlobal/ReactLiberty/blob/master/figures/inhertitance-scheme.png)
