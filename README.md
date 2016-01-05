@@ -38,6 +38,9 @@ How it looks like at app developer level?
         </main>
 ```
 
+Just have a look at [demo](https://github.com/LibertyGlobal/ReactLiberty/tree/master/demo).
+
+
 Usage
 -----
 
@@ -53,4 +56,4 @@ Classes tree
 ------------
 
 This is a set of base components every ReactLiberty renderer should support:
-[[https://github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png|alt=ReactLiberty classes tree]]
+![[https://github.com/LibertyGlobal/ReactLiberty/master/figures/inhertitance-scheme.png|alt=ReactLiberty classes tree]]
