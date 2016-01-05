@@ -4,7 +4,8 @@ var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service.js');
 
-var FocusManager = require('../vendor/improved-navigation-concept').FocusManager;
+var FocusManager = require('../vendor/sunbeam').FocusManager;
+var Focusable = require('../vendor/sunbeam').Focusable;
 
 var HIGHLIGHT = require('../assets/images/genre-highlight.png');
 
@@ -32,7 +33,7 @@ class CatAssetHighlight extends React.Component {
   }
 }
 
-class CategoryAsset extends React.Component {
+class CategoryAsset extends Focusable {
   static highlightClass = CatAssetHighlight;
 
   static styles = {
@@ -48,12 +49,6 @@ class CategoryAsset extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-    this.id = String(Date.now());
-    this.opacitySpring = spring(0.001, [120, 17]);
-  }
-
   shouldComponentUpdate(a, b) {
     return false;
   }
@@ -65,19 +60,6 @@ class CategoryAsset extends React.Component {
       <Img style={styles.image} src={CATEGORY_ICONS[this.props.data.id] || CATEGORY_ICONS['video']} key="3"/>
     </Div>;
   }
-
-  componentWillMount() {
-    this.parentId = this.context.navigationContainerId;
-    FocusManager.registerFocusableComponent(this);
-  }
-
-  componentWillUnmount() {
-    FocusManager.unregisterFocusableComponent(this);
-  }
 }
-
-CategoryAsset.contextTypes = {
-  navigationContainerId: React.PropTypes.string
-};
 
 module.exports = CategoryAsset;

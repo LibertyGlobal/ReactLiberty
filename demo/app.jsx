@@ -12,21 +12,24 @@ var {useQueries} = require('history');
 var history = useQueries(createHashHistory)();
 window.routerHistory = history;
 
-var FocusManager = require('./vendor/improved-navigation-concept').FocusManager;
+var FocusManager = require('./vendor/sunbeam').FocusManager;
+global.FM = FocusManager;
 
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
 var MenuItem = require('./components/menu/menu-item.jsx');
 var pages = {};
+
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
-var FocusableComponent = require('./vendor/improved-navigation-concept').NavigationContainerClass.default;
+var FocusableContainer = require('./vendor/sunbeam').FocusableContainer;
 
-class AppStoreRouter extends React.Component {
+class AppStoreRouter extends FocusableContainer {
   componentDidMount() {
     window.router = this.refs['router'];
-    window.router.history.listen(FocusManager.initializeFocus);
+    FocusManager.initializeFocus();
+    //window.router.history.listen(FocusManager.initializeFocus);
   }
 
   render() {
@@ -36,8 +39,12 @@ class AppStoreRouter extends React.Component {
         <header>
           <Header/>
           <Menu>
-            <MenuItem>FOR YOU</MenuItem>
-            <MenuItem>APP STORE</MenuItem>
+            <MenuItem onFocus={function(){
+              if (window.location.hash.indexOf('for-you') === -1) window.routerHistory.push('/for-you');
+            }}>FOR YOU</MenuItem>
+            <MenuItem onFocus={function(){
+              if (window.location.hash.indexOf('app-store') === -1)window.routerHistory.push('/app-store');
+            }}>APP STORE</MenuItem>
           </Menu>
         </header>
         <Router ref='router' history={history}>

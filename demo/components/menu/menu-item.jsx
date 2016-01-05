@@ -1,39 +1,21 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var FocusManager = require('../../vendor/improved-navigation-concept').FocusManager;
-var FocusableComponent = require('../../vendor/improved-navigation-concept').NavigationContainerClass.default;
+var FocusManager = require('../../vendor/sunbeam').FocusManager;
+var Focusable = require('../../vendor/sunbeam').Focusable;
 
-class MenuItem extends FocusableComponent {
-  constructor(props) {
-    super(props);
-    //this.id = String(Date.now());
+class MenuItem extends Focusable {
+  componentDidReceiveFocus() {
+    ReactDOM.findDOMNode(this).style.color = '#3489CD';
   }
 
-  componentReceivedFocus() {
-    //ReactDOM.findDOMNode(this.refs.element).styles.color = 'blue';
-  }
-
-  componentLostFocus() {
-
+  componentDidLoseFocus() {
+    ReactDOM.findDOMNode(this).style.color = '#E9E9EA';
   }
 
   render() {
     return <li>{this.props.children}</li>;
   }
-
-  componentWillMount() {
-    //this.parentId = this.context.navigationContainerId;
-    //FocusManager.registerFocusableComponent(this);
-  }
-
-  componentWillUnmount() {
-    //FocusManager.unregisterFocusableComponent(this);
-  }
 }
-
-MenuItem.contextTypes = {
-  //navigationContainerId: React.PropTypes.string
-};
 
 module.exports = MenuItem;

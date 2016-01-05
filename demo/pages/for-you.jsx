@@ -7,11 +7,13 @@ var CategoryAsset = require('../components/category-asset.jsx');
 var List = require('../components/list/list.jsx');
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
+var FocusManager = require('../vendor/sunbeam').FocusManager;
 
 class ForYou extends React.Component {
 
   goTop() {
     this.refs.mainList.goTo(0);
+    FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
   }
 
   render() {
@@ -50,7 +52,7 @@ class ForYou extends React.Component {
     return (
       <main style={styles.divStyle}>
         <Div style={styles.container}>
-          <List ref="mainList" style={styles.verticalList} orientation="vertical">
+          <List cyclic={false} ref="mainList" style={styles.verticalList} orientation="vertical">
             <Div style={styles.caruselRow}>
               <P style={styles.headerStyle}>Featured</P>
               <List style={styles.carusel}

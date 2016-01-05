@@ -47,7 +47,7 @@ class AppStore extends React.Component {
     return (
         <main style={styles.divStyle}>
           <Div style={styles.container}>
-            <List style={styles.verticalList} orientation="vertical">
+            <List cyclic={false} style={styles.verticalList} orientation="vertical">
               <Div style={styles.categoriesCaruselRow}>
                 <List style={styles.categoriesCarusel}
                       itemClass={CategoryAsset}

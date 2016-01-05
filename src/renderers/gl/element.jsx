@@ -48,7 +48,7 @@ class ReactLibertyElement extends React.Component {
   }
 
   createDisplayObject() {
-    this._displayObject = this._displayObject || this.getDisplayObject();
+    this.displayObject = this._displayObject = this._displayObject || this.getDisplayObject();
   }
 
   receiveComponent(nextElement, transaction, context) {

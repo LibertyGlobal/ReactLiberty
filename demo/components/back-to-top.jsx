@@ -4,9 +4,10 @@ var ReactLiberty = require('../../src/index');
 var backToTopImage = require('../assets/images/back-to-top.png');
 var backToTopHighlightImage = require('../assets/images/back-to-top-hl.png');
 
-var FocusManager = require('../vendor/improved-navigation-concept').FocusManager;
+var FocusManager = require('../vendor/sunbeam').FocusManager;
+var Focusable = require('../vendor/sunbeam').Focusable;
 
-class BackToTopButton extends React.Component {
+class BackToTopButton extends Focusable {
   styles = {
     width: 179,
     height: 54
@@ -41,17 +42,12 @@ class BackToTopButton extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-    this.id = String(Date.now());
-  }
-
-  componentReceivedFocus () {
+  componentDidReceiveFocus () {
     this.refs.highlight.style.opacity = 0.999;
     this.refs.highlight.updateDisplayObject();
   }
 
-  componentLostFocus () {
+  componentDidLoseFocus () {
     this.refs.highlight.style.opacity = 0.001;
     this.refs.highlight.updateDisplayObject();
   }
@@ -65,19 +61,6 @@ class BackToTopButton extends React.Component {
       <P style={styles.text}>Back to top</P>
     </Div>);
   }
-
-  componentWillMount() {
-    this.parentId = this.context.navigationContainerId;
-    FocusManager.registerFocusableComponent(this);
-  }
-
-  componentWillUnmount() {
-    FocusManager.unregisterFocusableComponent(this);
-  }
 }
-
-BackToTopButton.contextTypes = {
-  navigationContainerId: React.PropTypes.string
-};
 
 module.exports = BackToTopButton;

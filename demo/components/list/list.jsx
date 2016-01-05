@@ -1,14 +1,15 @@
 'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var ReactLiberty = require('../../../src/index');
 var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var ChildrenItemsManager = require('./strategies/children-items-manager.jsx');
 var DataItemsManager = require('./strategies/data-items-manager.jsx');
 
-var FocusManager = require('../../vendor/improved-navigation-concept').FocusManager;
-var FocusableComponent = require('../../vendor/improved-navigation-concept').NavigationContainerClass.default;
+var FocusManager = require('../../vendor/sunbeam').FocusManager;
+var FocusableContainer = require('../../vendor/sunbeam').FocusableContainer;
 
 function invoke(fn) {
   if (typeof this[fn] === 'function') {
@@ -16,7 +17,7 @@ function invoke(fn) {
   }
 }
 
-class List extends FocusableComponent {
+class List extends FocusableContainer {
   static orientation = {
     VERTICAL: 'vertical',
     HORIZONTAL: 'horizontal'
@@ -39,39 +40,39 @@ class List extends FocusableComponent {
     this.registeredChildren = new Set();
   }
 
-  getPreferredFocusedComponentNode(containerNode, prevFocusedComponentNode) {
-    return containerNode.children[this.state.currentIndex];
+  getPreferredFocusable(containerNode, prevFocusedComponentNode) {
+    return this._focusable.children[this.state.currentIndex];
   }
 
-  moveUp(containerNode, prevFocusedComponentNode) {
+  getUpFocusable(containerNode, prevFocusedComponentNode) {
+    if (this.props.orientation === List.orientation.VERTICAL && (this.state.currentIndex !== 0 || this.props.cyclic)) {
+      return this._focusable.children[this.selectPrev()];
+    } else {
+      return null;
+    }
+  }
+
+  getDownFocusable(containerNode, prevFocusedComponentNode) {
     if (this.props.orientation === List.orientation.VERTICAL) {
-      return containerNode.children[this.selectPrev()];
+      return this._focusable.children[this.selectNext()];
     } else {
-      return 'loseFocus';
+      return null;
     }
   }
 
-  moveDown(containerNode, prevFocusedComponentNode) {
-    if (this.props.orientation === List.orientation.VERTICAL) {
-      return containerNode.children[this.selectNext()];
-    } else {
-      return 'loseFocus';
-    }
-  }
-
-  moveLeft(containerNode, prevFocusedComponentNode) {
+  getLeftFocusable(containerNode, prevFocusedComponentNode) {
     if (this.props.orientation !== List.orientation.VERTICAL) {
-      return containerNode.children[this.selectPrev()];
+      return this._focusable.children[this.selectPrev()];
     } else {
-      return 'loseFocus';
+      return null;
     }
   }
 
-  moveRight(containerNode, prevFocusedComponentNode) {
+  getRightFocusable(containerNode, prevFocusedComponentNode) {
     if (this.props.orientation !== List.orientation.VERTICAL) {
-      return containerNode.children[this.selectNext()];
+      return this._focusable.children[this.selectNext()];
     } else {
-      return 'loseFocus';
+      return null;
     }
   }
 
@@ -97,11 +98,7 @@ class List extends FocusableComponent {
     this.itemsManager = new ItemsManagerClass(this);
   }
 
-  componentWillUnmount() {
-    this.registeredChildren.clear();
-  }
-
-  componentReceivedFocus() {
+  componentDidReceiveFocus() {
     if (this.itemsManager.getHighlightClass()) {
       this.refs.motion.refs.container.children[0].style.opacity = 0.999;
       this.refs.motion.refs.container.children[0].updateDisplayObject();
@@ -110,7 +107,7 @@ class List extends FocusableComponent {
     Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'showLabel'));
   }
 
-  componentLostFocus() {
+  componentDidLoseFocus() {
     if (this.itemsManager.getHighlightClass()) {
       this.refs.motion.refs.container.children[0].style.opacity = 0.001;
       this.refs.motion.refs.container.children[0].updateDisplayObject();
@@ -189,6 +186,7 @@ class List extends FocusableComponent {
 }
 
 List.defaultProps = {
+  cyclic: true,
   orientation: List.orientation.HORIZONTAL
 };
 

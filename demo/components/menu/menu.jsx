@@ -2,13 +2,21 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var MenuItem = require('./menu-item.jsx');
 
-var testStrategy = require('../../vendor/improved-navigation-concept').testStrategy;
-var FocusManager = require('../../vendor/improved-navigation-concept').FocusManager;
-var FocusableComponent = require('../../vendor/improved-navigation-concept').NavigationContainerClass.default;
+var IndexStrategy = require('../../vendor/sunbeam').strategies.horizontalIndexBasedFocusStrategy.default;
+var FocusManager = require('../../vendor/sunbeam').FocusManager;
+var FocusableContainer = require('../../vendor/sunbeam').FocusableContainer;
 
-class Menu extends React.Component {
-  constructor(props) {
-    super(props);
+class Menu extends FocusableContainer {
+  getFocusStrategy() {
+    if (!this.focusStrategy) {
+      this.focusStrategy = new IndexStrategy();
+    }
+
+    return this.focusStrategy;
+  }
+
+  componentWillMount() {
+    super.componentWillMount();
   }
 
   render() {
@@ -18,10 +26,6 @@ class Menu extends React.Component {
       </ul>
     );
   }
-}
-
-Menu.defaultProps = {
-  strategy: testStrategy
 }
 
 module.exports = Menu;
