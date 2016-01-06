@@ -1,18 +1,10 @@
-var fonts = require('horizon4-fonts');
+import 'horizon4-fonts';
+import React from 'react';
+import {render} from 'react-dom';
+import {Router, Route, Redirect} from 'react-router';
+import {FocusManager, FocusableContainer} from 'sunbeam';
+import history from './history';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
-var Redirect = require('react-router').Redirect;
-
-var createHashHistory = require('history/lib/createHashHistory');
-var {useQueries} = require('history');
-var history = useQueries(createHashHistory)();
-window.routerHistory = history;
-
-var FocusManager = require('./vendor/sunbeam').FocusManager;
 global.FM = FocusManager;
 
 var Header = require('./components/header/header.jsx');
@@ -23,7 +15,6 @@ var pages = {};
 pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
-var FocusableContainer = require('sunbeam').FocusableContainer;
 
 class AppStoreRouter extends FocusableContainer {
   static styles = {
@@ -46,10 +37,10 @@ class AppStoreRouter extends FocusableContainer {
           <Header/>
           <Menu>
             <MenuItem onFocus={function(){
-              if (window.location.hash.indexOf('for-you') === -1) window.routerHistory.push('/for-you');
+              if (window.location.hash.indexOf('for-you') === -1) history.push('/for-you');
             }}>FOR YOU</MenuItem>
             <MenuItem onFocus={function(){
-              if (window.location.hash.indexOf('app-store') === -1)window.routerHistory.push('/app-store');
+              if (window.location.hash.indexOf('app-store') === -1) history.push('/app-store');
             }}>APP STORE</MenuItem>
           </Menu>
         </header>
@@ -107,7 +98,7 @@ class AppStore {
   }
 
   init() {
-    ReactDOM.render(React.createElement(AppStoreRouter), this.container);
+    render(React.createElement(AppStoreRouter), this.container);
   }
 
   processVisibilityChange({target}) {
@@ -122,7 +113,7 @@ class AppStore {
     console.log('Suspending...');
     if (!this.suspended) {
       this.suspended = true;
-      window.routerHistory.push('/suspend');
+      history.push('/suspend');
     }
   }
 
@@ -130,7 +121,7 @@ class AppStore {
     console.log('Awaking...');
     if (this.suspended) {
       this.suspended = false;
-      window.routerHistory.goBack();
+      history.goBack();
     }
   }
 
