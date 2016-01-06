@@ -37,7 +37,7 @@ class List extends FocusableContainer {
     super(props);
     this.moveTo = 0;
     this.motionSpring = spring(this.moveTo, [120, 17]);
-    this.registeredChildren = new Set();
+    //this.registeredChildren = new Set();
   }
 
   getPreferredFocusable(containerNode, prevFocusedComponentNode) {
@@ -104,7 +104,7 @@ class List extends FocusableContainer {
       this.refs.motion.refs.container.children[0].updateDisplayObject();
     }
 
-    Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'showLabel'));
+    //Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'showLabel'));
   }
 
   componentDidLoseFocus() {
@@ -113,7 +113,7 @@ class List extends FocusableContainer {
       this.refs.motion.refs.container.children[0].updateDisplayObject();
     }
 
-    Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'hideLabel'));
+    //Array.from(this.registeredChildren).forEach(child => invoke.call(child, 'hideLabel'));
   }
 
   goTo(newIndex) {
@@ -158,7 +158,7 @@ class List extends FocusableContainer {
   }
 
   render() {
-    const refFn = child => this.registeredChildren.add(child);
+    //const refFn = child => this.registeredChildren.add(child);
 
     //Receiving items from items manager
     var items = this.itemsManager.getVisibleItems(refFn);

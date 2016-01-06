@@ -5,8 +5,6 @@ import {Router, Route, Redirect} from 'react-router';
 import {FocusManager, FocusableContainer} from 'sunbeam';
 import history from './history';
 
-global.FM = FocusManager;
-
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
 var MenuItem = require('./components/menu/menu-item.jsx');
