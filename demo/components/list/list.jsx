@@ -161,7 +161,7 @@ class List extends FocusableContainer {
     //const refFn = child => this.registeredChildren.add(child);
 
     //Receiving items from items manager
-    var items = this.itemsManager.getVisibleItems(refFn);
+    var items = this.itemsManager.getVisibleItems();
     var self = this;
 
     //Creating style object to pass motion spring
