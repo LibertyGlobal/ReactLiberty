@@ -14,34 +14,7 @@ module.exports = {
         test: /\.(jsx|es|js)$/,
         loader: 'babel-loader',
         query: {
-          plugins: [
-            "syntax-class-properties",
-            'transform-class-properties',
-            'transform-es2015-template-literals',
-            'transform-es2015-literals',
-            'transform-es2015-function-name',
-            'transform-es2015-arrow-functions',
-            'transform-es2015-block-scoped-functions',
-            'transform-es2015-classes',
-            'transform-es2015-object-super',
-            'transform-es2015-shorthand-properties',
-            'transform-es2015-computed-properties',
-            'transform-es2015-for-of',
-            'transform-es2015-sticky-regex',
-            'transform-es2015-unicode-regex',
-            'check-es2015-constants',
-            'transform-es2015-spread',
-            'transform-es2015-parameters',
-            'transform-es2015-destructuring',
-            'transform-es2015-block-scoping',
-            'transform-es2015-typeof-symbol',
-            ['transform-regenerator', { async: false, asyncGenerators: false }],
-            'babel-plugin-transform-react-jsx',
-            'babel-plugin-transform-flow-strip-types',
-            'babel-plugin-syntax-flow',
-            'babel-plugin-syntax-jsx',
-            'babel-plugin-transform-react-display-name',
-          ]
+          presets: ['react', 'es2015', 'stage-0', 'stage-1']
         },
       },
       {test: /\.css$/, loaders: ['style-loader', 'css-loader']},
@@ -57,7 +30,12 @@ module.exports = {
     extensions: ['', '.js', '.es', '.css', '.scss', '.png', '.jpg', '.ttf', '.json', '.json5']
   },
   plugins: [
-    new Webpack.NoErrorsPlugin()
+    new Webpack.NoErrorsPlugin(),
+    new Webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    })
   ],
   node: {
     fs: 'empty'

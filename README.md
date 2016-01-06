@@ -6,7 +6,7 @@ React Liberty
 Be free to choose between WebGL / Canvas / DOM / Native or any other UI renderer
 ---------------------------------------------------------------------------------
 
-This is a family of React libraries which designed to abstract renderer by presenting three kinds of entities. They are Image, Text and Container. 
+This is a React library designed to abstract renderer by presenting three kinds of entities. They are Image, Text and Container.
 
 React Liberty uses [CSS Layout](https://github.com/facebook/css-layout) for laying components out, [ReactMotion](https://github.com/chenglou/react-motion) for declarative animations and [Sunbeam](https://github.com/LibertyGlobal/sunbeam) for focus management.
 
@@ -14,7 +14,7 @@ React Liberty uses [CSS Layout](https://github.com/facebook/css-layout) for layi
 
 Motivation
 ----------
-As a TV company LibertyGlobal support a few generations of TV devices. Horizon, Dawn, EOS exposing HTML UI... Every of them have some specifity and nobody knows which shift we may expect in next few years. Let`s be prepared to the future by providing UI abstraction which allows to switch between renderers. So for example if we switch to Android we do not need to remake all apps we have, but use the same markup introducing a new renderer.
+As a TV company LibertyGlobal support a few generations of TV devices: Horizon, Dawn, EOS exposing HTML UI, every of them have some specifity and nobody knows which shift we may expect in next few years. Let`s be prepared for the future by providing UI abstraction which allows to switch between renderers. So for example if we switch to Android we do not need to remake all apps we have, but use the same markup with a new Android renderer.
 
 How it looks like at app developer level?
 -----------------------------------------
@@ -44,7 +44,7 @@ Just have a look at [demo](https://github.com/LibertyGlobal/ReactLiberty/tree/ma
 Usage
 -----
 
-Inherit your root component component from React.Component and use Div, P and Img (capitalized) to declare UI. You may insert ReactLiberty components into regular ReactDOM components.
+Inherit your root component component from React.Component and use Div, P and Img (capitalized) to declare UI. You may append ReactLiberty components to regular ReactDOM components.
 
 Switch between DOM and WebGL by setting `window.libertyRender = 'gl'` or `'dom'`
 
@@ -53,7 +53,7 @@ Build from sources
 ------------------
 
 You will need npm v3.0 or higher.
-Then do: `npm install`, `npm run compile`.
+Then do: `npm install`, `npm run compile` in order to compile library or `npm run appdev` in order to compile demo from demo folder.
 
 Performance hints
 -----------------
