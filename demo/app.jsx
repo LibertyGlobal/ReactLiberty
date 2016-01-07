@@ -1,9 +1,8 @@
 import React from 'react';
 import {FocusManager, FocusableContainer} from 'sunbeam';
-
-var Header = require('./components/header/header.jsx');
-var Menu = require('./components/menu/menu.jsx');
-var MenuItem = require('./components/menu/menu-item.jsx');
+import Header from './components/header/header.jsx';
+import Menu from './components/menu/menu.jsx';
+import MenuItem from './components/menu/menu-item.jsx';
 
 class Application extends FocusableContainer {
   static styles = {
