@@ -10,7 +10,7 @@ import Application from './app.jsx';
 import ForYou from './pages/for-you.jsx';
 import AppStore from './pages/app-store.jsx';
 
-const tree = (
+const routerTree = (
   <Router history={history}>
     <Route path="/" component={Application}>
       <IndexRedirect to="/for-you"/>
@@ -56,7 +56,7 @@ function handleKeyDown(event) {
   }
 }
 
-render(tree, mountNode);
+render(routerTree, mountNode);
 
 document.addEventListener('visibilitychange', handleVisibilityChange, false);
 window.addEventListener('keydown', handleKeyDown, false);
