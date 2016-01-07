@@ -10,7 +10,7 @@ var FocusManager = require('sunbeam').FocusManager;
 var Focusable = require('sunbeam').Focusable;
 
 class AppAssetHighlight extends React.Component {
-  render(){
+  render() {
     var style = {
       width: 164,
       height: 222,

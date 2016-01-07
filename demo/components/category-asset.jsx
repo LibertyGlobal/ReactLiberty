@@ -47,7 +47,7 @@ class CategoryAsset extends Focusable {
       height: 114,
       marginRight: 24
     }
-  }
+  };
 
   shouldComponentUpdate(a, b) {
     return false;

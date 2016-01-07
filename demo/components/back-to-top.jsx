@@ -11,7 +11,7 @@ class BackToTopButton extends Focusable {
   styles = {
     width: 179,
     height: 54
-  }
+  };
 
   static styles = {
     main: {
@@ -40,7 +40,7 @@ class BackToTopButton extends Focusable {
       position: 'relative',
       fontFamily: 'InterstatePro'
     }
-  }
+  };
 
   componentDidReceiveFocus () {
     this.refs.highlight.style.opacity = 0.999;
