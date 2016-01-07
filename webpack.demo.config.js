@@ -2,7 +2,7 @@ var BUNDLE_NAME = "app";
 var Webpack = require('webpack');
 
 module.exports = {
-  entry: "./demo/index.js",
+  entry: "./demo/index.jsx",
   output: {
     path: './demo/build',
     publicPath: '.demo/build',
