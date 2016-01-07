@@ -13,6 +13,12 @@ var FocusManager = require('sunbeam').FocusManager;
 
 class AppStore extends React.Component {
 
+  handleAppLaunch = appId => {
+    if (appId) {
+      appService.launchApp(appId);
+    }
+  };
+
   goTop() {
     this.refs.mainList.goTo(0);
     FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
@@ -64,13 +70,15 @@ class AppStore extends React.Component {
                 <P style={styles.headerStyle}>News</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('news')}/>
+                      data={appService.getApplicationsByCategory('news')}
+                      onItemSelect={this.handleAppLaunch}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>Music</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('music')}/>
+                      data={appService.getApplicationsByCategory('music')}
+                      onItemSelect={this.handleAppLaunch}/>
               </Div>
               <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
             </List>
