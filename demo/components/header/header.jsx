@@ -40,7 +40,7 @@ class Header extends React.Component {
         display: 'inline-block',
         color: '#B8B8BB'
       }
-    }
+    };
 
     return (
       <div style={styles.main}>
