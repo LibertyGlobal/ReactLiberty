@@ -75,13 +75,13 @@ class AppStore {
         FocusManager.doSelect();
         break;
       case 37:
-        setTimeout(FocusManager.doLeft, 3000);
+        FocusManager.doLeft();
         break;
       case 39:
         setTimeout(FocusManager.doRight, 3000);
         break;
       case 40:
-        setTimeout(FocusManager.doDown, 3000);
+        FocusManager.doDown();
         break;
       case 38:
         setTimeout(FocusManager.doUp, 3000);
