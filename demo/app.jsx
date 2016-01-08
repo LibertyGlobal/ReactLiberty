@@ -78,13 +78,13 @@ class AppStore {
         FocusManager.doLeft();
         break;
       case 39:
-        setTimeout(FocusManager.doRight, 3000);
+        FocusManager.doRight();
         break;
       case 40:
         FocusManager.doDown();
         break;
       case 38:
-        setTimeout(FocusManager.doUp, 3000);
+        FocusManager.doUp();
         break;
     }
   }
