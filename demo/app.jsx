@@ -12,11 +12,11 @@ class Application extends FocusableContainer {
     }
   };
 
-  createSectionFocusHandler = targetPath => () => {
+  navigateTo = path => {
     const {history} = this.props;
 
-    if (!history.isActive(targetPath)) {
-      history.push(targetPath);
+    if (!history.isActive(path)) {
+      history.push(path);
     }
   };
 
@@ -38,11 +38,11 @@ class Application extends FocusableContainer {
       <header style={Application.styles.header}>
         <Header/>
         <Menu>
-          <MenuItem onFocus={this.createSectionFocusHandler('/for-you')}>
+          <MenuItem onFocus={() => this.navigateTo('/for-you')}>
             FOR YOU
           </MenuItem>
 
-          <MenuItem onFocus={this.createSectionFocusHandler('/app-store')}>
+          <MenuItem onFocus={() => this.navigateTo('/app-store')}>
             APP STORE
           </MenuItem>
         </Menu>
