@@ -20,7 +20,7 @@ class AppStoreRouter extends FocusableContainer {
       position: 'relative',
       zIndex: 999
     }
-  }
+  };
 
   componentDidMount() {
     window.router = this.refs['router'];
