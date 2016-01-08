@@ -9,11 +9,13 @@ var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 var FocusManager = require('sunbeam').FocusManager;
 
+import launchApp from '../actions/launch-app';
+
 class ForYou extends React.Component {
 
   handleAppLaunch = appId => {
     if (appId) {
-      appService.launchApp(appId);
+      launchApp(appId);
     }
   };
 

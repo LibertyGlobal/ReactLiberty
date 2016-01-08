@@ -2,7 +2,6 @@ import 'horizon4-fonts';
 
 import React from 'react';
 import {render} from 'react-dom';
-import {Provider} from 'react-redux';
 import {Router, Route, IndexRedirect} from 'react-router';
 import {FocusManager} from 'sunbeam';
 import history from './history';

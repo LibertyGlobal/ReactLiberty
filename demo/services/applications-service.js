@@ -6,10 +6,7 @@ module.exports = {
   getFeatured: wrapMAFMethod(window.applicationManager.getFeatured),
   getRecent: wrapMAFMethod(window.applicationManager.getRecent),
   getFavorites: wrapMAFMethod(window.applicationManager.getFavorites),
-  getApp: wrapMAFMethod(window.applicationManager.getApp),
-  launchApp: function (appId) {
-    window.open(appId, '_blank');
-  }
+  getApp: wrapMAFMethod(window.applicationManager.getApp)
 };
 
 function wrapMAFMethod(method, category) {
