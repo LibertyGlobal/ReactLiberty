@@ -24,7 +24,7 @@
     "react-router": "^1.0.0"
   },
   "devDependencies": {
-    "babel": "",
+    "babel": "6.3.26",
     "babel-core": "",
     "babel-loader": "",
     "style-loader": "^0.13.0",
