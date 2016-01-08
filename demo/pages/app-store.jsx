@@ -19,10 +19,12 @@ class AppStore extends React.Component {
     }
   };
 
-  goTop() {
-    this.refs.mainList.goTo(0);
-    FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
-  }
+  goToTop = () => {
+    const {mainList} = this.refs;
+
+    mainList.goTo(0);
+    FocusManager.setFocusTarget(mainList._focusable.children[0]._focusable.children[0]);
+  };
 
   render() {
     var styles = {
@@ -80,7 +82,7 @@ class AppStore extends React.Component {
                       data={appService.getApplicationsByCategory('music')}
                       onItemSelect={this.handleAppLaunch}/>
               </Div>
-              <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
+              <BackToTopButton onSelect={this.goToTop} style={styles.caruselRow}/>
             </List>
           </Div>
         </main>
