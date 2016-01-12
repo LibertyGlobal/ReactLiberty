@@ -1,7 +1,7 @@
 import 'horizon4-fonts';
 
 import React from 'react';
-import {render} from 'react-dom';
+import {render, unmountComponentAtNode} from 'react-dom';
 import {Router, Route, IndexRedirect} from 'react-router';
 import {FocusManager} from 'sunbeam';
 import history from './history';
@@ -15,18 +15,29 @@ const routerTree = (
       <IndexRedirect to="/for-you"/>
       <Route path="/for-you" component={ForYou}/>
       <Route path="/app-store" component={AppStore}/>
-      <Route path="/suspended" component={null}/>
     </Route>
   </Router>
 );
 
-const mountNode = document.getElementById('app-container');
+const mountNode = window.document.getElementById('app-container');
+
+function resume() {
+  window.addEventListener('keydown', handleKeyDown, false);
+
+  render(routerTree, mountNode);
+}
+
+function suspend() {
+  window.removeEventListener('keydown', handleKeyDown, false);
+
+  unmountComponentAtNode(mountNode);
+}
 
 function handleVisibilityChange(event) {
   if (event.target.hidden) {
-    history.push('/suspended');
+    suspend();
   } else {
-    history.goBack();
+    resume();
   }
 }
 
@@ -55,7 +66,8 @@ function handleKeyDown(event) {
   }
 }
 
-render(routerTree, mountNode);
+window.document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
-document.addEventListener('visibilitychange', handleVisibilityChange, false);
-window.addEventListener('keydown', handleKeyDown, false);
+if (!window.document.hidden) {
+  resume();
+}
