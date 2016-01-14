@@ -57,17 +57,11 @@ class ReactLibertyElement extends React.Component {
   }
 
   getDisplayObject() {
-    return document.createElement('div');
+    return null;
   }
 
   createDisplayObject() {
-    this._displayObject = this._displayObject || this.getDisplayObject();
-    this._displayObject.style.position = 'absolute';
-    this._displayObject.style.left = '0';
-    this._displayObject.style.top = '0';
-    //this._displayObject.style.backfaceVisibility = 'hidden';
-    //this._displayObject.style.webkitBackfaceVisibility = 'hidden';
-    //this._displayObject.style.willChange = 'transform';
+    this._displayObject = {};
   }
 
   receiveComponent(nextElement, transaction, context) {
@@ -121,8 +115,6 @@ class ReactLibertyElement extends React.Component {
         this.DOMParent.style.position = 'relative';
       }
 
-      this.DOMParent.appendChild(this._displayObject);
-
       this.updateDisplayObject();
     } catch (e) {
       console.log(e);
@@ -145,54 +137,10 @@ class ReactLibertyElement extends React.Component {
     this._context = null;
     this._rootNodeID = null;
     this._topLevelWrapper = null;
-
-    if (this._displayObject) {
-      this._displayObject.parentNode.removeChild(this._displayObject);
-    }
   }
 
   updateDisplayObject() {
-    //Debugging
-    //console.trace('@S+update child coordinates');
-    //console.log('Updating : ' + this.constructor.name + ', ' + JSON.stringify(this.layout));
 
-    //Needed if we scale from center but adds additional calculation
-    //var halfWidth = 0;
-    //var halfHeight = 0;
-    /*var halfWidth = (((this.layout && this.layout.width) || this.style.width) / 2) || 0;
-     var halfHeight = (((this.layout && this.layout.height) || this.style.height) / 2) || 0;
-     this._displayObject.pivot.x = halfWidth;
-     this._displayObject.pivot.y = halfHeight;*/
-    //this._displayObject.scale.x = this.style.scale || 1;
-    //this._displayObject.scale.y = this.style.scale || 1;
-
-    //Rotation
-    //this._displayObject.rotation = this.props && parseInt(this.props.rotation, 10) || 0;
-
-    //Opacity
-    if (this._displayObject._cachedOpacity !== this.style.opacity && this.style.opacity) {
-      this._displayObject._cachedOpacity = this._displayObject.style.opacity = this.style.opacity || 1;
-      this._modified = this._displayObject._cachedOpacity !== 1 || this._displayObject._cachedOpacity !== 0 ? true : false;
-    }
-
-    //Translation
-    var x = 0;
-    var y = 0;
-
-    x = this.style.translateX || 0 + (this.layout && this.layout.left || (this.props && this.props.x) || 0);// + halfWidth;
-    y = this.style.translateY || 0 + (this.layout && this.layout.top || (this.props && this.props.y) || 0);// + halfHeight;
-
-    if (this.DOMParent) {
-      x += this.parentX;
-      y += this.parentY;
-    }
-
-    var transform = '';// (this._modified || this.style.translateX || this.style.translateY) ? 'translateZ(0)' : '';
-    transform += 'translateX(' + x + 'px) translateY(' + y + 'px)';
-
-    if (this._displayObject.style[transformPropertyName] !== transform) {
-      this._displayObject.style[transformPropertyName] = transform;
-    }
   }
 
   get style() {

@@ -1,9 +1,10 @@
-import 'horizon4-fonts';
+//import 'horizon4-fonts';
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, Redirect} from 'react-router';
-import {FocusManager, FocusableContainer} from 'sunbeam';
 import history from './history';
+import {FocusManager, FocusableContainer} from 'sunbeam';
+
 
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
@@ -25,7 +26,6 @@ class AppStoreRouter extends FocusableContainer {
   componentDidMount() {
     window.router = this.refs['router'];
     FocusManager.initializeFocus();
-    //window.router.history.listen(FocusManager.initializeFocus);
   }
 
   render() {
@@ -68,7 +68,6 @@ class AppStore {
   }
 
   onKeyDown(e) {
-    //console.trace('@S+key down');
     switch (e.keyCode) {
       case 32:
       case 13:
@@ -86,13 +85,21 @@ class AppStore {
       case 38:
         FocusManager.doUp();
         break;
+      //For testing purpose
+      case 83:
+        //PIXI.utils.BaseTextureCache = {};
+        //PIXI.utils.TextureCache = {};
+        this.suspend();
+        break;
+      case 65:
+
+        this.awake();
+        break;
     }
   }
 
   initLifecycleListeners() {
     //document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
-    //window.addEventListener('blur', this.suspend.bind(this), false);
-    //window.addEventListener('focus', this.awake.bind(this), false);
   }
 
   init() {
@@ -108,16 +115,16 @@ class AppStore {
   }
 
   suspend() {
-    console.log('Suspending...');
     if (!this.suspended) {
+      console.log('Suspending...');
       this.suspended = true;
       history.push('/suspend');
     }
   }
 
   awake() {
-    console.log('Awaking...');
     if (this.suspended) {
+      console.log('Awaking...');
       this.suspended = false;
       history.goBack();
     }

@@ -35,6 +35,7 @@ class AppAsset extends Focusable {
     },
     title: {
       fontFamily: 'InterstatePro',
+      fontWeight: 300,
       fontSize: 20,
       width: 129,
       marginTop: 0,

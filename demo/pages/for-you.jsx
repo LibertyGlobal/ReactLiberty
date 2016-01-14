@@ -41,7 +41,8 @@ class ForYou extends React.Component {
         height: 206
       },
       headerStyle: {
-        fontFamily: 'InterstatePro-Light',
+        fontFamily: 'InterstatePro',
+        fontWeight: 300,
         height: 20,
         marginBottom: 10,
         fontSize: 24,

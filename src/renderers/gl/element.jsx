@@ -130,6 +130,7 @@ class ReactLibertyElement extends React.Component {
     if (this._displayObject) {
       this._displayObject.parent.removeChild(this._displayObject);
       this._displayObject.destroy(false);
+      ReactLiberty.markStageAsChanged();
     }
   }
 
@@ -170,14 +171,7 @@ class ReactLibertyElement extends React.Component {
 
   //Viewport culling
   updateVisibility() {
-    var isOnScreen = this.isOnScreen();
-
-    /* if (this._visible !== isOnScreen) {
-      console.log('Visibility for ' + this.constructor.name + ' changed to ' + isOnScreen)
-    } */
-
-    this._visible = isOnScreen;
-    this._displayObject.visible = isOnScreen;
+    this._displayObject.visible = this._visible = this.isOnScreen();
   }
 
   isOnScreen() {
