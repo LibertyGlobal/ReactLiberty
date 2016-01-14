@@ -1,10 +1,8 @@
-//import 'horizon4-fonts';
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, Redirect} from 'react-router';
 import history from './history';
 import {FocusManager, FocusableContainer} from 'sunbeam';
-
 
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');

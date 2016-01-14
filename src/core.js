@@ -1,4 +1,4 @@
-module.exports = {};
+window.ReactLiberty = module.exports = {};
 
 //Initialize React stage
 var React = require('react');

@@ -1,10 +1,6 @@
 var React = require('react');
 var ReactMount = require('react/lib/ReactMount');
 var ReactLiberty = require('../../core.js');
-var ReactReconciler = require('react/lib/ReactReconciler');
-var ReactInstanceMap = require('react/lib/ReactInstanceMap');
-var ReactElement = require('react/lib/ReactElement');
-var ReactCompositeComponent = require('react/lib/ReactCompositeComponent');
 
 const { assign } = Object;
 

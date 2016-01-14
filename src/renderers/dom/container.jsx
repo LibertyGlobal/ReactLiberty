@@ -1,12 +1,6 @@
-var React = require('react');
-var ReactLiberty = require('../../core.js');
 var ReactLibertyElement = require('./element.jsx');
-var ReactElement = require('react/lib/ReactElement');
-var ReactUpdates = require('react/lib/ReactUpdates');
-var instantiateReactComponent = require('react/lib/instantiateReactComponent');
 var computeLayout = require('css-layout');
 var ReactMultiChild = require('react/lib/ReactMultiChild');
-var ReactEmptyComponent = require('react/lib/ReactEmptyComponent');
 
 const { assign } = Object;
 

@@ -65,9 +65,9 @@ class ReactLibertyElement extends React.Component {
     this._displayObject.style.position = 'absolute';
     this._displayObject.style.left = '0';
     this._displayObject.style.top = '0';
-    //this._displayObject.style.backfaceVisibility = 'hidden';
-    //this._displayObject.style.webkitBackfaceVisibility = 'hidden';
-    //this._displayObject.style.willChange = 'transform';
+    this._displayObject.style.backfaceVisibility = 'hidden';
+    this._displayObject.style.webkitBackfaceVisibility = 'hidden';
+    this._displayObject.style.willChange = 'transform';
   }
 
   receiveComponent(nextElement, transaction, context) {
@@ -187,7 +187,7 @@ class ReactLibertyElement extends React.Component {
       y += this.parentY;
     }
 
-    var transform = '';// (this._modified || this.style.translateX || this.style.translateY) ? 'translateZ(0)' : '';
+    var transform = (this._modified || this.style.translateX || this.style.translateY) ? 'translateZ(0)' : '';
     transform += 'translateX(' + x + 'px) translateY(' + y + 'px)';
 
     if (this._displayObject.style[transformPropertyName] !== transform) {

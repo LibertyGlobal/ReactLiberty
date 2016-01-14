@@ -6,6 +6,7 @@
   "scripts": {
     "test": "karma start",
     "appdev": "webpack -w --config=webpack.demo.config.js --progress",
+    "analyze": "webpack --config=webpack.demo.config.js --json | analyze-bundle-size",
     "appprod": "./node_modules/.bin/webpack -p --config=webpack.production.config.js"
   },
   "author": "PixelsCommander <denis.radin@gmail.com> (http://pixelscommander.com)",
