@@ -27,11 +27,11 @@ class AppAsset extends Focusable {
 
   static styles = {
     width: 164,
-    marginRight: 24,
+    marginRight: 14,
     image: {
       width: 164,
       height: 164,
-      marginRight: 24
+      marginRight: 14
     },
     title: {
       fontFamily: 'InterstatePro',
@@ -42,7 +42,7 @@ class AppAsset extends Focusable {
       marginLeft: 5,
       worldWarp: true,
       height: 30,
-      color: '#ffffff'
+      color: '#E9E9EA'
     }
   };
 

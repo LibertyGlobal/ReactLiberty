@@ -19,3 +19,6 @@ class MenuItem extends Focusable {
 }
 
 module.exports = MenuItem;
+
+rgb(233, 233, 234)
+rgb(184, 184, 187)
