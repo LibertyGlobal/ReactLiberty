@@ -4,6 +4,8 @@ import {Router, Route, Redirect} from 'react-router';
 import history from './history';
 import {FocusManager, FocusableContainer} from 'sunbeam';
 
+
+var WebFontLoader = require('webfontloader');
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
 var MenuItem = require('./components/menu/menu-item.jsx');
@@ -53,8 +55,6 @@ class AppStoreRouter extends FocusableContainer {
 
 class AppStore {
   constructor() {
-    this.container = document.getElementById('app-container');
-
     this.init();
     this.initLifecycleListeners();
     this.initFocusManager();
@@ -100,7 +100,14 @@ class AppStore {
   }
 
   init() {
-    render(React.createElement(AppStoreRouter), this.container);
+    WebFontLoader.load({
+      custom: {
+        families: ['InterstatePro']
+      },
+      active: function(){
+        render(React.createElement(AppStoreRouter), document.getElementById('app-container'));
+      }
+    });
   }
 
   processVisibilityChange({target}) {
