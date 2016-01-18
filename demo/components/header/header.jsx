@@ -28,6 +28,7 @@ class Header extends React.Component {
         color: '#B8B8BB'
       },
       headerCenter: {
+        color: '#7D7D84',
         fontSize: 18,
         display: 'inline-block',
         width: '100%',

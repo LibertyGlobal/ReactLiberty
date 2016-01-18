@@ -90,7 +90,6 @@ class AppStore {
         this.suspend();
         break;
       case 65:
-
         this.awake();
         break;
     }
