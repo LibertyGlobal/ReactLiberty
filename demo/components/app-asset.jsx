@@ -39,7 +39,7 @@ class AppAsset extends Focusable {
       fontSize: 20,
       width: 129,
       marginTop: 0,
-      marginLeft: 10,
+      marginLeft: 5,
       worldWarp: true,
       height: 30,
       color: '#ffffff'
