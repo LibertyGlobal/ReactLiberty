@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, Redirect} from 'react-router';
 import history from './history';
-import {FocusManager, FocusableContainer} from 'sunbeam';
+import {FocusManager, FocusableContainer} from './vendor/sunbeam';
 
 
 var WebFontLoader = require('webfontloader');

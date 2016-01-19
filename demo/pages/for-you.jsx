@@ -7,7 +7,7 @@ var CategoryAsset = require('../components/category-asset.jsx');
 var List = require('../components/list/list.jsx');
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
-var FocusManager = require('sunbeam').FocusManager;
+var FocusManager = require('../vendor/sunbeam').FocusManager;
 
 class ForYou extends React.Component {
 
@@ -25,10 +25,10 @@ class ForYou extends React.Component {
         height: 600
       },
       caruselRow: {
-        height: 261
+        height: 292
       },
       categoriesCaruselRow: {
-        height: 261
+        height: 292
       },
       categoriesCarusel: {
         paddingTop: 70,
@@ -38,7 +38,7 @@ class ForYou extends React.Component {
       carusel: {
         marginBottom: 55,
         width: 1140,
-        height: 206
+        height: 237
       },
       headerStyle: {
         fontFamily: 'InterstatePro',
@@ -50,6 +50,15 @@ class ForYou extends React.Component {
       }
     };
 
+    //Change after getRecent is implemented
+    var recentlyUsed = appService.getApplicationsByCategory('games');
+    var recentRow = recentlyUsed.length && (<Div style={styles.caruselRow}>
+        <P style={styles.headerStyle}>Recently used</P>
+        <List style={styles.carusel}
+              itemClass={AppAsset}
+              data={recentlyUsed.slice(0,18)}/>
+      </Div>);
+
     return (
       <main style={styles.divStyle}>
         <Div style={styles.container}>
@@ -58,31 +67,9 @@ class ForYou extends React.Component {
               <P style={styles.headerStyle}>Featured</P>
               <List style={styles.carusel}
                     itemClass={AppAsset}
-                    data={appService.getFeatured().slice(0,10)}/>
+                    data={appService.getFeatured().slice(0,18)}/>
             </Div>
-            <Div style={styles.caruselRow}>
-              <P style={styles.headerStyle}>Recently used</P>
-              <List style={styles.carusel}
-                    itemClass={AppAsset}
-                    data={appService.getApplicationsByCategory('games')}/>
-            </Div>
-            <Div style={styles.categoriesCaruselRow}>
-              <List style={styles.categoriesCarusel}
-                    itemClass={CategoryAsset}
-                    data={appService.getCategories()}/>
-            </Div>
-            <Div style={styles.caruselRow}>
-              <P style={styles.headerStyle}>News</P>
-              <List style={styles.carusel}
-                    itemClass={AppAsset}
-                    data={appService.getApplicationsByCategory('news')}/>
-            </Div>
-            <Div style={styles.caruselRow}>
-              <P style={styles.headerStyle}>Music</P>
-              <List style={styles.carusel}
-                    itemClass={AppAsset}
-                    data={appService.getApplicationsByCategory('music')}/>
-            </Div>
+            {recentRow}
             <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
           </List>
         </Div>

@@ -6,14 +6,14 @@ var spring = require('react-motion').spring;
 var PLACEHOLDER = require('../assets/images/placeholder.png');
 var HIGHLIGHT = require('../assets/images/app-highlight.png');
 
-var FocusManager = require('sunbeam').FocusManager;
-var Focusable = require('sunbeam').Focusable;
+var FocusManager = require('../vendor/sunbeam').FocusManager;
+var Focusable = require('../vendor/sunbeam').Focusable;
 
 class AppAssetHighlight extends React.Component {
   render(){
     var style = {
-      width: 164,
-      height: 222,
+      width: 180,
+      height: 238,
       position: 'absolute',
       opacity: 0.001
     };
@@ -26,11 +26,14 @@ class AppAsset extends Focusable {
   static highlightClass = AppAssetHighlight;
 
   static styles = {
-    width: 164,
+    width: 174,
+    marginLeft: 3,
     marginRight: 14,
     image: {
-      width: 164,
-      height: 164,
+      top: 3,
+      width: 174,
+      height: 174,
+      marginLeft: 3,
       marginRight: 14
     },
     title: {
@@ -38,8 +41,8 @@ class AppAsset extends Focusable {
       fontWeight: 300,
       fontSize: 20,
       width: 129,
-      marginTop: 0,
-      marginLeft: 5,
+      marginTop: 5,
+      marginLeft: 8,
       worldWarp: true,
       height: 30,
       color: '#E9E9EA'

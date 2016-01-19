@@ -1,8 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var FocusManager = require('sunbeam').FocusManager;
-var Focusable = require('sunbeam').Focusable;
+var FocusManager = require('../../vendor/sunbeam').FocusManager;
+var Focusable = require('../../vendor/sunbeam').Focusable;
 
 class MenuItem extends Focusable {
   componentDidReceiveFocus() {
@@ -19,6 +19,3 @@ class MenuItem extends Focusable {
 }
 
 module.exports = MenuItem;
-
-rgb(233, 233, 234)
-rgb(184, 184, 187)
