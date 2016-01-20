@@ -14,7 +14,8 @@ module.exports = {
         test: /\.(jsx|es|js)$/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0', 'stage-1']
+          presets: ['react', 'es2015', 'stage-0', 'stage-1'],
+          plugins: ["transform-object-assign"]
         },
       },
       {test: /\.css$/, loaders: ['style-loader', 'css-loader']},

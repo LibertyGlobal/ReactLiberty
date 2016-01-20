@@ -22,7 +22,8 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['react', 'es2015', 'stage-0', 'stage-1']
+          presets: ['react', 'es2015', 'stage-0', 'stage-1'],
+          plugins: ["transform-object-assign"]
         },
       },
       {test: /\.css$/, loaders: ['style-loader', 'css-loader']},
