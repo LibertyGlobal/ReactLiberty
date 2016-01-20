@@ -9,7 +9,7 @@ var Motion = require('react-motion').Motion;
 var spring = require('react-motion').spring;
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
-var FocusManager = require('../vendor/sunbeam').FocusManager;
+var FocusManager = require('sunbeam').FocusManager;
 
 class AppStore extends React.Component {
 

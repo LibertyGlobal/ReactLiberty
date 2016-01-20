@@ -8,8 +8,8 @@ var spring = require('react-motion').spring;
 var ChildrenItemsManager = require('./strategies/children-items-manager.jsx');
 var DataItemsManager = require('./strategies/data-items-manager.jsx');
 
-var FocusManager = require('../../vendor/sunbeam').FocusManager;
-var FocusableContainer = require('../../vendor/sunbeam').FocusableContainer;
+var FocusManager = require('sunbeam').FocusManager;
+var FocusableContainer = require('sunbeam').FocusableContainer;
 
 function invoke(fn) {
   if (typeof this[fn] === 'function') {

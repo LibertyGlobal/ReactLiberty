@@ -7,7 +7,7 @@ var CategoryAsset = require('../components/category-asset.jsx');
 var List = require('../components/list/list.jsx');
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
-var FocusManager = require('../vendor/sunbeam').FocusManager;
+var FocusManager = require('sunbeam').FocusManager;
 
 class ForYou extends React.Component {
 

@@ -2,9 +2,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var MenuItem = require('./menu-item.jsx');
 
-var IndexStrategy = require('../../vendor/sunbeam').strategies.horizontalIndexBasedFocusStrategy.default;
-var FocusManager = require('../../vendor/sunbeam').FocusManager;
-var FocusableContainer = require('../../vendor/sunbeam').FocusableContainer;
+var IndexStrategy = require('sunbeam').strategies.horizontalIndexBasedFocusStrategy.default;
+var FocusManager = require('sunbeam').FocusManager;
+var FocusableContainer = require('sunbeam').FocusableContainer;
 
 class Menu extends FocusableContainer {
   getFocusStrategy() {
