@@ -4,7 +4,7 @@ import {Router, Route, Redirect} from 'react-router';
 import history from './history';
 import {FocusManager, FocusableContainer} from 'sunbeam';
 
-
+require("babel-polyfill");
 var WebFontLoader = require('webfontloader');
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');

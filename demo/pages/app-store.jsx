@@ -62,11 +62,6 @@ class AppStore extends React.Component {
                       itemClass={AppAsset}
                       data={appService.getApplications().slice(0, 18)}/>
               </Div>
-              <Div style={styles.categoriesCaruselRow}>
-                <List style={styles.categoriesCarusel}
-                      itemClass={CategoryAsset}
-                      data={appService.getCategories()}/>
-              </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>TV & Video</P>
                 <List style={styles.carusel}
@@ -112,3 +107,10 @@ class AppStore extends React.Component {
 }
 
 module.exports = AppStore;
+
+/* Category row if needed
+<Div style={styles.categoriesCaruselRow}>
+ <List style={styles.categoriesCarusel}
+ itemClass={CategoryAsset}
+ data={appService.getCategories()}/>
+ </Div> */
