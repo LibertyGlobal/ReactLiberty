@@ -1,8 +1,10 @@
 import React from 'react';
+import Portal from 'react-portal';
 import {FocusManager, FocusableContainer} from 'sunbeam';
 import Header from './components/header/header.jsx';
 import Menu from './components/menu/menu.jsx';
 import MenuItem from './components/menu/menu-item.jsx';
+import OptInModal from './components/modal/opt-in-modal.jsx';
 
 class Application extends FocusableContainer {
   static styles = {
@@ -29,6 +31,10 @@ class Application extends FocusableContainer {
       <div>
         {this.renderHeader()}
         {this.props.children}
+
+        <Portal isOpened={true}>
+          <OptInModal/>
+        </Portal>
       </div>
     );
   }
