@@ -36,7 +36,7 @@ class List extends FocusableContainer {
   constructor(props) {
     super(props);
     this.moveTo = 0;
-    this.motionSpring = spring(this.moveTo, [500, 44]);
+    this.motionSpring = spring(this.moveTo, [200, 20]);
     //this.registeredChildren = new Set();
   }
 
