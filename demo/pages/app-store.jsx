@@ -13,6 +13,10 @@ var FocusManager = require('sunbeam').FocusManager;
 
 class AppStore extends React.Component {
 
+  contextTypes: {
+    sectionNavigation: React.PropTypes.Object
+  };
+
   goTop() {
     this.refs.mainList.goTo(0);
     FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);

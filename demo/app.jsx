@@ -33,7 +33,7 @@ class AppStoreRouter extends FocusableContainer {
       <div>
         <header style={AppStoreRouter.styles.header}>
           <Header/>
-          <Menu>
+          <Menu ref="menu">
             <MenuItem onFocus={function(){
               if (window.location.hash.indexOf('for-you') === -1) history.push('/for-you');
             }}>FOR YOU</MenuItem>
@@ -51,6 +51,16 @@ class AppStoreRouter extends FocusableContainer {
       </div>
     );
   }
+
+  getChildContext() {
+    return {
+      //sectionNavigation: this.refs.menu
+    };
+  }
+
+  childContextTypes:{
+    //sectionNavigation: React.PropTypes.Object
+  };
 }
 
 class AppStore {
@@ -104,7 +114,7 @@ class AppStore {
       custom: {
         families: ['InterstatePro']
       },
-      active: function(){
+      active: function () {
         render(React.createElement(AppStoreRouter), document.getElementById('app-container'));
       }
     });
