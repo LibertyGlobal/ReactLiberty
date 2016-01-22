@@ -37,23 +37,24 @@ class AppStore extends React.Component {
         height: 600
       },
       caruselRow: {
-        height: 261
+        height: 292
       },
       categoriesCaruselRow: {
-        height: 261
+        height: 292
       },
       categoriesCarusel: {
         paddingTop: 70,
         width: 1140,
-        height: 206
+        height: 237
       },
       carusel: {
         marginBottom: 55,
         width: 1140,
-        height: 206
+        height: 237
       },
       headerStyle: {
-        fontFamily: 'InterstatePro-Light',
+        fontFamily: 'InterstatePro',
+        fontWeight: 300,
         height: 20,
         marginBottom: 10,
         fontSize: 24,
@@ -65,10 +66,26 @@ class AppStore extends React.Component {
         <main style={styles.divStyle}>
           <Div style={styles.container}>
             <List ref="mainList" cyclic={false} style={styles.verticalList} orientation="vertical">
-              <Div style={styles.categoriesCaruselRow}>
-                <List style={styles.categoriesCarusel}
-                      itemClass={CategoryAsset}
-                      data={appService.getCategories()}/>
+              <Div style={styles.caruselRow}>
+                <P style={styles.headerStyle}>All apps</P>
+                <List style={styles.carusel}
+                      itemClass={AppAsset}
+                      data={appService.getApplications().slice(0, 18)}
+                      onItemSelect={this.handleAppLaunch}/>
+              </Div>
+              <Div style={styles.caruselRow}>
+                <P style={styles.headerStyle}>TV & Video</P>
+                <List style={styles.carusel}
+                      itemClass={AppAsset}
+                      data={appService.getApplicationsByCategory('video')}
+                      onItemSelect={this.handleAppLaunch}/>
+              </Div>
+              <Div style={styles.caruselRow}>
+                <P style={styles.headerStyle}>Music</P>
+                <List style={styles.carusel}
+                      itemClass={AppAsset}
+                      data={appService.getApplicationsByCategory('music')}
+                      onItemSelect={this.handleAppLaunch}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>News</P>
@@ -78,10 +95,24 @@ class AppStore extends React.Component {
                       onItemSelect={this.handleAppLaunch}/>
               </Div>
               <Div style={styles.caruselRow}>
-                <P style={styles.headerStyle}>Music</P>
+                <P style={styles.headerStyle}>Social</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('music')}
+                      data={appService.getApplicationsByCategory('social')}
+                      onItemSelect={this.handleAppLaunch}/>
+              </Div>
+              <Div style={styles.caruselRow}>
+                <P style={styles.headerStyle}>Sport</P>
+                <List style={styles.carusel}
+                      itemClass={AppAsset}
+                      data={appService.getApplicationsByCategory('sport')}
+                      onItemSelect={this.handleAppLaunch}/>
+              </Div>
+              <Div style={styles.caruselRow}>
+                <P style={styles.headerStyle}>Games</P>
+                <List style={styles.carusel}
+                      itemClass={AppAsset}
+                      data={appService.getApplicationsByCategory('games')}
                       onItemSelect={this.handleAppLaunch}/>
               </Div>
               <BackToTopButton onSelect={this.goToTop} style={styles.caruselRow}/>
@@ -93,3 +124,10 @@ class AppStore extends React.Component {
 }
 
 module.exports = AppStore;
+
+/* Category row if needed
+<Div style={styles.categoriesCaruselRow}>
+ <List style={styles.categoriesCarusel}
+ itemClass={CategoryAsset}
+ data={appService.getCategories()}/>
+ </Div> */

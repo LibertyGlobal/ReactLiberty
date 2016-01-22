@@ -12,8 +12,8 @@ var Focusable = require('sunbeam').Focusable;
 class AppAssetHighlight extends React.Component {
   render() {
     var style = {
-      width: 164,
-      height: 222,
+      width: 180,
+      height: 238,
       position: 'absolute',
       opacity: 0.001
     };
@@ -26,22 +26,26 @@ class AppAsset extends Focusable {
   static highlightClass = AppAssetHighlight;
 
   static styles = {
-    width: 164,
-    marginRight: 24,
+    width: 174,
+    marginLeft: 3,
+    marginRight: 14,
     image: {
-      width: 164,
-      height: 164,
-      marginRight: 24
+      top: 3,
+      width: 174,
+      height: 174,
+      marginLeft: 3,
+      marginRight: 14
     },
     title: {
       fontFamily: 'InterstatePro',
+      fontWeight: 300,
       fontSize: 20,
       width: 129,
-      marginTop: 0,
-      marginLeft: 10,
+      marginTop: 5,
+      marginLeft: 8,
       worldWarp: true,
       height: 30,
-      color: '#ffffff'
+      color: '#E9E9EA'
     }
   };
 

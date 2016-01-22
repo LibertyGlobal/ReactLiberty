@@ -1,7 +1,15 @@
+@font-face {
+    font-family: 'InterstatePro';
+    src: url('../../../node_modules/horizon4-fonts/src/DAWN-InterstatePro-Light.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 300;
+}
+
 html, body {
     background-color: #12121D;
     color: white;
     font-family: "InterstatePro";
+    font-weight: 300;
     color: #E9E9EA;
     margin: 0;
     padding: 0;
@@ -40,11 +48,12 @@ ul {
 }
 
 li {
+    font-family: "InterstatePro";
+    font-size: 26px;
+    font-weight: 300;
     display: inline-block;
     margin-right: 28px;
-    font-size: 26px;
     color: #E9E9EA;
-    font-weight: 300;
     vertical-align: top;
 }
 

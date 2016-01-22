@@ -1,6 +1,18 @@
 var React = require('react');
 var ReactMount = require('react/lib/ReactMount');
 var ReactLiberty = require('../../core.js');
+var ReactReconciler = require('react/lib/ReactReconciler');
+var ReactInstanceMap = require('react/lib/ReactInstanceMap');
+var ReactElement = require('react/lib/ReactElement');
+var ReactCompositeComponent = require('react/lib/ReactCompositeComponent');
+
+var testEl = document.createElement('div');
+testEl.style.MozTransform = 'translate(100px) rotate(20deg)';
+testEl.style.webkitTransform = 'translate(100px) rotate(20deg)';
+var styleAttrLowercase = testEl.getAttribute('style').toLowerCase();
+var hasWebkitTransform = styleAttrLowercase.indexOf('webkit') !== -1;
+
+var transformPropertyName = hasWebkitTransform ? 'webkitTransform' : 'transform';
 
 const { assign } = Object;
 
@@ -12,7 +24,12 @@ class ReactLibertyElement extends React.Component {
     this._rootNodeID = null;
     this._instance = null;
     this._renderedComponent = this;
-    this._visible = true;
+
+    this._cachedX = null;
+    this._cachedY = null;
+    this._cachedRotation = null;
+    this._cachedScale = null;
+    this._modified = false;
 
     //Liberty specific
     this._style = {};
@@ -40,11 +57,11 @@ class ReactLibertyElement extends React.Component {
   }
 
   getDisplayObject() {
-    return new PIXI.Container();
+    return null;
   }
 
   createDisplayObject() {
-    this._displayObject = this._displayObject || this.getDisplayObject();
+    this._displayObject = {};
   }
 
   receiveComponent(nextElement, transaction, context) {
@@ -70,7 +87,7 @@ class ReactLibertyElement extends React.Component {
     var parentPixiContainer = null;
 
     if (!this.parent) {
-      ReactLiberty.document.addChild(this._displayObject);
+      //document.body.appendChild(this._displayObject);
       this._isRootLibertyNode = true;
     }
 
@@ -91,8 +108,12 @@ class ReactLibertyElement extends React.Component {
       var paddingLeft = parseInt(styles.paddingLeft);
       var paddingTop = parseInt(styles.paddingTop);
 
-      this.parentX = boundingRect.left + paddingLeft;
-      this.parentY = boundingRect.top + paddingTop;
+      //this.parentX = boundingRect.left + paddingLeft;
+      //this.parentY = boundingRect.top + paddingTop;
+
+      if (this.DOMParent.style.position !== 'absolute' || this.DOMParent.style.position !== 'fixed') {
+        this.DOMParent.style.position = 'relative';
+      }
 
       this.updateDisplayObject();
     } catch (e) {
@@ -116,70 +137,10 @@ class ReactLibertyElement extends React.Component {
     this._context = null;
     this._rootNodeID = null;
     this._topLevelWrapper = null;
-
-    // Some existing components rely on inst.props even after they've been
-    // destroyed (in event handlers).
-    // TODO: inst.props = null;
-    // TODO: inst.state = null;
-    // TODO: inst.context = null;
-
-    if (this._displayObject) {
-      this._displayObject.parent.removeChild(this._displayObject);
-      this._displayObject.destroy(false);
-      ReactLiberty.markStageAsChanged();
-    }
   }
 
   updateDisplayObject() {
-    console.time("Update " + this.constructor.name);
-    var halfWidth = 0;
-    var halfHeight = 0;
 
-    //Needed if we scale from center but adds additional calculation
-    /*var halfWidth = (((this.layout && this.layout.width) || this.style.width) / 2) || 0;
-     var halfHeight = (((this.layout && this.layout.height) || this.style.height) / 2) || 0;
-     this._displayObject.pivot.x = halfWidth;
-     this._displayObject.pivot.y = halfHeight;*/
-
-    //this._displayObject.scale.x = this.style.scale || 1;
-    //this._displayObject.scale.y = this.style.scale || 1;
-
-    this._displayObject.x = this.style.translateX || 0 + (this.layout && this.layout.left || (this.props && this.props.x) || 0);// + halfWidth;
-    this._displayObject.y = this.style.translateY || 0 + (this.layout && this.layout.top || (this.props && this.props.y) || 0);// + halfHeight;
-
-    this._displayObject.alpha = this.style.opacity || 1;
-
-    if (this.DOMParent) {
-      this._displayObject.x += this.parentX;
-      this._displayObject.y += this.parentY;
-    }
-
-    this._displayObject.rotation = this.props && parseInt(this.props.rotation, 10) || 0;
-
-    this.updateVisibility();
-
-    if (this._visible && !ReactLiberty.shouldRedraw) {
-      ReactLiberty.markStageAsChanged();
-    }
-
-    console.timeEnd("Update element " + this.constructor.name);
-  }
-
-  //Viewport culling
-  updateVisibility() {
-    this._displayObject.visible = this._visible = this.isOnScreen();
-  }
-
-  isOnScreen() {
-    var bounds = this._displayObject.toGlobal({x:0, y:0});
-    var stageW = ReactLiberty.renderer.width;
-    var stageH = ReactLiberty.renderer.height;
-
-    if(bounds.x > stageW || bounds.y > stageH || bounds.x + bounds.width < 0 || bounds.y + bounds.height < 0) {
-      return false;
-    }
-
-    return true;
   }
 
   get style() {

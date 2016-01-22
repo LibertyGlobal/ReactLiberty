@@ -31,14 +31,15 @@ class BackToTopButton extends Focusable {
       opacity: 0.001
     },
     text: {
+      fontFamily: 'InterstatePro',
+      fontWeight: 300,
       fontSize: 24,
       height: 24,
       color: '#B8B8BB',
       textAlign: 'center',
       top: 15,
       left: 27,
-      position: 'relative',
-      fontFamily: 'InterstatePro'
+      position: 'relative'
     }
   };
 

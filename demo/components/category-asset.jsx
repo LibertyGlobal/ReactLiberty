@@ -11,13 +11,13 @@ var HIGHLIGHT = require('../assets/images/genre-highlight.png');
 
 var categories = appService.getCategories();
 var CATEGORY_ICONS = {
-  sport: require('../assets/images/genres-icons/sports.png'),
-  games: require('../assets/images/genres-icons/games.png'),
-  lifestyle: require('../assets/images/genres-icons/life-style.png'),
-  music: require('../assets/images/genres-icons/music.png'),
-  news: require('../assets/images/genres-icons/news.png'),
-  social: require('../assets/images/genres-icons/social.png'),
-  video: require('../assets/images/genres-icons/video.png'),
+  sport: './assets/images/genres-icons/sports.png',
+  games: './assets/images/genres-icons/games.png',
+  lifestyle: './assets/images/genres-icons/life-style.png',
+  music: './assets/images/genres-icons/music.png',
+  news: './assets/images/genres-icons/news.png',
+  social: './assets/images/genres-icons/social.png',
+  video: './assets/images/genres-icons/video.png',
 };
 
 class CatAssetHighlight extends React.Component {

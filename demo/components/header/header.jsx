@@ -16,7 +16,7 @@ class Header extends React.Component {
         position: 'relative',
         fontSize: 30,
         fontFamily: 'InterstatePro',
-        color: '#ffffff',
+        color: '#B6B6BA',
         fontWeight: 300,
         width: '100%'
       },
@@ -28,6 +28,7 @@ class Header extends React.Component {
         color: '#B8B8BB'
       },
       headerCenter: {
+        color: '#7D7D84',
         fontSize: 18,
         display: 'inline-block',
         width: '100%',

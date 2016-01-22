@@ -4,6 +4,7 @@ import React from 'react';
 import {render, unmountComponentAtNode} from 'react-dom';
 import {Router, Route, IndexRedirect} from 'react-router';
 import {FocusManager} from 'sunbeam';
+import WebFontLoader from 'webfontloader';
 import history from './history';
 import Application from './app.jsx';
 import ForYou from './pages/for-you.jsx';
@@ -68,6 +69,14 @@ function handleKeyDown(event) {
 
 window.document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
-if (!window.document.hidden) {
-  resume();
-}
+WebFontLoader.load({
+  custom: {
+    families: ['InterstatePro']
+  },
+
+  active() {
+    if (!window.document.hidden) {
+      resume();
+    }
+  }
+});

@@ -1,6 +1,7 @@
 var mock = require('../vendor/maf_mock.js');
 
 module.exports = {
+  getApplications: wrapMAFMethod(window.applicationManager.getApplications),
   getApplicationsByCategory: wrapMAFMethod(window.applicationManager.getApplicationsByCategory),
   getCategories: window.applicationManager.getCategories,
   getFeatured: wrapMAFMethod(window.applicationManager.getFeatured),

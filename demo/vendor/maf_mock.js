@@ -697,6 +697,10 @@ var mockData = {
 };
 
 window.applicationManager = {
+  getApplications: function () {
+    var apps = mockData.apps.reverse();
+    return apps;
+  },
   getApplicationsByCategory: function (categoryName) {
     return mockData.apps.filter(function (asset) {
       return asset.categories.indexOf(categoryName) !== -1;

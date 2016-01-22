@@ -1,12 +1,18 @@
+var React = require('react');
+var ReactLiberty = require('../../core.js');
 var ReactLibertyElement = require('./element.jsx');
+var ReactElement = require('react/lib/ReactElement');
+var ReactUpdates = require('react/lib/ReactUpdates');
+var instantiateReactComponent = require('react/lib/instantiateReactComponent');
 var computeLayout = require('css-layout');
 var ReactMultiChild = require('react/lib/ReactMultiChild');
+var ReactEmptyComponent = require('react/lib/ReactEmptyComponent');
 
 const { assign } = Object;
 
 class ReactLibertyContainer extends ReactLibertyElement {
   getDisplayObject() {
-    return document.createElement('div');
+    return null;
   }
 
   mountComponent(rootID, transaction, context) {
@@ -30,7 +36,6 @@ class ReactLibertyContainer extends ReactLibertyElement {
     if (typeof child !== 'string') {
       child.parent = this;
       this.children.push(child);
-      this._displayObject.appendChild(child._displayObject);
     }
   }
 
@@ -42,24 +47,14 @@ class ReactLibertyContainer extends ReactLibertyElement {
   receiveComponent(nextElement, transaction, context) {
     super.receiveComponent(nextElement, transaction, context);
     this.updateDisplayObject(false);
-    //this.updateChildren(this.props.children, transaction, context);
   }
 
   updateDisplayObject(updateChildren) {
-    super.updateDisplayObject();
 
-    if (updateChildren) {
-      for (var i = 0; i < this.children.length; i++) {
-        this.children[i].updateDisplayObject(updateChildren);
-      }
-    }
   }
 
   componentDidMount() {
     super.componentDidMount();
-    if (this._isRootLibertyNode) {
-      this.doLayout();
-    }
   }
 
   doLayout() {
@@ -79,4 +74,4 @@ assign(
   ReactMultiChild.Mixin
 );
 
-window['DOMdiv'] = module.exports = ReactLibertyContainer;
+module.exports = ReactLibertyContainer;
