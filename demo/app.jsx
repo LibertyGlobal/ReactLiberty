@@ -102,7 +102,8 @@ class AppStore {
   init() {
     WebFontLoader.load({
       custom: {
-        families: ['InterstatePro']
+        families: ['InterstatePro'],
+        urls: ['./assets/css/fonts.css']
       },
       active: function(){
         render(React.createElement(AppStoreRouter), document.getElementById('app-container'));
