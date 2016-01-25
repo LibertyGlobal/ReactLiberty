@@ -9,22 +9,12 @@ var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 var FocusManager = require('sunbeam').FocusManager;
 
-import launchApp from '../actions/launch-app';
-
 class ForYou extends React.Component {
 
-  handleAppLaunch = appId => {
-    if (appId) {
-      launchApp(appId);
-    }
-  };
-
-  goToTop = () => {
-    const {mainList} = this.refs;
-
-    mainList.goTo(0);
-    FocusManager.setFocusTarget(mainList._focusable.children[0]._focusable.children[0]);
-  };
+  goTop() {
+    this.refs.mainList.goTo(0);
+    FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
+  }
 
   render() {
     var styles = {
@@ -66,8 +56,7 @@ class ForYou extends React.Component {
         <P style={styles.headerStyle}>Recently used</P>
         <List style={styles.carusel}
               itemClass={AppAsset}
-              data={recentlyUsed.slice(0,18)}
-              onItemSelect={this.handleAppLaunch}/>
+              data={recentlyUsed.slice(0,18)}/>
       </Div>);
 
     return (
@@ -78,11 +67,10 @@ class ForYou extends React.Component {
               <P style={styles.headerStyle}>Featured</P>
               <List style={styles.carusel}
                     itemClass={AppAsset}
-                    data={appService.getFeatured().slice(0,18)}
-                    onItemSelect={this.handleAppLaunch}/>
+                    data={appService.getFeatured().slice(0,18)}/>
             </Div>
             {recentRow}
-            <BackToTopButton onSelect={this.goToTop} style={styles.caruselRow}/>
+            <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
           </List>
         </Div>
       </main>

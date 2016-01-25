@@ -11,31 +11,12 @@ var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 var FocusManager = require('sunbeam').FocusManager;
 
-import launchApp from '../actions/launch-app';
-
 class AppStore extends React.Component {
-
-  handleAppLaunch = appId => {
-    if (appId) {
-      launchApp(appId);
-    }
-  };
-  
-  contextTypes: {
-    sectionNavigation: React.PropTypes.Object
-  };
 
   goTop() {
     this.refs.mainList.goTo(0);
     FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
   }
-
-  goToTop = () => {
-    const {mainList} = this.refs;
-
-    mainList.goTo(0);
-    FocusManager.setFocusTarget(mainList._focusable.children[0]._focusable.children[0]);
-  };
 
   render() {
     var styles = {
@@ -79,52 +60,45 @@ class AppStore extends React.Component {
                 <P style={styles.headerStyle}>All apps</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplications().slice(0, 18)}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplications().slice(0, 18)}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>TV & Video</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('video')}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplicationsByCategory('video')}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>Music</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('music')}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplicationsByCategory('music')}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>News</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('news')}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplicationsByCategory('news')}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>Social</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('social')}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplicationsByCategory('social')}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>Sport</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('sport')}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplicationsByCategory('sport')}/>
               </Div>
               <Div style={styles.caruselRow}>
                 <P style={styles.headerStyle}>Games</P>
                 <List style={styles.carusel}
                       itemClass={AppAsset}
-                      data={appService.getApplicationsByCategory('games')}
-                      onItemSelect={this.handleAppLaunch}/>
+                      data={appService.getApplicationsByCategory('games')}/>
               </Div>
-              <BackToTopButton onSelect={this.goToTop} style={styles.caruselRow}/>
+              <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
             </List>
           </Div>
         </main>

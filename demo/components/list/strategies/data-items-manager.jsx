@@ -52,7 +52,7 @@ class DataScroller {
     return this.itemSize;
   }
 
-  getVisibleItems(itemProps) {
+  getVisibleItems(refFn) {
     this.cachedItems = [];
     var itemClass = this.carusel.props.itemClass;
 
@@ -60,7 +60,7 @@ class DataScroller {
       var selected = (i === this.carusel.state.currentIndex)
       var dataItem = this.carusel.props.data[i];
       this.cachedItems.push(React.createElement(itemClass, {
-        ...itemProps,
+        ref: refFn,
         selected,
         index: i,
         key: dataItem.id + i,

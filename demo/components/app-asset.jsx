@@ -10,7 +10,7 @@ var FocusManager = require('sunbeam').FocusManager;
 var Focusable = require('sunbeam').Focusable;
 
 class AppAssetHighlight extends React.Component {
-  render() {
+  render(){
     var style = {
       width: 180,
       height: 238,
@@ -49,21 +49,6 @@ class AppAsset extends Focusable {
     }
   };
 
-  static propTypes = {
-    selected: React.PropTypes.bool,
-    index: React.PropTypes.number,
-    key: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string
-    ]),
-    data: React.PropTypes.object,
-    onSelect: React.PropTypes.func
-  };
-
-  static defaultProps = {
-    onSelect: () => {}
-  };
-
   shouldComponentUpdate(a, b) {
     return false;
   }
@@ -77,7 +62,7 @@ class AppAsset extends Focusable {
   }
 
   componentWillSelect() {
-    this.props.onSelect(this.props.data.id);
+    window.appStore.runApp(this.props.data.id);
   }
 
   render() {

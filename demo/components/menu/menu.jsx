@@ -20,10 +20,6 @@ class Menu extends FocusableContainer {
   }
 
   render() {
-    this.props.children.forEach(function (child) {
-
-    });
-
     return (
       <ul>
         {this.props.children}

@@ -36,7 +36,7 @@ class List extends FocusableContainer {
   constructor(props) {
     super(props);
     this.moveTo = 0;
-    this.motionSpring = spring(this.moveTo, [200, 20]);
+    this.motionSpring = spring(this.moveTo, [500, 44]);
     //this.registeredChildren = new Set();
   }
 
@@ -161,9 +161,7 @@ class List extends FocusableContainer {
     //const refFn = child => this.registeredChildren.add(child);
 
     //Receiving items from items manager
-    var items = this.itemsManager.getVisibleItems({
-      onSelect: this.props.onItemSelect
-    });
+    var items = this.itemsManager.getVisibleItems();
     var self = this;
 
     //Creating style object to pass motion spring
@@ -189,8 +187,7 @@ class List extends FocusableContainer {
 
 List.defaultProps = {
   cyclic: true,
-  orientation: List.orientation.HORIZONTAL,
-  onItemSelect: () => {}
+  orientation: List.orientation.HORIZONTAL
 };
 
 var extendStyle = function (objA, objB) {
