@@ -36,6 +36,7 @@ class ForYou extends React.Component {
         height: 206
       },
       carusel: {
+        marginLeft: -7,
         marginBottom: 55,
         width: 1140,
         height: 237

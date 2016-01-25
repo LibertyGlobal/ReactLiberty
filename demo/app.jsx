@@ -15,11 +15,26 @@ pages['for-you'] = require('./pages/for-you.jsx');
 pages['app-store'] = require('./pages/app-store.jsx');
 
 
-class AppStoreRouter extends FocusableContainer {
+class ApplicationComponent extends FocusableContainer {
   static styles = {
     header: {
       position: 'relative',
       zIndex: 999
+    }
+  };
+
+  getChildContext() {
+    var focusableContext = super.getChildContext();
+    return Object.assign(focusableContext, {
+      sectionNavigation: this.refs.menu
+    });
+  }
+
+  navigateTo(path) {
+    const {history} = this.props;
+
+    if (!history.isActive(path)) {
+      history.push(path);
     }
   };
 
@@ -31,7 +46,7 @@ class AppStoreRouter extends FocusableContainer {
   render() {
     return (
       <div>
-        <header style={AppStoreRouter.styles.header}>
+        <header style={ApplicationComponent.styles.header}>
           <Header/>
           <Menu>
             <MenuItem onFocus={function(){
@@ -53,7 +68,7 @@ class AppStoreRouter extends FocusableContainer {
   }
 }
 
-class AppStore {
+class Application {
   constructor() {
     this.init();
     this.initLifecycleListeners();
@@ -85,8 +100,6 @@ class AppStore {
         break;
       //For testing purpose
       case 83:
-        //PIXI.utils.BaseTextureCache = {};
-        //PIXI.utils.TextureCache = {};
         this.suspend();
         break;
       case 65:
@@ -96,7 +109,7 @@ class AppStore {
   }
 
   initLifecycleListeners() {
-    //document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
+    document.addEventListener('visibilitychange', this.processVisibilityChange.bind(this), false);
   }
 
   init() {
@@ -106,7 +119,7 @@ class AppStore {
         urls: ['./assets/css/fonts.css']
       },
       active: function(){
-        render(React.createElement(AppStoreRouter), document.getElementById('app-container'));
+        render(React.createElement(ApplicationComponent), document.getElementById('app-container'));
       }
     });
   }
@@ -141,4 +154,8 @@ class AppStore {
   }
 }
 
-window.appStore = new AppStore();
+ApplicationComponent.childContextTypes.sectionNavigation = React.PropTypes.element;
+
+console.log(Application.childContextTypes);
+
+window.appStore = new Application();

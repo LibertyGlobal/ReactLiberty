@@ -10,6 +10,7 @@ var spring = require('react-motion').spring;
 var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 var FocusManager = require('sunbeam').FocusManager;
+var Focusable = require('sunbeam').Focusable;
 
 class AppStore extends React.Component {
 
@@ -38,6 +39,7 @@ class AppStore extends React.Component {
         height: 237
       },
       carusel: {
+        marginLeft: -7,
         marginBottom: 55,
         width: 1140,
         height: 237

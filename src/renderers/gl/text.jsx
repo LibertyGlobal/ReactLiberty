@@ -20,12 +20,13 @@ class ReactLibertyText extends ReactLibertyElement {
       fontWeight = '700 ';
     }
 
-    pixiStyle.font = fontWeight + (CSS.fontSize || 18) + 'px ' + (CSS.fontFamily || 'Arial');
+    pixiStyle.fontSize = CSS.fontSize || 18;
+    pixiStyle.font = fontWeight + pixiStyle.fontSize + 'px ' + (CSS.fontFamily || 'Arial');
     pixiStyle.fontWeight = fontWeight;
     pixiStyle.fill = CSS.color || '#000000';
     pixiStyle.wordWrapWidth = CSS.width || null;
     pixiStyle.align = CSS.textAlign;
-    pixiStyle.lineHeight = CSS.lineHeight;
+    pixiStyle.lineHeight = CSS.lineHeight ? CSS.lineHeight : pixiStyle.fontSize;
     if (pixiStyle.wordWrapWidth) {
       pixiStyle.wordWrap = true;
     }

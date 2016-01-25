@@ -17,8 +17,11 @@ class ReactLibertyText extends ReactLibertyElement {
 
     node.style.padding = '0';
     node.style.margin = '0';
-    node.style.fontSize = (CSS.fontSize || 18) + 'px';
-    node.style.lineHeight = CSS.lineHeight ? CSS.lineHeight + 'px' : node.style.fontSize;
+    var fontSize = (CSS.fontSize || 18);
+    //1.15 eliminates difference between canvas and DOM visible lineHeight size when do defaults
+    node.style.lineHeight = (CSS.lineHeight ? CSS.lineHeight : fontSize * 1.15) + 'px';
+    //We add px after to avoid parseInt when calculating fontSize * 1.15
+    node.style.fontSize = fontSize + 'px';
     node.style.fontFamily = CSS.fontFamily || 'Arial';
     node.style.color = CSS.color || '#000000';
     node.style.width = CSS.width ? CSS.width + 'px' : '100%';

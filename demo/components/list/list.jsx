@@ -36,7 +36,7 @@ class List extends FocusableContainer {
   constructor(props) {
     super(props);
     this.moveTo = 0;
-    this.motionSpring = spring(this.moveTo, [500, 44]);
+    this.motionSpring = spring(this.moveTo, [400, 30]);
     //this.registeredChildren = new Set();
   }
 
@@ -96,6 +96,10 @@ class List extends FocusableContainer {
 
     var ItemsManagerClass = this.props.children ? ChildrenItemsManager : DataItemsManager;
     this.itemsManager = new ItemsManagerClass(this);
+  }
+
+  componentDidMount() {
+    this.initialPosition = this.refs.motion.refs.container.layout[this.positionProperty] || 0;
   }
 
   componentDidReceiveFocus() {
@@ -178,7 +182,11 @@ class List extends FocusableContainer {
 
     return (<Motion ref='motion' defaultStyle={this.styles} style={styleObject}>
         {function (interpolatedStyle) {
-          self.movedTo = interpolatedStyle[self.translateProperty];
+          //+initialPosition, -initialPosition may look weird but it is handy way
+          //to isolate layout initial position in coordinate space without touching scroll logic
+          //Feel free to replace with better solution
+          interpolatedStyle[self.translateProperty] = interpolatedStyle[self.translateProperty] + self.initialPosition;
+          self.movedTo = interpolatedStyle[self.translateProperty] - self.initialPosition;
           return (<Div ref='container' style={interpolatedStyle}>{highlight}{items}</Div>);
         }}
       </Motion>);

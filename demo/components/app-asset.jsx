@@ -45,7 +45,8 @@ class AppAsset extends Focusable {
       marginLeft: 8,
       worldWarp: true,
       height: 30,
-      color: '#E9E9EA'
+      color: '#E9E9EA',
+      lineHeight: 25
     }
   };
 

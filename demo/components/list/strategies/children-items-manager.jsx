@@ -12,9 +12,6 @@ class ChildrenScroller {
     var movedTo = this.carusel.movedTo;
     var currentIndex = this.carusel.state.currentIndex;
     var itemsLength = this.getVisibleItems().length;
-
-    console.log(this.getVisibleRange());
-
     var itemsOnScreen = this.getNumberOfItemsVisible();
     var itemSize = this.getSizeForItem(0);
     var focusedItemPosition = currentIndex * itemSize;
