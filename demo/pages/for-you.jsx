@@ -11,9 +11,13 @@ var FocusManager = require('sunbeam').FocusManager;
 
 class ForYou extends React.Component {
 
+  contextTypes: {
+    application: React.PropTypes.element
+  };
+
   goTop() {
     this.refs.mainList.goTo(0);
-    FocusManager.setFocusTarget(this.refs.mainList._focusable.children[0]._focusable.children[0]);
+    FocusManager.setFocusTarget('section-navigation');
   }
 
   render() {

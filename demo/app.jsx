@@ -23,21 +23,6 @@ class ApplicationComponent extends FocusableContainer {
     }
   };
 
-  getChildContext() {
-    var focusableContext = super.getChildContext();
-    return Object.assign(focusableContext, {
-      sectionNavigation: this.refs.menu
-    });
-  }
-
-  navigateTo(path) {
-    const {history} = this.props;
-
-    if (!history.isActive(path)) {
-      history.push(path);
-    }
-  };
-
   componentDidMount() {
     window.router = this.refs['router'];
     FocusManager.initializeFocus();
@@ -48,7 +33,7 @@ class ApplicationComponent extends FocusableContainer {
       <div>
         <header style={ApplicationComponent.styles.header}>
           <Header/>
-          <Menu>
+          <Menu id="section-navigation">
             <MenuItem onFocus={function(){
               if (window.location.hash.indexOf('for-you') === -1) history.push('/for-you');
             }}>FOR YOU</MenuItem>
@@ -153,8 +138,6 @@ class Application {
     window.open(appURL, '_blank');
   }
 }
-
-ApplicationComponent.childContextTypes.sectionNavigation = React.PropTypes.element;
 
 console.log(Application.childContextTypes);
 
