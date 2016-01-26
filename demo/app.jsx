@@ -23,9 +23,42 @@ class ApplicationComponent extends FocusableContainer {
     }
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.removeHistoryListener = () => {};
+    this.menuItems = {};
+  }
+
   componentDidMount() {
     window.router = this.refs['router'];
     FocusManager.initializeFocus();
+
+    this.removeHistoryListener = history.listen(location => {
+      switch (location.pathname) {
+        case '/for-you':
+          this.menuItems.forYou.active = true;
+          this.menuItems.forYou.setActive();
+          this.menuItems.appStore.active = false;
+          this.menuItems.appStore.setInactive();
+          break;
+
+        case '/app-store':
+          this.menuItems.appStore.active = true;
+          this.menuItems.appStore.setActive();
+          this.menuItems.forYou.active = false;
+          this.menuItems.forYou.setInactive();
+          break;
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeHistoryListener();
+  }
+
+  registerMenu(name, component) {
+    this.menuItems[name] = component;
   }
 
   render() {
@@ -34,10 +67,10 @@ class ApplicationComponent extends FocusableContainer {
         <header style={ApplicationComponent.styles.header}>
           <Header/>
           <Menu id="section-navigation">
-            <MenuItem onFocus={function(){
+            <MenuItem ref={this.registerMenu.bind(this, 'forYou')} onFocus={function(){
               if (window.location.hash.indexOf('for-you') === -1) history.push('/for-you');
             }}>FOR YOU</MenuItem>
-            <MenuItem onFocus={function(){
+            <MenuItem ref={this.registerMenu.bind(this, 'appStore')} onFocus={function(){
               if (window.location.hash.indexOf('app-store') === -1) history.push('/app-store');
             }}>APP STORE</MenuItem>
           </Menu>
