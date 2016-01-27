@@ -181,7 +181,7 @@ class ApplicationLauncher {
     if (!this.suspended) {
       console.log('Suspending...');
       this.suspended = true;
-      browserHistory.push('/suspend');
+      hashHistory.push('/suspend');
     }
   }
 
@@ -189,7 +189,7 @@ class ApplicationLauncher {
     if (this.suspended) {
       console.log('Awaking...');
       this.suspended = false;
-      browserHistory.goBack();
+      hashHistory.goBack();
     }
   }
 
