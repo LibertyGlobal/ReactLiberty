@@ -7,14 +7,16 @@ var Focusable = require('sunbeam').Focusable;
 class MenuItem extends Focusable {
   componentDidReceiveFocus() {
     this.setActive();
-    //ReactDOM.findDOMNode(this).style.color = '#3489CD';
+
+    ReactDOM.findDOMNode(this).style.borderBottomColor = '#3489CD';
   }
 
   componentDidLoseFocus() {
     if (!this.active) {
       this.setInactive();
     }
-    //ReactDOM.findDOMNode(this).style.color = '#E9E9EA';
+
+    ReactDOM.findDOMNode(this).style.borderBottomColor = 'transparent';
   }
 
   setActive() {

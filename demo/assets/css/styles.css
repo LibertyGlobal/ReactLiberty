@@ -41,13 +41,21 @@ ul {
 }
 
 li {
+    position: relative;
+    top: -11px;
     font-family: "InterstatePro";
     font-size: 26px;
     font-weight: 300;
+    line-height: 48px;
     display: inline-block;
     margin-right: 28px;
     color: #E9E9EA;
+    border-bottom: 5px solid transparent;
     vertical-align: top;
+}
+
+li .menu-search-item {
+    line-height: 48px;
 }
 
 main {
