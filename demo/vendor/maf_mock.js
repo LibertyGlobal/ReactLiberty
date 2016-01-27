@@ -62,7 +62,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon2.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -78,7 +78,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon3.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -94,7 +94,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon4.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -126,7 +126,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon5.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -158,7 +158,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon6.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -174,7 +174,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon7.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -190,7 +190,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon8.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -206,7 +206,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon9.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -222,7 +222,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon10.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -238,7 +238,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon1.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -254,7 +254,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon2.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -270,7 +270,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon3.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -286,7 +286,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon4.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -302,7 +302,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon5.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -318,7 +318,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon6.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -334,7 +334,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon7.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -350,7 +350,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon8.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -366,7 +366,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon9.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -382,7 +382,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon10.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -414,7 +414,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon1.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -446,7 +446,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon2.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -494,7 +494,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon3.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -510,7 +510,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon4.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -526,7 +526,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon5.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -542,7 +542,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon6.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -558,7 +558,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon7.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -574,7 +574,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon8.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -590,7 +590,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon9.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -606,7 +606,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon10.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -670,7 +670,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon1.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
@@ -686,7 +686,7 @@ var mockData = {
     "images": {
       "icon": {
         "120x120": "images/icons/120_120.png",
-        "192x192": null,
+        "192x192": "icon2.png",
         "200x200": "images/icons/200x200.png",
         "235x120": "images/icons/235x120.png"
       }
