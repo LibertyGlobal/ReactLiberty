@@ -54,9 +54,9 @@ Build from sources
 
 You will need npm v3.0 or higher.
 Do `npm install`, then:
-`npm run compile` - compiles ReactLiberty library
-`npm run appprod` - compiles production version of AppStore application placed in demo folder with all minifications and optimizations enabled. After this you may deploy content of demo folder as a standalone app with all dependencies baked in.
-`npm run appdev` - starts development mode when build is initiated by file watcher. It compiles application every time source code is changed without minifying and optimizing output.
+- `npm run compile` - compiles ReactLiberty library
+- `npm run appprod` - compiles production version of AppStore application placed in demo folder with all minifications and optimizations enabled. After this you may deploy content of demo folder as a standalone app with all dependencies baked in.
+- `npm run appdev` - starts development mode when build is initiated by file watcher. It compiles application every time source code is changed without minifying and optimizing output.
 
 Performance hints
 -----------------
