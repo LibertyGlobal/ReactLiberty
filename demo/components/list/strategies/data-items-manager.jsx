@@ -27,7 +27,7 @@ class DataScroller {
       var deltaFrom = Math.abs(movedTo + focusedItemVisibleFrom);
 
       if (Math.ceil(deltaTo) > Math.ceil(deltaFrom)) {
-        moveTo = focusedItemVisibleFrom;
+        moveTo = focusedItemVisibleFrom - this.itemSize;
       } else {
         moveTo = focusedItemPosition;
       }
