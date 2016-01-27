@@ -7,7 +7,7 @@ class DataScroller {
   }
 
   getNumberOfItemsVisible() {
-    return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.itemSize) - 1;
+    return Math.floor(this.carusel.props.style[this.carusel.sizeProperty] / this.itemSize);
   }
 
   getPositionForItem(index) {
@@ -27,7 +27,7 @@ class DataScroller {
       var deltaFrom = Math.abs(movedTo + focusedItemVisibleFrom);
 
       if (Math.ceil(deltaTo) > Math.ceil(deltaFrom)) {
-        moveTo = focusedItemVisibleFrom - this.itemSize;
+        moveTo = focusedItemVisibleFrom;
       } else {
         moveTo = focusedItemPosition;
       }
