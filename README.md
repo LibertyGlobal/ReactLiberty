@@ -53,7 +53,7 @@ Build from sources
 ------------------
 
 You will need npm v3.0 or higher.
-Then do: `npm install`, `npm run compile` in order to compile library or `npm run appdev` in order to compile demo from demo folder.
+Then do: `npm install`, `npm run compile` in order to compile library or `npm run appprod` in order to compile demo from demo folder. `npm run appdev` starts development watchers and build every time code changed.
 
 Performance hints
 -----------------
