@@ -34,6 +34,8 @@ class ApplicationComponent extends FocusableContainer {
     window.router = this.refs['router'];
     FocusManager.initializeFocus();
 
+    //TODO Should be refactored to usage of nextFocused in focus manager callbacks
+    //this will reduce amount of hardcoded stuff dramatically
     this.removeHistoryListener = history.listen(location => {
       switch (location.pathname) {
         case '/for-you':
