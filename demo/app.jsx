@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, Redirect} from 'react-router';
-import history from './history';
+import {hashHistory} from 'react-router';
 import {FocusManager, FocusableContainer} from 'sunbeam';
 
 require("babel-polyfill");
@@ -25,42 +25,17 @@ class ApplicationComponent extends FocusableContainer {
 
   constructor(props, context) {
     super(props, context);
-
-    this.removeHistoryListener = () => {};
     this.menuItems = {};
   }
 
   componentDidMount() {
     window.router = this.refs['router'];
     FocusManager.initializeFocus();
-
-    //TODO Should be refactored to usage of nextFocused in focus manager callbacks
-    //this will reduce amount of hardcoded stuff dramatically
-    this.removeHistoryListener = history.listen(location => {
-      switch (location.pathname) {
-        case '/for-you':
-          this.menuItems.forYou.active = true;
-          this.menuItems.forYou.setActive();
-          this.menuItems.appStore.active = false;
-          this.menuItems.appStore.setInactive();
-          break;
-
-        case '/app-store':
-          this.menuItems.appStore.active = true;
-          this.menuItems.appStore.setActive();
-          this.menuItems.forYou.active = false;
-          this.menuItems.forYou.setInactive();
-          break;
-      }
-    });
+    this.addMenuConditions();
   }
 
   componentWillUnmount() {
     this.removeHistoryListener();
-  }
-
-  registerMenu(name, component) {
-    this.menuItems[name] = component;
   }
 
   render() {
@@ -69,15 +44,18 @@ class ApplicationComponent extends FocusableContainer {
         <header style={ApplicationComponent.styles.header}>
           <Header/>
           <Menu id="section-navigation">
-            <MenuItem ref={this.registerMenu.bind(this, 'forYou')} onFocus={function(){
-              if (window.location.hash.indexOf('for-you') === -1) history.push('/for-you');
-            }}>FOR YOU</MenuItem>
-            <MenuItem ref={this.registerMenu.bind(this, 'appStore')} onFocus={function(){
-              if (window.location.hash.indexOf('app-store') === -1) history.push('/app-store');
-            }}>APP STORE</MenuItem>
+            <MenuItem ref={this.registerMenu.bind(this, 'search')} onFocus={this.openSearch}>
+              <div className="menu-search-item"></div>
+            </MenuItem>
+            <MenuItem ref={this.registerMenu.bind(this, 'forYou')} onFocus={this.navigateTo.bind(this, '/for-you')}>
+              FOR YOU
+            </MenuItem>
+            <MenuItem ref={this.registerMenu.bind(this, 'appStore')} onFocus={this.navigateTo.bind(this, '/app-store')}>
+              APP STORE
+            </MenuItem>
           </Menu>
         </header>
-        <Router ref='router' history={history}>
+        <Router ref='router' history={hashHistory}>
           <Redirect from='/' to='/for-you'/>
           <Route path='/for-you' component={pages['for-you']}></Route>
           <Route path='/app-store' component={pages['app-store']}></Route>
@@ -86,9 +64,56 @@ class ApplicationComponent extends FocusableContainer {
       </div>
     );
   }
+
+  openSearch() {
+    alert('Expecting search integration from Metrological');
+  }
+
+  navigateTo(path) {
+    hashHistory.push(path);
+  }
+
+  registerMenu(name, component) {
+    this.menuItems[name] = component;
+  }
+
+  //TODO Should be refactored to usage of nextFocused in focus manager callbacks
+  //this will reduce amount of hardcoded stuff dramatically
+  addMenuConditions() {
+    this.removeHistoryListener = hashHistory.listen(location => {
+      switch (location.pathname) {
+        case '/for-you':
+          this.menuItems.forYou.active = true;
+          this.menuItems.forYou.setActive();
+          this.menuItems.appStore.active = false;
+          this.menuItems.appStore.setInactive();
+          this.menuItems.search.active = false;
+          this.menuItems.search.setInactive();
+          break;
+
+        case '/app-store':
+          this.menuItems.forYou.active = false;
+          this.menuItems.forYou.setInactive();
+          this.menuItems.appStore.active = true;
+          this.menuItems.appStore.setActive();
+          this.menuItems.search.active = false;
+          this.menuItems.search.setInactive();
+          break;
+
+        case '/search':
+          this.menuItems.forYou.active = false;
+          this.menuItems.forYou.setInactive();
+          this.menuItems.appStore.active = false;
+          this.menuItems.appStore.setInactive();
+          this.menuItems.search.active = true;
+          this.menuItems.search.setActive();
+          break;
+      }
+    });
+  }
 }
 
-class Application {
+class ApplicationLauncher {
   constructor() {
     this.init();
     this.initLifecycleListeners();
@@ -135,10 +160,10 @@ class Application {
   init() {
     WebFontLoader.load({
       custom: {
-        families: ['InterstatePro'],
+        families: ['InterstatePro', 'icomoon'],
         urls: ['./assets/css/fonts.css']
       },
-      active: function(){
+      active: function () {
         render(React.createElement(ApplicationComponent), document.getElementById('app-container'));
       }
     });
@@ -156,7 +181,7 @@ class Application {
     if (!this.suspended) {
       console.log('Suspending...');
       this.suspended = true;
-      history.push('/suspend');
+      browserHistory.push('/suspend');
     }
   }
 
@@ -164,7 +189,7 @@ class Application {
     if (this.suspended) {
       console.log('Awaking...');
       this.suspended = false;
-      history.goBack();
+      browserHistory.goBack();
     }
   }
 
@@ -174,6 +199,4 @@ class Application {
   }
 }
 
-console.log(Application.childContextTypes);
-
-window.appStore = new Application();
+window.appStore = new ApplicationLauncher();

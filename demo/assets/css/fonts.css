@@ -9,3 +9,8 @@
     font-family: 'InterstatePro-ExtraLight';
     src: url('../fonts/DAWN-InterstatePro-ExtraLight.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.ttf') format('truetype');
+}
