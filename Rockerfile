@@ -1,0 +1,57 @@
+# This is an example Rockerfile - replacement for Dockerfile.
+# See https://github.com/grammarly/rocker
+#
+# Installation:
+# brew tap grammarly/tap
+# brew install grammarly/tap/rocker
+#
+# Usage (build and push image with tag equals current git rev):
+# rocker build --no-garbage --push -var version=$(git rev-parse HEAD)
+#
+# Goal of Rockerfiles is to move build steps from Jenkins to
+# docker containers and store them as a code.
+#
+# Rocker allows to cache layers and provide full isolation of build
+# so you won't break other jobs if you do somehting on Jenkins
+# server. 
+#
+# Rocker supports build variables.
+#
+# It provides flexibily in case if you need to change
+# build steps for your development branch.
+#
+# And ofc you can now run build in your local machine.
+
+###############
+# Build image #
+###############
+FROM node:5.5.0
+
+# Use ssh key from ENV veriable GIT_SSH_KEY or use ssh-agent
+RUN mkdir -p /root/.ssh/
+#MOUNT {{ .Env.GIT_SSH_KEY }}:/root/.ssh/id_rsa
+MOUNT {{ .Env.SSH_AUTH_SOCK }}:/ssh-agent
+ENV SSH_AUTH_SOCK /ssh-agent 
+RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
+
+WORKDIR /app
+COPY package.json /app/
+RUN npm install
+COPY . /app
+RUN npm run appprod
+EXPORT demo
+
+################
+# Deploy image #
+################
+FROM registry.lgi.io/libertyglobal/lgi-nginx:latest
+MAINTAINER CTO-WebAppDev@libertyglobal.com
+
+RUN mkdir -p /var/www/htdocs
+IMPORT demo /var/www/htdocs
+ADD nginx.conf /etc/nginx/
+EXPOSE 80
+
+TAG registry.lgi.io/libertyglobal/test-paas:{{ .version }}
+# pushes if --push is specified
+PUSH registry.lgi.io/libertyglobal/test-paas:{{ .version }}
