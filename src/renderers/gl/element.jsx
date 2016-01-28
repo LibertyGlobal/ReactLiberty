@@ -84,7 +84,8 @@ class ReactLibertyElement extends React.Component {
   mountComponentToDOM() {
     try {
       //If is being added to ReactDOM node then consider X,Y of it`s bounding rect as a location
-      this.DOMParent = ReactMount.findReactNodeByID(this._instance._rootNodeID.substr(0, this._instance._rootNodeID.lastIndexOf('.')));
+      var parentId = this._instance._rootNodeID.substr(0, this._instance._rootNodeID.lastIndexOf('.'));
+      this.DOMParent = ReactMount.getNode(parentId);
       var boundingRect = this.DOMParent.getBoundingClientRect();
 
       var styles = window.getComputedStyle(this.DOMParent);

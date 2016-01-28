@@ -4,7 +4,7 @@ import {Router, Route, Redirect} from 'react-router';
 import {hashHistory} from 'react-router';
 import {FocusManager, FocusableContainer} from 'sunbeam';
 
-require("babel-polyfill");
+require('babel-polyfill');
 var WebFontLoader = require('webfontloader');
 var Header = require('./components/header/header.jsx');
 var Menu = require('./components/menu/menu.jsx');
@@ -43,9 +43,9 @@ class ApplicationComponent extends FocusableContainer {
       <div>
         <header style={ApplicationComponent.styles.header}>
           <Header/>
-          <Menu id="section-navigation">
+          <Menu ref='section-navigation' id='section-navigation'>
             <MenuItem ref={this.registerMenu.bind(this, 'search')} onFocus={this.openSearch}>
-              <div className="menu-search-item"></div>
+              <div className='menu-search-item'></div>
             </MenuItem>
             <MenuItem ref={this.registerMenu.bind(this, 'forYou')} onFocus={this.navigateTo.bind(this, '/for-you')}>
               FOR YOU
@@ -54,6 +54,7 @@ class ApplicationComponent extends FocusableContainer {
               APP STORE
             </MenuItem>
           </Menu>
+          <div className='top-fade'></div>
         </header>
         <Router ref='router' history={hashHistory}>
           <Redirect from='/' to='/for-you'/>
@@ -63,6 +64,10 @@ class ApplicationComponent extends FocusableContainer {
         </Router>
       </div>
     );
+  }
+
+  shrinkHeader() {
+    this.refs.header
   }
 
   openSearch() {
