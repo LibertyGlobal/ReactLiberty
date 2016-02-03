@@ -29,13 +29,13 @@ FROM node:5.5.0
 
 # Use ssh key from ENV veriable GIT_SSH_KEY or use ssh-agent
 RUN mkdir -p /root/.ssh/
-#MOUNT {{ .Env.GIT_SSH_KEY }}:/root/.ssh/id_rsa
-MOUNT {{ .Env.SSH_AUTH_SOCK }}:/ssh-agent
-ENV SSH_AUTH_SOCK /ssh-agent 
+MOUNT {{ .Env.GIT_SSH_KEY }}:/root/.ssh/id_rsa
+#MOUNT {{ .Env.SSH_AUTH_SOCK }}:/ssh-agent
+#ENV SSH_AUTH_SOCK /ssh-agent
 RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 
 WORKDIR /app
-COPY package.json /app/
+ADD package.json /app/
 RUN npm install
 COPY . /app
 RUN npm run appprod
@@ -52,6 +52,6 @@ IMPORT demo /var/www/htdocs
 ADD nginx.conf /etc/nginx/
 EXPOSE 80
 
-TAG registry.lgi.io/libertyglobal/test-paas:{{ .version }}
+TAG registry-new.lgi.io/libertyglobal/test-paas:{{ .version }}
 # pushes if --push is specified
-PUSH registry.lgi.io/libertyglobal/test-paas:{{ .version }}
+PUSH registry-new.lgi.io/libertyglobal/test-paas:{{ .version }}
