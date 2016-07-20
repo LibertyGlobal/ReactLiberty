@@ -1,92 +1,99 @@
-var ReactLiberty = require('../../core.js');
 var ReactLibertyElement = require('./element.jsx');
 var computeLayout = require('css-layout');
 var ReactMultiChild = require('react/lib/ReactMultiChild');
 
-const { assign } = Object;
+const {assign} = Object;
 
 class ReactLibertyContainer extends ReactLibertyElement {
-  getDisplayObject() {
-    return new PIXI.Container();
-  }
-
-  mountComponent(rootID, transaction, context) {
-    super.mountComponent(rootID, transaction, context);
-
-    this._context.oldParent = this._context.parent;
-    this._context.parent = this;
-    this.mountChildren(this.props.children, transaction, this._context).map(this.mountChild.bind(this));
-    this._context.parent = this._context.oldParent;
-
-    transaction.getReactMountReady().enqueue(this.updateDisplayObject, this, true);
-
-    if (this._isRootLibertyNode) {
-      return '';
-    } else {
-      return this;
+    getDisplayObject() {
+        return new PIXI.Container();
     }
-  }
 
-  mountChild(child) {
-    if (typeof child !== 'string') {
-      child.parent = this;
-      this.children.push(child);
-      this._displayObject.addChild(child._displayObject);
+    mountComponent(rootID, transaction, context) {
+        super.mountComponent(rootID, transaction, context);
+
+        this._context.oldParent = this._context.parent;
+        this._context.parent = this;
+        this.mountChildren(this.props.children, transaction, this._context);
+        this._context.parent = this._context.oldParent;
+
+        transaction.getReactMountReady().enqueue(this.updateDisplayObject, this, true);
+
+        if (this._isRootLibertyNode) {
+            return '';
+        } else {
+            return this;
+        }
     }
-  }
 
-  unmountComponent() {
-    this.unmountChildren();
-    super.unmountComponent();
-  }
-
-  receiveComponent(nextElement, transaction, context) {
-    super.receiveComponent(nextElement, transaction, context);
-    this.updateDisplayObject(false);
-    //this.updateChildren(this.props.children, transaction, context);
-  }
-
-  updateDisplayObject(updateChildren) {
-    super.updateDisplayObject();
-
-    if (updateChildren) {
-      for (var i = 0; i < this.children.length; i++) {
-        this.children[i].updateDisplayObject(updateChildren);
-      }
+    mountChild(child) {
+        if (typeof child !== 'string') {
+            this.children.push(child);
+        }
     }
-  }
 
-  updateVisibility() {
-    super.updateVisibility();
-    if (this._visible) {
-      for (var i = 0; i < this.children.length; i++) {
-        this.children[i].updateVisibility();
-      }
+    unmountComponent() {
+        this.unmountChildren();
+        super.unmountComponent();
     }
-  }
 
-  componentDidMount() {
-    super.componentDidMount();
-    if (this._isRootLibertyNode) {
-      this.doLayout();
+    receiveComponent(nextElement, transaction, nextContext) {
+        var oldProps = this.props;
+        super.receiveComponent(nextElement, transaction, nextContext);
+        nextContext.parent = this;
+        this._updateChildren(nextElement.props.children, transaction, nextContext);
+        nextContext.parent = this.parent;
+
+        console.log('Receiving new component ');
+
+        transaction.getReactMountReady().enqueue(this.updateDisplayObject, this, true);
     }
-  }
 
-  doLayout() {
-    this.timesLayouted = this.timesLayouted + 1 || 1;
-    console.log('Layouted, ' + this.constructor.name + ', ' + this.timesLayouted);
-    computeLayout(this);
-    this.updateDisplayObject(true);
-  }
+    updateDisplayObject(updateChildren) {
+        super.updateDisplayObject();
 
-  render() {
-    return super.render();
-  }
+        if (updateChildren) {
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].updateDisplayObject(updateChildren);
+            }
+        }
+    }
+
+    componentDidUpdate() {
+        super.componentDidUpdate();
+        if (this._isRootLibertyNode) {
+            this.doLayout();
+        }
+    }
+
+    componentDidMount() {
+        console.log('Container did mount', this._mountOrder, this._isRootLibertyNode);
+        super.componentDidMount();
+        if (this._isRootLibertyNode) {
+            this.doLayout();
+        }
+    }
+
+    doLayout() {
+        this.timesLayouted = this.timesLayouted + 1 || 1;
+        console.log('Layouted, ' + this.constructor.name + ', times' + this.timesLayouted);
+        computeLayout(this);
+        this.updateDisplayObject(true);
+    }
+
+    updateVisibility() {
+        super.updateVisibility();
+        if (this._visible) {
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].updateVisibility();
+            }
+        }
+    }
 }
 
 assign(
-  ReactLibertyContainer.prototype,
-  ReactMultiChild.Mixin
+    ReactLibertyContainer.prototype,
+    ReactMultiChild.Mixin
 );
 
 window['Div'] = window['GLdiv'] = module.exports = ReactLibertyContainer;

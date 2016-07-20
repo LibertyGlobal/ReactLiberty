@@ -158,11 +158,17 @@ class List extends FocusableContainer {
   }
 
   shouldComponentUpdate(a, b) {
-    return false;
+    if (a.data !== this.props.data) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render() {
     //const refFn = child => this.registeredChildren.add(child);
+
+    console.log('Rendering list');
 
     //Receiving items from items manager
     var items = this.itemsManager.getVisibleItems();

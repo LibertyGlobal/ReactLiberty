@@ -1,18 +1,8 @@
-var React = require('react');
-var ReactMount = require('react/lib/ReactMount');
+var React = window.React || require('react');
+var ReactMount = window.ReactMount || require('react/lib/ReactMount');
 var ReactLiberty = require('../../core.js');
-var ReactReconciler = require('react/lib/ReactReconciler');
-var ReactInstanceMap = require('react/lib/ReactInstanceMap');
-var ReactElement = require('react/lib/ReactElement');
-var ReactCompositeComponent = require('react/lib/ReactCompositeComponent');
 
-var testEl = document.createElement('div');
-testEl.style.MozTransform = 'translate(100px) rotate(20deg)';
-testEl.style.webkitTransform = 'translate(100px) rotate(20deg)';
-var styleAttrLowercase = testEl.getAttribute('style').toLowerCase();
-var hasWebkitTransform = styleAttrLowercase.indexOf('webkit') !== -1;
-
-var transformPropertyName = hasWebkitTransform ? 'webkitTransform' : 'transform';
+var nextMountID = 0;
 
 const { assign } = Object;
 
@@ -33,6 +23,7 @@ class ReactLibertyElement extends React.Component {
 
     //Liberty specific
     this._style = {};
+    this.lastLayout = null;
     this.layout = null;
     this.parent = null;
     this.children = [];
@@ -43,7 +34,6 @@ class ReactLibertyElement extends React.Component {
     //DOM attached specific
     this.parentX = 0;
     this.parentY = 0;
-    this.isRootLibertyNode = true;
 
     this._mountOrder = 0;
     this._topLevelWrapper = null;
@@ -71,13 +61,11 @@ class ReactLibertyElement extends React.Component {
   }
 
   receiveComponent(nextElement, transaction, context) {
-    var newProps = nextElement.props;
-    var oldProps = this._currentElement.props;
+    this.props = nextElement.props;
 
-    this.props = newProps;
-
-    this.updateDisplayObject();
-    return this;
+    if (this.componentDidUpdate) {
+      transaction.getReactMountReady().enqueue(this.componentDidUpdate, this);
+    }
   }
 
   mountComponent(rootID, transaction, context) {
@@ -85,16 +73,18 @@ class ReactLibertyElement extends React.Component {
     this.createDisplayObject();
 
     this._context = context;
-    //this._mountOrder = nextMountID++;
+    this._mountOrder = nextMountID++;
     this._rootNodeID = rootID;
     this._instance = this;
 
-    this.parent = this._context && this._context.parent;
+    this.parent = this._context && this._context.parent || context && context.parent;
     var parentPixiContainer = null;
 
     if (!this.parent) {
-      //document.body.appendChild(this._displayObject);
       this._isRootLibertyNode = true;
+    } else {
+      this.parent.children.push(this);
+      this.parent._displayObject.appendChild(this._displayObject);
     }
 
     if (this.componentDidMount) {
@@ -106,7 +96,7 @@ class ReactLibertyElement extends React.Component {
 
   mountComponentToDOM() {
     try {
-      //If is being added to ReactDOM node then consider X,Y of it`s bounding rect as a location
+      //If is being added to ReactDOM node then consider X,Y of it`ss bounding rect as a location
       var parentId = this._instance._rootNodeID.substr(0, this._instance._rootNodeID.lastIndexOf('.'));
       this.DOMParent = ReactMount.getNode(parentId);
       var boundingRect = this.DOMParent.getBoundingClientRect();
@@ -115,8 +105,8 @@ class ReactLibertyElement extends React.Component {
       var paddingLeft = parseInt(styles.paddingLeft);
       var paddingTop = parseInt(styles.paddingTop);
 
-      //this.parentX = boundingRect.left + paddingLeft;
-      //this.parentY = boundingRect.top + paddingTop;
+      this.parentX = paddingLeft;
+      this.parentY = paddingTop;
 
       if (this.DOMParent.style.position !== 'absolute' || this.DOMParent.style.position !== 'fixed') {
         this.DOMParent.style.position = 'relative';
@@ -149,6 +139,13 @@ class ReactLibertyElement extends React.Component {
 
     if (this._displayObject) {
       this._displayObject.parentNode.removeChild(this._displayObject);
+    }
+
+    if (this.parent) {
+      var indexOnParent = this.parent.children.indexOf(this);
+      if (indexOnParent !== -1) {
+        this.parent.children.splice(indexOnParent, 1);
+      }
     }
   }
 
@@ -201,6 +198,10 @@ class ReactLibertyElement extends React.Component {
     return style;
   }
 
+  componentDidUpdate() {
+    this.updateDisplayObject();
+  }
+
   componentDidMount() {
     if (this._isRootLibertyNode) {
       setTimeout(this.mountComponentToDOM.bind(this), 100);
@@ -215,10 +216,14 @@ class ReactLibertyElement extends React.Component {
   getPublicInstance() {
     return this;
   }
-
-  getDisplayObject() {
-    return this._displayObject;
-  }
 }
+
+//Detecting transform property
+var testEl = document.createElement('div');
+testEl.style.MozTransform = 'translate(100px) rotate(20deg)';
+testEl.style.webkitTransform = 'translate(100px) rotate(20deg)';
+var styleAttrLowercase = testEl.getAttribute('style').toLowerCase();
+var hasWebkitTransform = styleAttrLowercase.indexOf('webkit') !== -1;
+var transformPropertyName = hasWebkitTransform ? 'webkitTransform' : 'transform';
 
 module.exports = ReactLibertyElement;

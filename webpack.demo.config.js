@@ -1,4 +1,5 @@
 var BUNDLE_NAME = "app";
+var path = require('path');
 var Webpack = require('webpack');
 
 module.exports = {
@@ -35,7 +36,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.es', '.css', '.scss', '.png', '.jpg', '.ttf', '.json', '.json5']
+    extensions: ['', '.js', '.es', '.css', '.scss', '.png', '.jpg', '.ttf', '.json', '.json5'],
+    alias: {
+      'pixi': path.join(__dirname, 'node_modules/pixi.js')
+    },
   },
   plugins: [
     new Webpack.NoErrorsPlugin(),

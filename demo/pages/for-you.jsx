@@ -9,6 +9,8 @@ var appService = require('../services/applications-service');
 var BackToTopButton = require('../components/back-to-top.jsx');
 var FocusManager = require('sunbeam').FocusManager;
 
+var restarted = false;
+
 class ForYou extends React.Component {
 
   contextTypes: {
@@ -21,6 +23,15 @@ class ForYou extends React.Component {
   }
 
   render() {
+    var self = this;
+
+    if (!restarted) {
+      setTimeout(function(){
+        self.forceUpdate();
+        restarted = true
+      }, 2000);
+    }
+
     var styles = {
       container: {
         flexDirection: 'column'

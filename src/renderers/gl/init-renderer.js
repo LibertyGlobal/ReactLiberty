@@ -1,4 +1,4 @@
-var PIXI = require('pixi.js');
+var PIXI = require('pixi');
 window.PIXI = PIXI;
 
 // Initialize PIXI renderer

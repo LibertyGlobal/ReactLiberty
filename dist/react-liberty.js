@@ -50377,7 +50377,7 @@
 	    value: function receiveComponent(nextElement, transaction, context) {
 	      _get(Object.getPrototypeOf(ReactLibertyContainer.prototype), 'receiveComponent', this).call(this, nextElement, transaction, context);
 	      this.updateDisplayObject(false);
-	      //this.updateChildren(this.props.children, transaction, context);
+	      this.updateChildren(this.props.children, transaction, context);
 	    }
 	  }, {
 	    key: 'updateDisplayObject',

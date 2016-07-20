@@ -1,6 +1,8 @@
-var React = require('react');
-var ReactMount = require('react/lib/ReactMount');
+var React = window.React || require('react');
+var ReactMount = window.ReactMount || require('react/lib/ReactMount');
 var ReactLiberty = require('../../core.js');
+
+var nextMountID = 0;
 
 const { assign } = Object;
 
@@ -16,6 +18,7 @@ class ReactLibertyElement extends React.Component {
 
     //Liberty specific
     this._style = {};
+    this.lastLayout = null;
     this.layout = null;
     this.parent = null;
     this.children = [];
@@ -26,7 +29,6 @@ class ReactLibertyElement extends React.Component {
     //DOM attached specific
     this.parentX = 0;
     this.parentY = 0;
-    this.isRootLibertyNode = true;
 
     this._mountOrder = 0;
     this._topLevelWrapper = null;
@@ -40,7 +42,7 @@ class ReactLibertyElement extends React.Component {
   }
 
   getDisplayObject() {
-    return new PIXI.Container();
+    return new PIXI.Sprite();
   }
 
   createDisplayObject() {
@@ -48,13 +50,11 @@ class ReactLibertyElement extends React.Component {
   }
 
   receiveComponent(nextElement, transaction, context) {
-    var newProps = nextElement.props;
-    var oldProps = this._currentElement.props;
+    this.props = nextElement.props;
 
-    this.props = newProps;
-
-    this.updateDisplayObject();
-    return this;
+    if (this.componentDidUpdate) {
+      transaction.getReactMountReady().enqueue(this.componentDidUpdate, this);
+    }
   }
 
   mountComponent(rootID, transaction, context) {
@@ -62,7 +62,7 @@ class ReactLibertyElement extends React.Component {
     this.createDisplayObject();
 
     this._context = context;
-    //this._mountOrder = nextMountID++;
+    this._mountOrder = nextMountID++;
     this._rootNodeID = rootID;
     this._instance = this;
 
@@ -70,8 +70,12 @@ class ReactLibertyElement extends React.Component {
     var parentPixiContainer = null;
 
     if (!this.parent) {
-      ReactLiberty.document.addChild(this._displayObject);
       this._isRootLibertyNode = true;
+    } else {
+      this.parent.children.push(this);
+      this.parent._displayObject.addChild(this._displayObject);
+      this._displayObject.mountOrder = this._mountOrder;
+      console.log('Mounted ', this._mountOrder, this.parent._mountOrder);
     }
 
     if (this.componentDidMount) {
@@ -94,6 +98,14 @@ class ReactLibertyElement extends React.Component {
 
       this.parentX = boundingRect.left + paddingLeft;
       this.parentY = boundingRect.top + paddingTop;
+
+      if (this.DOMParent.style.position !== 'absolute' || this.DOMParent.style.position !== 'fixed') {
+        this.DOMParent.style.position = 'relative';
+      }
+
+      ReactLiberty.document.addChild(this._displayObject);
+
+      console.log('Mounting to DOM');
 
       this.updateDisplayObject();
     } catch (e) {
@@ -188,9 +200,13 @@ class ReactLibertyElement extends React.Component {
     return style;
   }
 
+  componentDidUpdate() {
+    this.updateDisplayObject();
+  }
+
   componentDidMount() {
     if (this._isRootLibertyNode) {
-      this.mountComponentToDOM();
+      setTimeout(this.mountComponentToDOM.bind(this), 100);
     }
     this.updateDisplayObject();
   }
@@ -201,10 +217,6 @@ class ReactLibertyElement extends React.Component {
 
   getPublicInstance() {
     return this;
-  }
-
-  getDisplayObject() {
-    return this._displayObject;
   }
 }
 
