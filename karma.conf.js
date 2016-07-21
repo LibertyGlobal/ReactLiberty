@@ -30,12 +30,6 @@ module.exports = function (config) {
         server: stbConfig.localIp, // Karma server IP address as seen by STB
         // Additional TR-69 parameters to set (`UIServerURL` is constructed from config)
         tr69: {
-          AppStoreURL: 'http://widgets.metrological.com/liberty/pl/production/#boot',
-          RENGURL: 'https://dawnreng.lab5c.nl.dmdsdp.com/',
-          TraxisWebURL: 'https://dawntraxisweb.lab5c.nl.dmdsdp.com/',
-          VodSRMURL: 'rtsp://dawntraxisweb.lab5c.nl.dmdsdp.com/',
-          MultimediaAlliancePlatformURL: 'https://dawnmap.lab5c.nl.dmdsdp.com/',
-          Country: 'PL'
         }
       }
     },
@@ -70,7 +64,7 @@ module.exports = function (config) {
 
     logLevel: config.LOG_INFO,
 
-    singleRun: true,
+    singleRun: false,
 
     // Avoid DISCONNECTED messages
     // See https://github.com/karma-runner/karma/issues/598

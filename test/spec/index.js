@@ -17,11 +17,6 @@ describe('Main package', () => {
   it('should contain dom namespace for corresponding renderer', () => {
     ReactLiberty.dom.should.be.ok;
   });
-
-  it('should contain render function', () => {
-    console.log(ReactLiberty.render);
-    (typeof ReactLiberty.render).should.be('function');
-  });
 });
 
 describe('gl renderer', () => {
