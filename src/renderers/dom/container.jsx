@@ -38,11 +38,13 @@ class ReactLibertyContainer extends ReactLibertyElement {
     }
 
     receiveComponent(nextElement, transaction, nextContext) {
-        var oldProps = this.props;
         super.receiveComponent(nextElement, transaction, nextContext);
-        nextContext.parent = this;
-        this._updateChildren(nextElement.props.children, transaction, nextContext);
-        nextContext.parent = this.parent;
+
+        if (nextElement.props.children != this.props.children) {
+            nextContext.parent = this;
+            this._updateChildren(nextElement.props.children, transaction, nextContext);
+            nextContext.parent = this.parent;
+        }
 
         console.log('Receiving new component ');
 

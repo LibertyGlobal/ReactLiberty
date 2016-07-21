@@ -61,6 +61,14 @@ class ReactLibertyElement extends React.Component {
   }
 
   receiveComponent(nextElement, transaction, context) {
+    var style = this.props.style;
+
+    if (nextElement.props.style && this.props.style) {
+      for (var propertyName in this.props.style) {
+        nextElement.props.style[propertyName] = nextElement.props.style[propertyName] || this.props.style[propertyName];
+      }
+    }
+
     this.props = nextElement.props;
 
     if (this.componentDidUpdate) {
@@ -194,8 +202,7 @@ class ReactLibertyElement extends React.Component {
   }
 
   get style() {
-    var style = (this.props && this.props.style) || this._style;
-    return style;
+    return this.props && this.props.style || {};
   }
 
   componentDidUpdate() {

@@ -50,6 +50,14 @@ class ReactLibertyElement extends React.Component {
   }
 
   receiveComponent(nextElement, transaction, context) {
+    var style = this.props.style;
+
+    if (nextElement.props.style && this.props.style) {
+      for (var propertyName in this.props.style) {
+        nextElement.props.style[propertyName] = nextElement.props.style[propertyName] || this.props.style[propertyName];
+      }
+    }
+
     this.props = nextElement.props;
 
     if (this.componentDidUpdate) {
@@ -174,8 +182,6 @@ class ReactLibertyElement extends React.Component {
     if (this._visible && !ReactLiberty.shouldRedraw) {
       ReactLiberty.markStageAsChanged();
     }
-
-    console.timeEnd("Update element " + this.constructor.name);
   }
 
   //Viewport culling
@@ -206,7 +212,7 @@ class ReactLibertyElement extends React.Component {
 
   componentDidMount() {
     if (this._isRootLibertyNode) {
-      setTimeout(this.mountComponentToDOM.bind(this), 100);
+      setTimeout(this.mountComponentToDOM.bind(this), 0);
     }
     this.updateDisplayObject();
   }
