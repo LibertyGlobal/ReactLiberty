@@ -77,7 +77,7 @@ class ReactLibertyContainer extends ReactLibertyElement {
 
     doLayout() {
         this.timesLayouted = this.timesLayouted + 1 || 1;
-        console.log('Layouted, ' + this.constructor.name + ', times' + this.timesLayouted);
+        console.log('Layouted, ' + this.constructor.name + ', times ' + this.timesLayouted);
         computeLayout(this);
         this.updateDisplayObject(true);
     }

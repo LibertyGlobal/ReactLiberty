@@ -1,4 +1,5 @@
 var BUNDLE_NAME = "react-liberty";
+var path = require('path');
 
 module.exports = {
     entry: "./src/index.js",
@@ -24,6 +25,12 @@ module.exports = {
             {test: /\.json$/, loader: 'json-loader'},
             {test: /\.json5$/, loader: 'json5-loader'}
         ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.es', '.css', '.scss', '.png', '.jpg', '.ttf', '.json', '.json5'],
+        alias: {
+            'pixi': path.join(__dirname, 'node_modules/pixi.js')
+        },
     },
     node: {
         fs: 'empty'

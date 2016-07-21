@@ -140,9 +140,9 @@ class List extends FocusableContainer {
     this.motionSpring.val = -this.moveTo;
     this.refs.motion.startAnimating();
 
-    this.setState({
+    /* this.setState({
       currentIndex: newIndex
-    });
+    }); */
 
     var currentItem = this.itemsManager.getVisibleItems()[newIndex];
 
