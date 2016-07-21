@@ -2,7 +2,6 @@ var BUNDLE_NAME = "react-liberty";
 var path = require('path');
 
 module.exports = {
-    entry: "./src/index.js",
     devtool: "inline-source-map",
     output: {
         path: __dirname,
