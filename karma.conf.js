@@ -1,38 +1,58 @@
 'use strict';
 
-// Load local config
-var execSync = require('child_process').execSync;
-var stbConfig = JSON.parse(execSync('stb config'));
+const reporters = [
+  'mocha'
+];
+const browsers = [
+  'Chrome'
+];
 
-var webpackConfig = require('./webpack.karma.config.js');
+let upstreamProxy = undefined;
+let customLaunchers = undefined;
+let stbReporter = undefined;
+
+// Are we runnning tests on the STB
+if (process.env['STB_TEST']) {
+  // Load local config
+  const execSync = require('child_process').execSync;
+  const stbConfig = JSON.parse(execSync('stb config'));
+
+  // proxy through the STB
+  upstreamProxy = {
+    path: 'MWRPAppServer',
+    port: 8081,
+    hostname: stbConfig.ip,
+    protocol: 'http:'
+  };
+
+  // add the stb reporter to collect timestamped test logs
+  reporters.push('stb');
+  stbReporter = {
+    reportsDir: './reports'
+  };
+
+  // add the stb launcher to run tests on the STB too
+  browsers.push('MyStb');
+  customLaunchers = {
+    MyStb: {
+      base: 'stb',
+      stb: stbConfig.ip, // STB IP address
+      server: stbConfig.localIp, // Karma server IP address as seen by STB
+      // Additional TR-69 parameters to set (`UIServerURL` is constructed from config)
+      tr69: {}
+    }
+  };
+}
+
+const webpackConfig = require('./webpack.karma.config.js');
 
 module.exports = function (config) {
   config.set({
-
-    // web proxy stuff
-    upstreamProxy: {
-      path: 'MWRPAppServer',
-      port: 8081,
-      hostname: stbConfig.ip,
-      protocol: 'http:'
-    },
-
-    browsers: [
-      'PhantomJS',
-      'MyStb'
-    ],
-
-    // Need to use a custom launcher to pass parameters
-    customLaunchers: {
-      MyStb: {
-        base: 'stb',
-        stb: stbConfig.ip, // STB IP address
-        server: stbConfig.localIp, // Karma server IP address as seen by STB
-        // Additional TR-69 parameters to set (`UIServerURL` is constructed from config)
-        tr69: {
-        }
-      }
-    },
+    upstreamProxy: upstreamProxy,
+    browsers: browsers,
+    customLaunchers: customLaunchers,
+    reporters: reporters,
+    stbReporter: stbReporter,
 
     frameworks: ['mocha'],
 
@@ -46,17 +66,6 @@ module.exports = function (config) {
       'test/spec/**/*.js': ['webpack', 'sourcemap']
     },
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'stb'],
-
-
-    // Options for the stb reporter
-    stbReporter: {
-      reportsDir: './reports'
-    },
-
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: false
@@ -64,7 +73,7 @@ module.exports = function (config) {
 
     logLevel: config.LOG_INFO,
 
-    singleRun: false,
+    singleRun: true,
 
     // Avoid DISCONNECTED messages
     // See https://github.com/karma-runner/karma/issues/598
