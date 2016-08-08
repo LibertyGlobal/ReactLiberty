@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "karma start",
-    "stb-test": "./stb-test.sh",
+    "stb-test": "STB_TEST=true karma start",
     "appdev": "webpack -w --config=webpack.demo.config.js --progress",
     "analyze": "webpack --config=webpack.demo.config.js --json | analyze-bundle-size",
     "appprod": "./node_modules/.bin/webpack -p --config=webpack.production.config.js"
@@ -40,7 +40,6 @@
     "babel-runtime": "6.3.19",
     "chai": "^3.5.0",
     "css-loader": "^0.23.0",
-    "horizon4-stb-tools": "git+ssh://git@github.com/LibertyGlobal/horizon4-stb-tools.git",
     "json-loader": "^0.5.4",
     "karma": "git+https://github.com/pghalliday/karma.git",
     "karma-chrome-launcher": "^0.2.2",
@@ -48,6 +47,7 @@
     "karma-mocha-reporter": "^2.0.4",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.6",
+    "karma-stb-plugin": "git+ssh://git@github.com/LibertyGlobal/horizon4-karma-stb-plugin.git",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.5.3",
     "phantomjs": "^1.9.19",
