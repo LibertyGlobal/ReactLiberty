@@ -36,4 +36,7 @@ if (window.libertyRender === 'canvas') {
   require('./renderers/gl/init-renderer.js');
 }
 
+
+ReactLiberty.Component = ReactLiberty[window.libertyRender].Container;
+
 module.exports = ReactLiberty;

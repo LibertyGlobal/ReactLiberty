@@ -26,9 +26,9 @@ class ForYou extends React.Component {
     var self = this;
 
     if (!restarted) {
+      restarted = true
       setTimeout(function(){
         self.forceUpdate();
-        restarted = true
       }, 2000);
     }
 
@@ -75,6 +75,12 @@ class ForYou extends React.Component {
               data={recentlyUsed.slice(0,18)}/>
       </Div>);
 
+    var backToTop = recentRow ? <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/> : null;
+
+    if (!recentRow) {
+      return null;
+    }
+
     return (
       <main style={styles.divStyle}>
         <Div style={styles.container}>
@@ -86,7 +92,7 @@ class ForYou extends React.Component {
                     data={appService.getFeatured().slice(0,18)}/>
             </Div>
             {recentRow}
-            <BackToTopButton onSelect={this.goTop.bind(this)} style={styles.caruselRow}/>
+            {backToTop}
           </List>
         </Div>
       </main>

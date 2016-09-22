@@ -77,6 +77,8 @@ class List extends FocusableContainer {
   }
 
   componentWillMount() {
+    console.log('Mounting list');
+
     super.componentWillMount();
     this.positionProperty = this.props.orientation === List.orientation.VERTICAL ? 'top' : 'left';
     this.sizeProperty = this.props.orientation === List.orientation.VERTICAL ? 'height' : 'width';
@@ -158,7 +160,7 @@ class List extends FocusableContainer {
   }
 
   shouldComponentUpdate(a, b) {
-    if (a.data !== this.props.data) {
+    if (this.itemsManager instanceof DataItemsManager && a.data !== this.props.data || this.itemsManager instanceof ChildrenItemsManager && a.children !== this.props.children ) {
       return true;
     } else {
       return false;

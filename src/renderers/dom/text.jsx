@@ -24,10 +24,13 @@ class ReactLibertyText extends ReactLibertyElement {
     node.style.fontSize = fontSize + 'px';
     node.style.fontFamily = CSS.fontFamily || 'Arial';
     node.style.color = CSS.color || '#000000';
-    node.style.width = CSS.width ? CSS.width + 'px' : '100%';
+    node.style.width = CSS.width ? CSS.width + 'px' : 'auto';
+    node.style.height = CSS.height ? CSS.height + 'px' : 'auto';
+    node.style.overflow = 'hidden';
     node.style.textAlign = CSS.textAlign;
     node.style.wordWrap = CSS.wordWrap;
     node.style.whiteSpace = !CSS.wordWrap && !CSS.width ? 'nowrap' : 'normal';
+    node.style.fontWeight = CSS.fontWeight;
   }
 }
 

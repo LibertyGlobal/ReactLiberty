@@ -28,7 +28,7 @@ class ReactLibertyElement extends React.Component {
     this.parent = null;
     this.children = [];
     this.DOMParent = null;
-    this._displayObject = null;
+    this.node = this._mountImage = this._displayObject = null;
     this._isRootLibertyNode = false;
 
     //DOM attached specific
@@ -51,7 +51,7 @@ class ReactLibertyElement extends React.Component {
   }
 
   createDisplayObject() {
-    this._displayObject = this._displayObject || this.getDisplayObject();
+    this._mountImage = this.node = this._displayObject = this._displayObject || this.getDisplayObject();
     this._displayObject.style.position = 'absolute';
     this._displayObject.style.left = '0';
     this._displayObject.style.top = '0';
@@ -77,6 +77,7 @@ class ReactLibertyElement extends React.Component {
   }
 
   mountComponent(rootID, transaction, context) {
+
     this.props = this._currentElement.props;
     this.createDisplayObject();
 
@@ -91,7 +92,7 @@ class ReactLibertyElement extends React.Component {
     if (!this.parent) {
       this._isRootLibertyNode = true;
     } else {
-      this.parent.children.push(this);
+      this.parent.mountChild(this);
       this.parent._displayObject.appendChild(this._displayObject);
     }
 
@@ -136,7 +137,7 @@ class ReactLibertyElement extends React.Component {
     }
 
     //ReactReconciler.unmountComponent(this._renderedComponent);
-    this._renderedComponent = null;
+    this._renderedComponent = this._mountImage = this.node = null;
     this._instance = null;
 
     // These fields do not really need to be reset since this object is no

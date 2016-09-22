@@ -55,7 +55,7 @@ class BackToTopButton extends Focusable {
 
   render() {
     var styles = BackToTopButton.styles;
-
+    console.log("Back to top");
     return (<Div style={styles.main}>
       <Img width="179" height="54" style={styles.image} src={backToTopImage}/>
       <Img width="179" height="54" ref="highlight" style={styles.highlight} src={backToTopHighlightImage}/>

@@ -42,7 +42,7 @@ class ReactLibertyContainer extends ReactLibertyElement {
 
         if (nextElement.props.children != this.props.children) {
             nextContext.parent = this;
-            this._updateChildren(nextElement.props.children, transaction, nextContext);
+            this.updateChildren(nextElement.props.children, transaction, nextContext);
             nextContext.parent = this.parent;
         }
 

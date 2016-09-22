@@ -48,10 +48,10 @@ class ApplicationComponent extends FocusableContainer {
               <div className='menu-search-item'></div>
             </MenuItem>
             <MenuItem ref={this.registerMenu.bind(this, 'forYou')} onFocus={this.navigateTo.bind(this, '/for-you')}>
-              FOR YOU
+              <div>FOR YOU</div>
             </MenuItem>
             <MenuItem ref={this.registerMenu.bind(this, 'appStore')} onFocus={this.navigateTo.bind(this, '/app-store')}>
-              APP STORE
+              <div>APP STORE</div>
             </MenuItem>
           </Menu>
           <div className='top-fade'></div>
