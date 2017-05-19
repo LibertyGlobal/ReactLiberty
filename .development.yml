@@ -1,0 +1,29 @@
+---
+# Array of services
+  # service name MUST be defined
+- name: test-paas
+  # image MUST be defined
+  image: registry-new.lgi.io/libertyglobal/test-paas
+  # Path to Rockerfile
+  build_file: Rockerfile
+  # Optional, eu-central-1 is default
+  region: eu-central-1
+  # Optional, ecs-blue is default
+  cluster: ecs-green
+  # Domain to deploy paas.appdev.io for dev; paas.lgi.io for prod
+  domain: paas.appdev.io
+  # Optional, 4 is default and recommended for prod. Use 1 for development.
+  instances: 4
+  # Optional, 512 is default. 1024 is 1 core
+  cpu: 32
+  # Optional, 1024 is default.
+  memory: 64 
+  # Optional, 80 is default. Port for health check.
+  port: 80
+  # Optional, /healtcheck is default. 
+  # WARN! This endpoint MUST return HTTP 200 or YOUR SERVICE WON'T RUN
+  healthcheck: /demo/
+  # Optional, plain is default.
+  # To use ELK with this service you MUST output logs to stdout.
+  # To build graphs on this logs you MUST use json output format
+  log_format: json
